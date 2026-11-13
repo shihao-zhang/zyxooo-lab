@@ -42,8 +42,8 @@
     p { margin: 0; max-width: 740px; }
     .section-title { padding-bottom: 14px; border-bottom: 1px solid var(--rule); color: var(--heading); font-size: 26px; font-weight: 700; line-height: 1.4; }
     .entry, .project { min-height: 168px; padding-block: 20px; }
-    .entry { border-bottom: 1px solid var(--rule); }
-    .entry:last-child { border-bottom: 0; }
+    .entry, .project { border-bottom: 1px solid var(--rule); }
+    .entry:last-child, .project:last-child { border-bottom: 0; }
     .meta { margin-top: 7px; color: var(--muted); font-size: 14px; }
     .links { display: flex; flex-wrap: wrap; gap: 8px 26px; margin-top: 11px; font-size: 15px; }
     .links a { display: inline-flex; align-items: baseline; gap: 7px; }
@@ -55,7 +55,7 @@
     .byline { color: var(--muted); font-size: 14px; font-weight: 400; }
     figure { margin: 0; width: 112px; max-width: 100%; justify-self: end; }
     .diagram-link { display: grid; justify-items: center; text-decoration: none; cursor: zoom-in; }
-    .diagram-link img { display: block; width: auto; max-width: 100%; height: auto; max-height: 120px; aspect-ratio: 1440 / 1740; object-fit: contain; border: 1px solid var(--rule); }
+    .diagram-link img { display: block; width: auto; max-width: 100%; height: auto; max-height: 120px; object-fit: contain; border: 1px solid var(--rule); }
     .status { margin-top: 7px; color: var(--muted); font-size: 14px; }
     footer { margin-top: 28px; padding-block: 26px 40px; border-top: 1px solid var(--rule); }
     footer h2 { font-size: 18px; margin-bottom: 12px; }
@@ -135,6 +135,22 @@
               <img src="assets/ai-native-pm-architecture.svg" width="1440" height="1740" alt="AI-native PM 原始架构图：从项目接入、产品协作到方法内化。图内版本标识属于原图，发布状态以项目说明为准。">
             </a>
             <p class="sr-only" id="diagram-description">项目接入先确认工作位置、任务和方法身份；工程接入、外部访问与发布按条件确认，其他材料逐步补齐。产品协作包含目标与事实、需求共写、原型共创、设计走查与修复、按约定交付；需求与原型可交替推进，反馈回到受影响的需求或设计。访谈与独立报告由用户主动提出，影响回扫与证据检查按任务需要调用，不增加必经阶段。实战反馈经记录、核证去重、对齐修改和验证封包，形成候选版本，由项目明确采用。图中流程不授权外发，交付不等于真实服务已验通。</p>
+          </figure>
+        </article>
+        <article class="project">
+          <div class="project-copy">
+            <h3>hire-screening-kit <span class="byline">· MIT</span></h3>
+            <p>飞书招聘场景的简历筛选参考实现。规则粗排后由模型精读，人工评估与面试反馈用于校准筛选规则。</p>
+            <div class="links">
+              <a href="https://github.com/shihao-zhang/hire-screening-kit-oss" target="_blank" rel="noopener noreferrer">查看项目 <span class="arrow" aria-hidden="true">↗</span></a>
+              <a href="assets/hire-screening-kit-architecture.svg" target="_blank" rel="noopener">项目架构 <span class="arrow" aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+          <figure>
+            <a class="diagram-link" href="assets/hire-screening-kit-architecture.svg" target="_blank" rel="noopener" title="查看项目架构原图" aria-label="查看 hire-screening-kit 项目架构原图（新窗口）" aria-describedby="hire-diagram-description">
+              <img src="assets/hire-screening-kit-architecture.svg" width="1200" height="972" alt="hire-screening-kit 原始架构图：规则粗排、模型精读、人工复核、面试反馈与规则回归。">
+            </a>
+            <p class="sr-only" id="hire-diagram-description">投递从飞书招聘进入私有工作区，先经规则粗排，再经模型精读。筛选结果经人工确认后同步到飞书多维表格，由招聘团队复核和跟进。人工评估与面试结果用于回归核对；规则调整先模拟，再由人确认。</p>
           </figure>
         </article>
       </section>
