@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="628" viewBox="0 0 1200 628" role="img" aria-labelledby="title desc">
+  <title id="title">AutoEvoloop：评测驱动的双环进化</title>
+  <desc id="desc">内环改进 Agent Harness：从基线开实验，比较评测结果，评审采纳的改动成为下一轮基线。外环改进自进化框架：复盘多轮实验记录，提炼可复用的方法，用于调整实验引擎，再在后续实验中验证。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#607e70"/>
+    </marker>
+    <marker id="loop-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#846b42"/>
+    </marker>
+    <style>
+      text { font-family: "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif; fill: #263f36; }
+      .title { font-family: Georgia,serif; font-size: 44px; font-weight: 700; }
+      .subtitle { font-size: 24px; fill: #496456; }
+      .label { font-size: 18px; font-weight: 700; fill: #496456; }
+      .heading { font-size: 27px; font-weight: 700; }
+      .detail { font-size: 20px; fill: #455d50; }
+      .boundary { font-size: 19px; fill: #6e5733; }
+      .flow { fill: none; stroke: #607e70; stroke-width: 2.5; stroke-linejoin: round; marker-end: url(#arrow); }
+      .loop { fill: none; stroke: #846b42; stroke-width: 2.5; stroke-linejoin: round; stroke-dasharray: 8 6; marker-end: url(#loop-arrow); }
+    </style>
+  </defs>
+  <rect width="1200" height="628" fill="#f8f7f3"/>
+  <text class="title" x="64" y="72">AutoEvoloop</text>
+  <text class="subtitle" x="64" y="112">评测驱动的 Agent Harness 自进化框架</text>
+  <text class="label" x="64" y="153">内环 · 改进 Harness</text>
+  <path class="flow" d="M1017 194 V175 H184 V194"/>
+  <text class="detail" x="475" y="164">评审采纳后，更新基线</text>
+
+  <g aria-label="实验与评审主流程">
+    <rect x="64" y="194" width="240" height="145" rx="8" fill="#edf1eb" stroke="#c8d5cc"/>
+    <rect x="342" y="194" width="240" height="145" rx="8" fill="#edf1eb" stroke="#c8d5cc"/>
+    <rect x="620" y="194" width="240" height="145" rx="8" fill="#eef0f4" stroke="#cbd2dd"/>
+    <rect x="898" y="194" width="238" height="145" rx="8" fill="#f3eee3" stroke="#d8cbb0"/>
+    <path class="flow" d="M304 266 H342"/>
+    <path class="flow" d="M582 266 H620"/>
+    <path class="flow" d="M860 266 H898"/>
+    <text class="heading" x="86" y="240">Harness 基线</text>
+    <text class="detail" x="86" y="278">从现有版本开分支</text>
+    <text class="detail" x="86" y="307">保留评测对照</text>
+    <text class="heading" x="364" y="240">实验引擎</text>
+    <text class="detail" x="364" y="278">准备、分析、拟方案</text>
+    <text class="detail" x="364" y="307">执行改动与验证</text>
+    <text class="heading" x="642" y="240">测评与留档</text>
+    <text class="detail" x="642" y="278">对比基线结果</text>
+    <text class="detail" x="642" y="307">改动与报告同提交</text>
+    <text class="heading" x="920" y="240">合并评审</text>
+    <text class="detail" x="920" y="278">达标后提出合并</text>
+    <text class="detail" x="920" y="307">评审通过才合并</text>
+  </g>
+
+  <g aria-label="外环：从多轮实验中提炼方法，再改进实验引擎">
+    <text class="label" x="64" y="405">外环 · 改进进化方法</text>
+    <path class="loop" d="M740 339 V417"/>
+    <path class="loop" d="M462 417 V339"/>
+    <rect x="310" y="417" width="272" height="96" rx="8" fill="#f3eee3" stroke="#d8cbb0"/>
+    <rect x="620" y="417" width="300" height="96" rx="8" fill="#f3eee3" stroke="#d8cbb0"/>
+    <path class="loop" d="M620 465 H582"/>
+    <text class="heading" x="332" y="458">迭代实验方法</text>
+    <text class="detail" x="332" y="491">在下一轮实验中验证</text>
+    <text class="heading" x="642" y="458">提炼元经验</text>
+    <text class="detail" x="642" y="491">复盘多轮实验的得失</text>
+  </g>
+
+  <path d="M64 550 H1136" stroke="#d6ddd7"/>
+  <text class="boundary" x="64" y="587">未晋升的改动保留在实验分支。达到评测门槛不等于已经合并或上线。</text>
+</svg>
