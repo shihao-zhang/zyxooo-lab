@@ -1,0 +1,2250 @@
+<!doctype html><html lang="zh-CN"><head><meta name="use-iframe" content="true"><meta name="html-box-height-mode" content="viewport"><meta name="description" content="Agent 评测研究｜1＋6 阅读手册，编辑版 v1，2026-11-11"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Agent 评测研究｜可信判断与决策 · 1＋6 手册</title><style>
+/* 核心是阅读布局，不是 house style。以下色彩、字体、宽度、比例均可按内容调整。 */
+:root{--paper:#f7f6f1;--surface:#fff;--ink:#24312e;--muted:#59675f;--line:#c9d0c8;--accent:#275f50;--soft:#e8eee7;--rail:230px;--reading-width:1120px;--overview-width:1260px;--gutter:clamp(24px,4.8vw,72px);--sans:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+*{box-sizing:border-box}html{scroll-padding-top:76px;scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.75 var(--sans)}
+a{color:var(--accent);text-underline-offset:4px}a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:3px solid #95602d;outline-offset:4px}
+.skip{position:fixed;top:8px;left:12px;z-index:100;transform:translateY(-160%);padding:8px 12px;background:var(--ink);color:#fff}.skip:focus{transform:none}
+.chapter-nav{position:fixed;inset:0 auto 0 0;width:var(--rail);overflow-y:auto;padding:30px 22px;border-right:1px solid var(--line);background:var(--soft)}
+.brand{font-size:19px;margin:0 0 24px;font-weight:750}.nav-group{display:block;font-size:12px;color:var(--muted);margin:20px 10px 7px}
+.chapter-nav a{display:block;text-decoration:none;color:var(--ink);font-size:14px;padding:8px 10px;border-left:2px solid transparent}
+.chapter-nav a[aria-current="location"]{border-left-color:var(--accent);background:var(--paper);color:var(--accent);font-weight:700}
+.reading-switch{display:none;position:fixed;top:16px;right:24px;z-index:70;gap:3px;padding:4px;background:var(--paper);border:1px solid var(--line);box-shadow:0 3px 12px #24312e10}
+.js .reading-switch:not([hidden]){display:flex}.reading-switch button{padding:8px 19px;border:0;background:transparent;color:var(--accent);font:650 14px var(--sans);cursor:pointer}
+.reading-switch button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.page-header,main,.page-footer{margin-left:var(--rail);padding-inline:var(--gutter)}
+.inner{max-width:var(--reading-width);margin-inline:auto}.page-header{padding-top:78px;padding-bottom:34px;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:12px;letter-spacing:.1em;color:var(--accent);margin:0 0 12px}
+h1{font-size:clamp(34px,3.8vw,52px);line-height:1.2;letter-spacing:-.035em;margin:0 0 20px;text-wrap:balance}
+.lead{max-width:72ch;font-size:19px;line-height:1.7;margin:0}.detail-meta{font-size:13px;color:var(--muted);margin-top:22px}
+.chapter{padding:40px 0;border-bottom:1px solid var(--line);scroll-margin-top:76px}h2{font-size:29px;line-height:1.35;margin:0 0 17px}h3{font-size:20px;line-height:1.5;margin:24px 0 10px}
+p{margin:0 0 15px}.prose{max-width:76ch}.chapter-map{display:flex;gap:14px;flex-wrap:wrap}.chapter-map a{font-size:14px}
+details{margin:20px 0;border-block:1px solid var(--line);padding:12px 0}summary{font-weight:650;cursor:pointer}.details-body{padding-top:15px}
+.table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%}th,td{text-align:left;vertical-align:top;padding:10px;border-bottom:1px solid var(--line)}thead{display:table-header-group}
+figure{margin:0}svg{display:block;width:100%;height:auto}figcaption,.caption{font-size:13px;color:var(--muted)}.page-footer{padding-block:25px;font-size:13px;color:var(--muted)}
+/* 只定义可自由填充的区域，不预设图数、节点或固定卡片。可重排、合并、删除。 */
+.overview{display:none;padding:20px 0 28px}.overview-layout{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(240px,1fr);gap:28px}
+.overview-main{min-width:0}.overview-support{min-width:0;border-left:1px solid var(--line);padding-left:24px}
+.overview h2{font-size:23px}.overview h3{font-size:18px;margin-top:0}.overview p{font-size:16px}
+.relationship-slot{min-height:150px;padding:24px;border-top:3px solid var(--accent);background:var(--soft)}
+.overview-end{margin-top:20px;padding-top:14px;border-top:1px solid var(--line);font-size:14px}.overview-end p{font-size:14px}
+@media screen{
+.js[data-view="quick"] .overview{display:block}
+.js[data-view="quick"] .full-only{display:none}
+.js[data-view="quick"] .page-header,.js[data-view="quick"] main{margin-inline:auto;max-width:var(--overview-width)}
+.js[data-view="quick"] .page-header{padding-top:76px;padding-bottom:22px;border-bottom:0}
+.js[data-view="quick"] h1{font-size:clamp(30px,3vw,40px);margin-bottom:12px}
+.js[data-view="quick"] .lead{font-size:17px;max-width:90ch}}
+@media(max-width:720px){.chapter-nav{position:static;width:auto;border-right:0;border-bottom:1px solid var(--line);padding:74px 20px 12px;display:flex;gap:10px;overflow-x:auto}.chapter-nav .brand,.nav-group{display:none}.chapter-nav a{white-space:nowrap}.page-header,main,.page-footer{margin-left:0;padding-inline:22px}.page-header{padding-top:28px}.reading-switch{right:12px;top:10px}.overview-layout{grid-template-columns:1fr}.overview-support{border-left:0;padding-left:0}.js[data-view="quick"] .page-header{padding-top:76px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+@media print{@page{margin:16mm}body{background:#fff;color:#111;font-size:11pt}.skip,.chapter-nav,.reading-switch,.overview{display:none!important}
+.page-header,main,.page-footer,.js[data-view="quick"] .page-header,.js[data-view="quick"] main{margin:0;max-width:none;padding-inline:0}.page-header,.js[data-view="quick"] .page-header{padding-top:0;padding-bottom:6mm}h1,.js[data-view="quick"] h1{font-size:27pt}.chapter{padding:7mm 0}h2,h3{break-after:avoid}.table-wrap{overflow:visible}table{break-inside:auto}tr{break-inside:avoid}details::details-content{display:block!important}details{break-inside:auto}summary{list-style:none}a{color:inherit}.page-footer{padding-block:6mm}}
+
+:root{--paper:#faf8f2;--soft:#f0eee6;--ink:#263831;--accent:#285e4f;--muted:#59645e;--line:#cdd1c6;--rail:245px;--reading-width:1040px;--gutter:clamp(26px,4vw,64px)}.page-header{border-top:7px solid var(--accent)}.chapter-nav{background:#eeeee6}.brand{font-size:18px}.chapter-nav a{font-size:13px;padding:9px 7px}.chapter-nav b{display:inline-block;min-width:23px;color:var(--accent)}h1{font-family:Georgia,"Songti SC",serif;font-weight:600}h3{margin-top:36px}.article p,.article li{max-width:78ch}.article h3{border-top:1px solid var(--line);padding-top:25px}.article blockquote{border-left:3px solid var(--line);margin:20px 0;padding-left:18px;color:var(--muted)}.article table{font-size:15px;line-height:1.65;margin:15px 0}th{background:#ecefe7}td,th{padding:13px}.chapter-map{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;margin:28px 0}.chapter-map a{border-top:1px solid var(--line);padding:18px 12px 18px 0;text-decoration:none;display:grid;grid-template-columns:38px 1fr;gap:4px 10px}.chapter-map span{grid-row:span 2;font:24px Georgia,serif;color:#6d7e66}.chapter-map strong{font-size:17px}.chapter-map small{color:var(--muted);font-size:14px}.chapter-heading{display:flex;gap:22px;align-items:center}.chapter-number{font:64px Georgia,serif;color:#78866b}.chapter-take{font-size:20px;border-left:4px solid var(--accent);padding:10px 20px;margin:22px 0 30px;background:#eef2e9}.boundary,.legacy{padding:18px 22px;background:#f0ece0;margin:25px 0;font-size:16px}.local-guide{padding:12px 0 20px;font-size:15px;color:var(--muted)}.return{display:inline-block;margin-top:24px;font-size:14px}.source-index{font-size:12px;overflow-wrap:anywhere;word-break:break-word}.closing{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;border-top:3px solid var(--accent);padding-top:22px}.closing p{font-size:16px}.overview-layout{grid-template-columns:minmax(0,3fr) minmax(250px,1fr)}.overview-main svg{background:#fffdf7}.overview-support p{margin-bottom:22px}.source-notes{font-size:15px}code{font-size:.9em;overflow-wrap:anywhere}@media print{.chapter{break-before:page}.chapter:first-child{break-before:auto}.chapter-number{font-size:40pt}.chapter-take{font-size:13pt}.article table{font-size:9pt}details::details-content{display:block!important}.source-index{font-size:8pt}.closing{display:block}.chapter-map a{break-inside:avoid}.page-footer{display:block!important}.article p,.article li{max-width:none}}
+.dependency-map{margin:18px 0}.dependency-local{margin:24px 0}.dependency-local h4{font-size:17px;margin:0 0 10px}.dependency-map figcaption,.dependency-local figcaption{margin-top:8px}.overview-prose>h3:first-child{border-top:0;padding-top:0}.quick-check{border-top:1px solid var(--line);padding-top:18px}.quick-check p{font-size:15px;margin-bottom:14px}.local-summary{border-top:1px solid var(--line);padding-top:12px;margin-top:14px}.overview .local-summary{font-size:15px}.overview-prose>h3{scroll-margin-top:76px}@media print{.dependency-map,.dependency-local{break-inside:avoid}.quick-check{display:none}}</style></head><body><a class="skip" href="#main-content">跳到正文</a><nav class="chapter-nav full-only" aria-label="手册章节"><p class="brand">Agent 评测研究</p><span class="nav-group">研究地图</span><a href="#reading-start">00 总览与阅读路径</a><span class="nav-group">六个判断</span><a href="#chapter-01"><b>01</b> 目标、被测对象与业务价值</a><a href="#chapter-02"><b>02</b> 任务与环境代表性</a><a href="#chapter-03"><b>03</b> 判据与裁判有效性</a><a href="#chapter-04"><b>04</b> 执行条件的可控与等价</a><a href="#chapter-05"><b>05</b> 结果比较、归因与泛化</a><a href="#chapter-06"><b>06</b> 评测证据的使用与线上校准</a><span class="nav-group">证据边界</span><a href="#source-index">来源索引与更新</a></nav><div class="reading-switch" id="mode-controls" role="group" aria-label="整篇阅读深度" hidden><button id="quick-button" type="button" aria-pressed="false" aria-controls="quickview full-reading">速览</button><button id="full-button" type="button" aria-pressed="true" aria-controls="quickview full-reading">全文</button><span id="mode-status" role="status" style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)">全文</span></div><header class="page-header" id="top"><div class="inner"><p class="eyebrow">AGENT EVALUATION / 1＋6 研究手册</p><h1>Agent 评测，怎样形成可信判断</h1><p class="lead">Agent 评测如何形成可信、适用边界清楚、足以支持产品与研发决策的判断？</p><p class="detail-meta full-only">基于 2026-11-09 底稿与 11-10 增量 · 框架与 HTML 编辑 2026-11-11 · 既有来源未重新核查 · 默认全文，可切整篇速览</p></div></header><main id="main-content" tabindex="-1"><section id="quickview" class="overview" tabindex="-1" aria-label="整篇速览"><div class="inner"><p class="eyebrow">整篇速览 / 编辑综合，依据六篇正文</p><h2>形成可信、适用边界清楚的判断，需要六个方向接上</h2><div class="overview-layout"><div class="overview-main"><figure class="dependency-map"><svg viewBox="0 0 1000 470" role="img" aria-labelledby="quick-map-title quick-map-desc"><title id="quick-map-title">六个方向怎样共同形成可信判断</title><desc id="quick-map-desc">01的目标约束02、03、04，也直接约束06的行动阈值。02、03、04共同支撑05，05进入06。06的新事实可以返回重查包含01、02、03、04的前提组；三者内部的约束在下方局部图展开。</desc><defs><marker id="quick-evidence-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="none" stroke="#47736b"/></marker><marker id="quick-goal-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="none" stroke="#846b42"/></marker><marker id="quick-feedback-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="none" stroke="#6b7184"/></marker></defs><rect x="80" y="10" width="840" height="210" rx="5" fill="none" stroke="#c7cdbf" stroke-width="1.5"/><g fill="none" stroke="#846b42" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#quick-goal-arrow)"><path d="M500 94 V112 H220 V135"/><path d="M500 94 V135"/><path d="M500 112 H780 V135"/><path d="M240 67 H45 V385 H240"/></g><g fill="none" stroke="#47736b" stroke-width="2"><path d="M220 200 V235 H780 V200"/><path d="M500 200 V260" marker-end="url(#quick-evidence-arrow)"/><path d="M500 320 V355" marker-end="url(#quick-evidence-arrow)"/></g><path d="M760 385 H960 V110 H920" fill="none" stroke="#6b7184" stroke-width="2" stroke-dasharray="2 5" marker-end="url(#quick-feedback-arrow)"/><g fill="#edf2ee" stroke="#bacbc3"><rect x="240" y="40" width="520" height="54" rx="4"/><rect x="95" y="135" width="250" height="65" rx="4"/><rect x="375" y="135" width="250" height="65" rx="4"/><rect x="655" y="135" width="250" height="65" rx="4"/><rect x="240" y="260" width="520" height="60" rx="4"/><rect x="240" y="355" width="520" height="60" rx="4"/></g><g fill="#233e38" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18"><text x="500" y="74">01 目标与被测对象：证据要改变什么行动</text><text x="220" y="162">02 任务与环境代表性</text><text x="220" y="185" font-size="15">覆盖≠保真；数量≠代表性</text><text x="500" y="162">03 判据与裁判有效性</text><text x="500" y="185" font-size="15">合理解能通过，实质错误能拒绝</text><text x="780" y="162">04 执行条件的可控与等价</text><text x="780" y="185" font-size="15">隔离须覆盖状态，适配须验语义</text><text x="500" y="286">05 比较、归因与泛化</text><text x="500" y="309" font-size="15">同题配对；区间不能修复抽样偏差</text><text x="500" y="382">06 证据使用与线上校准</text><text x="500" y="405" font-size="15">支持有条件的决定，并核对真实交付</text><text x="95" y="32" text-anchor="start" font-size="14">可重查的目标与证据条件</text><text transform="translate(25 255) rotate(-90)" font-size="15" fill="#846b42">01 → 06：目标与行动阈值</text><text transform="translate(985 258) rotate(-90)" font-size="15" fill="#6b7184">06 反馈：可重查 01 / 02 / 03 / 04</text></g><g fill="none" stroke-width="2"><path d="M90 450 H130" stroke="#47736b"/><path d="M365 450 H405" stroke="#846b42" stroke-dasharray="7 5"/><path d="M670 450 H710" stroke="#6b7184" stroke-dasharray="2 5"/></g><g fill="#59645e" font-family="system-ui,sans-serif" font-size="15"><text x="140" y="455">共同支撑与结果使用</text><text x="415" y="455">目标约束（含 01 → 06）</text><text x="720" y="455">新事实反馈重查</text></g></svg><figcaption>主图表达判断之间的依赖与反馈，不是固定实施流水线。反馈箭头指向 01—04 所在的前提组，可按新事实重查其中任一项。</figcaption></figure><p class="caption local-summary"><strong>组内约束：</strong>02 → 03、02 → 04；03 ↔ 04 需对齐评分证据与采集方式。可评分性也可能反向影响样本选择，须回查 02。<a href="#map-依赖与反馈">展开完整关系与局部图 ↗</a></p><p class="caption"><a href="#reading-start">打开总览与六篇入口 ↗</a></p></div><aside class="overview-support"><h3>三个不能跳过的转换</h3><p><strong>分数 → 能力。</strong> 先固定被测系统、任务与预算，再讨论差异。<a href="#chapter-01">01 ↗</a> · <a href="#chapter-05">05 ↗</a></p><p><strong>模拟 → 工作。</strong> 既要保留约束，也要验证状态与判分语义。<a href="#chapter-02">02 ↗</a> · <a href="#chapter-03">03 ↗</a> · <a href="#chapter-04">04 ↗</a></p><p><strong>能力 → 价值。</strong> 真实输入不等于真实交付；人工补救不能被算成自主能力。<a href="#chapter-06">06 ↗</a></p><div class="quick-check"><h3>换运行器后掉分，先查什么？</h3><p>先检查状态、重试和观测接口是否改变（04）；再区分任务是否仍代表真实工作（02）、评分是否有效（03）、差异是否可信（05）。若被测对象已变，回查 01；是否阻止发布，交给 06 的行动判断。</p><p><strong>掉分是一种现象，不能仅凭“换了运行器”就唯一归入 04。</strong> <a href="#map-用一个例子检查归属">看完整自检例 ↗</a></p></div></aside></div><div class="overview-end"><p><strong>阅读边界：</strong>公开材料支持方法与问题框架，不等于我们已复现效果。04 已完成正文收窄与来源附录；其余五篇沿用既有研究初稿与审查记录。本次未重新核查既有来源。企业任务分布、人工成本和离线—线上对应仍待验证。</p></div></div></section><div class="full-only inner" id="full-reading"><section class="chapter" id="reading-start" tabindex="-1"><p class="eyebrow">00 / 研究地图</p><h2>可信的判断，需要把六个问题接起来</h2><div class="article overview-prose"><h3 id="map-研究主问题">研究主问题</h3>
+<p><strong>Agent
+评测如何形成可信、适用边界清楚、足以支持产品与研发决策的判断？</strong></p>
+<p>六个方向按“判断可能在哪里失真、主要应追问什么”组织。目标、样本、判分、执行、推断和使用各有主责，也相互约束并接受反馈。这套研究拆解不声称六项穷尽所有问题或构成数学意义上的
+MECE；存在交叉时，仍需辨明当前主要作出哪种判断。</p>
+<h3 id="map-六个方向与交接">六个方向与交接</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>编号与专题入口</th>
+<th>一句核心问题</th>
+<th>边界与交接</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#chapter-01">01 目标、被测对象与业务价值篇</a></td>
+<td>为支持什么决定，正在测谁、测什么？</td>
+<td>界定目标、对象与约束，为 02、03、04 提供前提，也直接约束 06
+如何使用结果。</td>
+</tr>
+<tr>
+<td><a href="#chapter-02">02 任务与环境代表性篇</a></td>
+<td>任务和环境保留了目标工作的哪些约束？</td>
+<td>向 03 说明允许的结果与业务分支，向 04
+说明需保留的初态、观测与动作语义；运行时是否真正保留归 04。</td>
+</tr>
+<tr>
+<td><a href="#chapter-03">03 判据与裁判有效性篇</a></td>
+<td>哪些结果应该通过，裁判能否据证据判对？</td>
+<td>规定判据、所需证据及缺失时如何判；可靠采证归
+04，二者共同检查证据能否支持有效判分。</td>
+</tr>
+<tr>
+<td><a href="#chapter-04">04 执行条件的可控与等价篇</a></td>
+<td>这次运行和采到的证据，是否符合约定的实验条件？</td>
+<td>处理状态生命周期、初态、权限、观测、动作、预算、重试与采证；把实际条件及偏差交给
+05。跨运行器是其中一种核验情形。</td>
+</tr>
+<tr>
+<td><a href="#chapter-05">05 结果比较、归因与泛化篇</a></td>
+<td>差异有多可信、来自哪里、能推广到哪里？</td>
+<td>综合样本、判分与执行证据，形成带不确定性和适用边界的结论；是否采取行动归
+06。</td>
+</tr>
+<tr>
+<td><a href="#chapter-06">06 评测证据的使用与线上校准篇</a></td>
+<td>结论支持什么行动，真实使用后是否仍成立？</td>
+<td>结合 01 的决策目标使用 05
+的结论；新事实可触发对目标、样本、判据或执行条件的重查。</td>
+</tr>
+</tbody>
+</table></div>
+<p>04
+保持平级，因为残留状态、并发干扰、权限或观测差异、经验保留方式，都可能独立改变实验含义。Harbor
+接入与跨运行器比较是研究这些问题的具体情形，不承担整个系列的主问题。</p>
+<h3 id="map-依赖与反馈">依赖与反馈</h3><figure class="dependency-map"><svg viewBox="0 0 1000 470" role="img" aria-labelledby="full-map-title full-map-desc"><title id="full-map-title">六个方向怎样共同形成可信判断</title><desc id="full-map-desc">01的目标约束02、03、04，也直接约束06的行动阈值。02、03、04共同支撑05，05进入06。06的新事实可以返回重查包含01、02、03、04的前提组；三者内部的约束在下方局部图展开。</desc><defs><marker id="full-evidence-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="none" stroke="#47736b"/></marker><marker id="full-goal-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="none" stroke="#846b42"/></marker><marker id="full-feedback-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="none" stroke="#6b7184"/></marker></defs><rect x="80" y="10" width="840" height="210" rx="5" fill="none" stroke="#c7cdbf" stroke-width="1.5"/><g fill="none" stroke="#846b42" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#full-goal-arrow)"><path d="M500 94 V112 H220 V135"/><path d="M500 94 V135"/><path d="M500 112 H780 V135"/><path d="M240 67 H45 V385 H240"/></g><g fill="none" stroke="#47736b" stroke-width="2"><path d="M220 200 V235 H780 V200"/><path d="M500 200 V260" marker-end="url(#full-evidence-arrow)"/><path d="M500 320 V355" marker-end="url(#full-evidence-arrow)"/></g><path d="M760 385 H960 V110 H920" fill="none" stroke="#6b7184" stroke-width="2" stroke-dasharray="2 5" marker-end="url(#full-feedback-arrow)"/><g fill="#edf2ee" stroke="#bacbc3"><rect x="240" y="40" width="520" height="54" rx="4"/><rect x="95" y="135" width="250" height="65" rx="4"/><rect x="375" y="135" width="250" height="65" rx="4"/><rect x="655" y="135" width="250" height="65" rx="4"/><rect x="240" y="260" width="520" height="60" rx="4"/><rect x="240" y="355" width="520" height="60" rx="4"/></g><g fill="#233e38" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18"><text x="500" y="74">01 目标与被测对象：证据要改变什么行动</text><text x="220" y="162">02 任务与环境代表性</text><text x="220" y="185" font-size="15">覆盖≠保真；数量≠代表性</text><text x="500" y="162">03 判据与裁判有效性</text><text x="500" y="185" font-size="15">合理解能通过，实质错误能拒绝</text><text x="780" y="162">04 执行条件的可控与等价</text><text x="780" y="185" font-size="15">隔离须覆盖状态，适配须验语义</text><text x="500" y="286">05 比较、归因与泛化</text><text x="500" y="309" font-size="15">同题配对；区间不能修复抽样偏差</text><text x="500" y="382">06 证据使用与线上校准</text><text x="500" y="405" font-size="15">支持有条件的决定，并核对真实交付</text><text x="95" y="32" text-anchor="start" font-size="14">可重查的目标与证据条件</text><text transform="translate(25 255) rotate(-90)" font-size="15" fill="#846b42">01 → 06：目标与行动阈值</text><text transform="translate(985 258) rotate(-90)" font-size="15" fill="#6b7184">06 反馈：可重查 01 / 02 / 03 / 04</text></g><g fill="none" stroke-width="2"><path d="M90 450 H130" stroke="#47736b"/><path d="M365 450 H405" stroke="#846b42" stroke-dasharray="7 5"/><path d="M670 450 H710" stroke="#6b7184" stroke-dasharray="2 5"/></g><g fill="#59645e" font-family="system-ui,sans-serif" font-size="15"><text x="140" y="455">共同支撑与结果使用</text><text x="415" y="455">目标约束（含 01 → 06）</text><text x="720" y="455">新事实反馈重查</text></g></svg><figcaption>主图表达判断之间的依赖与反馈，不是固定实施流水线。反馈箭头指向 01—04 所在的前提组，可按新事实重查其中任一项。</figcaption></figure><figure class="dependency-local"><h4>02—04 内部也有约束，不能当作互不相关的三项</h4><svg viewBox="0 0 1000 235" role="img" aria-labelledby="full-local-title full-local-desc"><title id="full-local-title">任务、评分与执行条件的局部约束</title><desc id="full-local-desc">02的任务定义约束03的判据，02的工作约束决定04必须保留的执行条件；03与04双向对齐评分所需证据和采集方式。</desc><defs><marker id="full-local-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M0,0 L8,4 L0,8" fill="none" stroke="#846b42"/></marker></defs><g fill="none" stroke="#846b42" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#full-local-arrow)"><path d="M310 110 H395 V53 H590"/><path d="M395 110 V183 H590"/><path d="M770 85 V150" marker-start="url(#full-local-arrow)"/></g><g fill="#edf2ee" stroke="#bacbc3"><rect x="30" y="75" width="280" height="70" rx="4"/><rect x="590" y="20" width="360" height="65" rx="4"/><rect x="590" y="150" width="360" height="65" rx="4"/></g><g fill="#233e38" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18"><text x="170" y="104">02 任务与环境代表性</text><text x="170" y="128" font-size="15">选择什么任务，保留什么约束</text><text x="770" y="47">03 判据与裁判有效性</text><text x="770" y="71" font-size="15">什么结果应被接受</text><text x="770" y="177">04 执行条件的可控与等价</text><text x="770" y="201" font-size="15">如何保留状态并取得证据</text><text x="490" y="40" font-size="15">任务定义可接受结果</text><text x="490" y="171" font-size="15">任务约束定义执行条件</text><text x="792" y="115" text-anchor="start" font-size="14">评分所需证据</text><text x="792" y="135" text-anchor="start" font-size="14">↔ 采集方式</text></g></svg><figcaption>可评分性也可能反向影响样本选择：若只保留容易自动判分的任务，应回查 02 是否遗漏真实工作。</figcaption></figure>
+<p>这些关系表达判断之间的约束，不要求六篇依次交付，也不把 02、03、04
+视为互不影响的并列项。</p>
+<ul>
+<li><strong>01 → 02、03、04，并直接连接 06。</strong>
+决策目标、被测对象与约束既限定评测，也限定结果的使用。</li>
+<li><strong>02 → 03、04。</strong>
+允许的结果约束判据；需保留的初态、观测与动作语义约束执行。03 也向 02
+反馈可评分性限制；需检查这是否使任务偏向容易自动评分的工作，不能把便于评分当作入选的唯一标准。</li>
+<li><strong>03 ↔︎ 04。</strong>
+判据提出证据需求，采集能力限定实际可得的证据；证据不足时需共同修正约定。</li>
+<li><strong>02、03、04 共同支撑 05 → 06。</strong>
+样本边界、判分有效性与实际执行条件共同限定比较、归因和外推；06
+再判断结论能支持什么行动。</li>
+<li><strong>06 → 01、02、03、04。</strong>
+新事实可能要求重定目标、补充样本、修订判据或重查执行条件，再据此更新结果解释。</li>
+</ul>
+<h3 id="map-用一个例子检查归属">用一个例子检查归属</h3>
+<p><strong>同一任务更换运行器后，通过率下降。仅凭这个现象，无法把原因归给
+04。</strong>
+换运行器是调查入口；需要根据查明的问题确定主责方向，必要时联动多篇。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>需要辨明的问题</th>
+<th>主要归属</th>
+<th>应带走的判断</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>配置变化已改变被测系统，或两次比较目标不同。</td>
+<td>01 目标与对象</td>
+<td>两次究竟在比较谁，比较目标是否仍一致。</td>
+</tr>
+<tr>
+<td>任务或环境遗漏了真实工作的关键约束。</td>
+<td>02 任务代表性</td>
+<td>这批任务仍代表哪一段目标工作。</td>
+</tr>
+<tr>
+<td>同一交付被误拒，或判据不接受合理解法。</td>
+<td>03 评分有效性</td>
+<td>下降是否来自判据或裁判错误。</td>
+</tr>
+<tr>
+<td>存在残留状态、并发干扰，或观测、权限、预算、重试与采证约定变化。</td>
+<td>04 执行条件</td>
+<td>实际运行与约定哪里不一致，是否改变实验含义。</td>
+</tr>
+<tr>
+<td>已对齐条件，但差异可能来自随机波动或有限样本。</td>
+<td>05 结果推断</td>
+<td>差异有多可信，归因和推广到哪里为止。</td>
+</tr>
+<tr>
+<td>需要判断下降是否应阻止发布，或与线上表现不一致。</td>
+<td>06 使用与校准</td>
+<td>现有证据支持什么行动，还需什么校准。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="map-按问题选读">按问题选读</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>你正在困惑什么</th>
+<th>从哪里开始</th>
+<th>接着查看什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>分数提高了，却不清楚对产品有什么价值。</td>
+<td>01</td>
+<td>用 06 检查它如何进入实际决定。</td>
+</tr>
+<tr>
+<td>样本不像真实工作，或不知道环境该模拟到什么程度。</td>
+<td>02</td>
+<td>用 03、04 分别检查判据与运行条件。</td>
+</tr>
+<tr>
+<td>合理解被误拒，或错误结果能骗过裁判。</td>
+<td>03</td>
+<td>用 04 检查裁判依赖的证据怎样取得。</td>
+</tr>
+<tr>
+<td>重跑、并发或迁移后实验条件变了。</td>
+<td>04</td>
+<td>用 01 确认被测对象，用 05 判断对比较的影响。</td>
+</tr>
+<tr>
+<td>结果有差距，却不知是否偶然、来自什么因素。</td>
+<td>05</td>
+<td>回查 02、03、04 的前提，再交给 06 使用。</td>
+</tr>
+<tr>
+<td>离线与真实使用背离，或不知道能否据此发布。</td>
+<td>06</td>
+<td>按反馈原因回到 01、02、03、04。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="map-范围与证据边界">范围与证据边界</h3>
+<p>01、02、03、05、06 沿用既有研究初稿，本轮正文不变。04
+已按状态、执行与采证、条件等价性和框架取舍收窄，并补充来源附录。六篇共同构成
+v1 研究稿；文本整理完成不等于工程结论已获实测。</p>
+<p>版本、时效、成本、维护和污染控制贯穿多个方向，按它们影响的判断处理。训练可以是评测证据的使用场景；训练吞吐、优化算法及具体评测系统的建设方案不在本轮范围内。</p>
+<p>六方向划分、依赖关系和归属例是研究综合。典型资料沿用 2026-11-09
+核对的来源，本轮未重新联网核验，也未增加外部研究或案例。尚未运行
+benchmark、开展生产实验或进行改前／改后的读者测试；框架修改与审查共识不等于已经验证阅读效果或工程效果。</p>
+<details class="source-notes"><summary>典型资料索引：六个方向各自参考了什么</summary><h3 id="map-典型资料索引">典型资料索引</h3>
+<p>以下资料各有自己的样本、方法与适用范围。同一资料可以服务多个方向，六方向划分本身仍是本系列的研究设计。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>方向</th>
+<th>典型资料与切入点</th>
+<th>关键限定</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td><strong>τ-bench（2024）</strong>将工具、用户对话与业务规则纳入交互，并用
+<code>pass^k</code> 关注重复成功。<a
+href="https://arxiv.org/abs/2406.12045">原论文</a></td>
+<td>展示如何将能力落实为设置和指标；业务收益仍需实际场景验证。</td>
+</tr>
+<tr>
+<td>02</td>
+<td><strong>SaaS-Bench（2026，§3.2）</strong>从职业角色与工作流种子构造任务，经模型生成模板与实例、人工挑战与修订，并绑定应用数据状态。<a
+href="https://arxiv.org/html/2605.15777v1#S3.SS2">任务构造章节</a></td>
+<td>引出“保留了哪些工作约束”的问题，构造流程本身不能证明代表性。</td>
+</tr>
+<tr>
+<td>03</td>
+<td><strong>OpenAI 对 SWE-bench Verified
+的审计（2026）</strong>发现，其审查的模型常失败题目中，部分测试会拒绝功能正确的提交。<a
+href="https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified/">官方审计</a></td>
+<td>说明任务失败可能来自裁判；发现限于其审计样本与方法。</td>
+</tr>
+<tr>
+<td>04</td>
+<td><strong>Harbor 团队的 TheAgentCompany
+适配说明</strong>要求整次任务串行运行，避免共享业务服务重置互相干扰；<strong>Harbor
+的 OSWorld 对照实验记录</strong>对齐模型、观测、动作与预算后，比较
+PromptAgent 与 OSWorldAgent。<a
+href="https://github.com/harbor-framework/adapters/blob/main/src/theagentcompany/README.md#notes--caveats">适配说明</a>
+· <a
+href="https://huggingface.co/datasets/harborframework/parity-experiments/discussions/259">对照实验记录</a></td>
+<td>前者是 Harbor 团队的适配约束；后者涉及不同 Agent
+实现，等价程度须回到实验结果判断。</td>
+</tr>
+<tr>
+<td>05</td>
+<td><strong>METR
+时间跨度研究（2025）</strong>以人类完成时长衡量软件任务，并对任务族、任务与尝试做分层
+bootstrap，报告置信区间。<a
+href="https://metr.org/blog/2025-03-19-measuring-ai-ability-to-complete-long-tasks/">研究方法</a></td>
+<td>支持量化不确定性；推广范围仍受其软件任务样本约束。</td>
+</tr>
+<tr>
+<td>06</td>
+<td><strong>Anthropic《Demystifying evals for AI
+agents》（2026）</strong>区分能力与回归评测，并结合自动评测、生产监测、A/B
+测试与人工复核。<a
+href="https://www.anthropic.com/research/demystifying-evals-for-ai-agents">技术文章</a></td>
+<td>提供持续使用证据的方法参照，不能替代具体产品的线上校准。</td>
+</tr>
+</tbody>
+</table></div>
+</details></div></section><section class="chapter" id="chapter-01" tabindex="-1"><div class="chapter-heading"><span class="chapter-number">01</span><div><p class="eyebrow">这份证据要改变什么决定？</p><h2>目标、被测对象与业务价值</h2></div></div><p class="chapter-take">先绑定候选行动，再定义被测对象。模型、Agent 配置和业务系统的结论不能互换。</p><div class="article"><blockquote>
+<p>2026-11-10 · docs: 补充 Hyper-τ
+被测对象短案例与来源边界；保留研究初稿状态，未做运行验证。</p>
+</blockquote>
+<p><strong>本篇判断：Agent
+评测应先明确“这份证据要改变什么决定”，再界定被测系统，最后选择能力维度与指标。</strong>
+模型能力、Agent
+配置表现和业务收益不能相互替代。本篇研究三者怎样连接，不展开任务采样、裁判实现、运行器、统计检验和上线实验的完整方法。以下研究事实来自一手材料；标为“本文建议”的部分是综合推断，未做真实运行或业务验证。</p>
+<h3
+id="01-一第一性评测购买的是决策信息">一、第一性：评测购买的是决策信息</h3>
+<p>假设团队拿到“任务成功率
+85%”。它不能独自回答是否值得购买、能否放开写权限，或者应先改善模型还是工具。还缺少成功的任务是什么、谁完成了剩余工作、允许付出多少成本，以及错误会造成什么后果。</p>
+<p>因此，评测的最小单位不应只是一个分数，而应是一个带条件的判断：<strong>对于某类工作，在规定信息、权限、资源和人工参与下，方案
+A 相比基线 B，是否更符合某项产品目标。</strong>
+这不是要求每次都做全系统研究，而是要求证据与决定相匹配。一次廉价诊断可以支持“值得继续试”，却未必足以支持“可以替代人工”。</p>
+<p>本文建议同时列出候选行动，以及什么结果会改变决定。例如，候选行动是维持建议模式、扩大受限试用或允许授权后执行；触发条件可写成“关键约束达标、目标结果达到业务所需改善、人工负担未超出可接受范围”。具体门槛及证据强度由业务责任人与评测设计共同确定，并保留“证据不足，继续验证”的分支，不能等看完分数再临时调整。</p>
+<p>《AI Agents That
+Matter》明确区分模型研究与下游选型：前者可能关心计算投入和能力的关系，后者需要考虑实际支付成本与任务表现。作者同时主张联合观察准确性和成本，反对只追求最高分。本篇采纳的是这种问题区分，不把论文中的历史价格当成今天的采购依据。<a
+href="https://arxiv.org/html/2407.01502v1">原论文，§2、§4</a></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>要改变的决定</th>
+<th>评测需要回答什么</th>
+<th>证据不能越过的边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>是否换模型</td>
+<td>在相同任务与可比配置下，候选模型是否改善目标表现？</td>
+<td>结论先限于测试过的配置，不能直接称为模型的普遍优劣。</td>
+</tr>
+<tr>
+<td>是否改 Agent 方案</td>
+<td>新工具接口、记忆或流程是否改善目标表现，代价是什么？</td>
+<td>不能把整个方案的改善全部归给底层模型。</td>
+</tr>
+<tr>
+<td>是否扩大业务使用</td>
+<td>包含人工接管的整体流程，是否比现有方式更有价值？</td>
+<td>离线完成率只能支持价值假设，不能证明业务收益。</td>
+</tr>
+</tbody>
+</table></div>
+<p>这些问题常同时存在，但应分别记录答案。否则团队可能用便宜模型的单次调用费用证明流程省钱，或用少数难题的突破证明可以全面自动化。</p>
+<h3 id="01-二被测对象模型agent-配置与完整系统">二、被测对象：模型、Agent
+配置与完整系统</h3>
+<p><strong>模型是产生预测或行动建议的核心组件；Agent
+配置决定它如何获得信息、选择行动并持续工作；完整系统还包含真实服务、人和组织流程。</strong>
+这是一种服务于评测设计的分层，不是唯一的架构分类。</p>
+<p>Anthropic 在 2026 年的评测文章中，将 Agent harness
+定义为使模型能够处理输入、编排工具并返回结果的系统，并强调评测 Agent
+时测的是模型与该系统的组合。它还区分对话记录与最终环境状态：声称订好了机票，不等于数据库里真的存在预订。本篇据此要求同时说清“谁在行动”和“什么算交付”。<a
+href="https://www.anthropic.com/research/demystifying-evals-for-ai-agents">官方技术文章：评测结构</a></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>被测对象</th>
+<th>必须讲清的组成</th>
+<th>合适的结论表达</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>模型在指定条件下的表现</td>
+<td>模型版本、输入信息、调用方式与推理预算；外围策略尽量保持可比。</td>
+<td>“在本工具与提示配置下，替换模型后表现如何。”</td>
+</tr>
+<tr>
+<td>Agent 配置</td>
+<td>模型、提示、知识与记忆、工具及权限、控制流程、重试与停止规则。</td>
+<td>“这套可部署配置在规定任务和预算下表现如何。”</td>
+</tr>
+<tr>
+<td>完整业务系统</td>
+<td>Agent
+配置，加上服务可靠性、人工审核与接管、用户操作及交付流程。</td>
+<td>“这套人机流程在规定业务范围内产生什么结果和代价。”</td>
+</tr>
+</tbody>
+</table></div>
+<p>同一个功能也可能在不同研究中处于不同位置。若研究工具接口设计，接口是被测方案的一部分；若研究模型替换，接口通常应固定。若研究业务服务中断时的交付能力，服务故障属于测试条件；若只想了解模型推理能力，混入随机服务故障会妨碍解释。边界由问题决定，不能只按软件模块命名决定。</p>
+<p>固定配置也有取舍：原有提示和工具格式可能已经围绕旧模型优化，直接替换会使候选模型处于不利条件。若决定是“能否直接替换”，应把结论限定为现有配置下的效果；若决定是“充分适配后选哪套方案”，可给各候选同等适配预算，记录改动、投入和评测条件，此时比较的是适配后的组合系统。两类结果应分别呈现。</p>
+<p>一个现实例子是 SWE-agent。作者在固定语言模型的前提下研究
+Agent–Computer
+Interface，调整命令、反馈和历史信息的呈现，并通过消融分析这些设计的影响。这表明“同一个模型”不等于“同一个被测
+Agent”；接口也可能成为能力瓶颈。本轮核对论文机制，未复现其性能提升。<a
+href="https://arxiv.org/html/2405.15793v3">SWE-agent，§2、§5.1</a></p>
+<p>本文建议保留一张简短的“被测对象说明”：名称与版本、包含什么、外部条件是什么、允许谁介入、资源上限是什么。换模型、开放新权限或改变接管规则后，应更新说明。这样才能判断下一份分数是在比较版本，还是已经换了产品。</p>
+<h4 id="01-短案例当-agent-本身成为交付物">短案例：当 Agent
+本身成为交付物</h4>
+<p>Hyper-τ（τ^τ-bench）把“构建客服 Agent”设为任务。外层 Developer
+是模型与编码 harness
+的组合：它从政策文档、客服记录等材料恢复需求；在启用客户访谈的任务中，还需向模拟委托方
+Client 追问遗漏的信息，再提交可执行
+Agent。这些企业式材料由领域规则转换构造，并非真实客户项目的原样记录。<a
+href="https://arxiv.org/html/2609.04611v1#S3">论文 §3.1–3.2</a></p>
+<p>内层让交付的 Agent 服务模拟终端用户，在 Developer
+未见的任务上检查最终状态与沟通结果；外层得分由这些表现及服务超预算惩罚决定。因此，<strong>被比较的是构建系统，接受运行验收的是它交付的
+Agent</strong>。需求访谈中的 Client
+与验收中的用户承担不同角色，不能把访谈顺利或代码能运行当作交付成功。<a
+href="https://github.com/sierra-research/hyper-tau-bench#readme">官方
+README</a></p>
+<p>构建预算与服务预算也要分开：前者约束开发阶段耗时，并另记 Developer
+调用成本；后者约束交付 Agent
+平均每次对话的额度及可用模型。本文据此建议同时看“花多少投入造出来”和“造出的系统怎样交付”。该基准支持受控模拟下的构建能力比较，尚不能证明真实客户收益。<a
+href="https://arxiv.org/html/2609.04611v1#S4">论文 §4</a></p>
+<h3
+id="01-三20242026问题从能做扩展到怎样才有用">三、2024—2026：问题从“能做”扩展到“怎样才有用”</h3>
+<p>这不是后一种评测取代前一种，而是不同研究逐步补上缺失的业务条件。</p>
+<p>2024 年的 τ-bench 将用户对话、领域规则和工具操作放到同一任务中。Agent
+既要理解用户意图，又要遵守规则并改变目标状态。它提出
+pass^k，以多次尝试全部成功的概率观察一致性，说明平均完成率之外还存在“能否稳定交付”的问题。<a
+href="https://arxiv.org/html/2406.12045v1">τ-bench，§3、§5</a></p>
+<p>2025 年的 τ²-bench
+进一步引入双方都能操作环境的电信支持场景。作者比较了 Agent
+独自控制全部工具与引导模拟用户共同操作的设置，报告后者表现下降。这使“自己会做”与“让用户配合做成”成为可区分的问题。不过，两种设置也改变了信息与控制条件，不能把全部差值理解成纯粹的语言沟通能力差异。<a
+href="https://arxiv.org/html/2506.07982v1">τ²-bench，§4.2</a></p>
+<p>同在 2025 年，METR 用人类完成任务所需时长，描述 Agent
+在指定成功概率下能处理的任务跨度。这个量提供了理解任务复杂度的另一种尺度，但它既不是
+Agent
+自己的运行时长，也不是已节省的人类工时，更不是一个岗位可自动化的比例。<a
+href="https://metr.org/blog/2025-03-19-measuring-ai-ability-to-complete-long-tasks/">METR
+时间跨度研究</a></p>
+<p>到 2026 年，Anthropic
+的方法总结更明确地将自动评测放进包含生产监测、人工审阅等证据的整体框架。本文的综合判断是：产品规划需要同时看任务能力、交付条件和实际价值，而不是期待一个更大、更难的排行榜解决所有问题。这是方法性建议，并非对全部行业实践的普查结论。<a
+href="https://www.anthropic.com/research/demystifying-evals-for-ai-agents">Anthropic
+方法总结</a></p>
+<h3
+id="01-四从业务价值推导能力而不是从能力清单猜价值">四、从业务价值推导能力，而不是从能力清单猜价值</h3>
+<p>以下是<strong>教学假设</strong>：企业准备引入售后退款
+Agent。业务目标是缩短处理周期，同时控制错误退款，并降低坐席总投入。现状由人工处理；拟上线范围只覆盖规则明确的部分退款请求，争议和权限不足的情况仍交人工。</p>
+<p>可以按“价值目标 → 工作结果 → 必要能力 →
+可观察指标”倒推。例如，“降低坐席投入”要求 Agent
+不仅判断退款是否成立，还要取得必要确认、正确执行，并把不能完成的事项交接清楚。单独测规则问答答对率，会漏掉执行和接管造成的工作量。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>业务目标</th>
+<th>必要能力或工作结果</th>
+<th>候选观测指标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>降低人工总投入</td>
+<td>能独立完成适用任务，也能给人工提供可接续的信息。</td>
+<td>每件来单的人工处理、审核与返工时间，以及自主完成覆盖率。</td>
+</tr>
+<tr>
+<td>控制错误退款</td>
+<td>能确认身份、判断资格，并在授权边界内执行。</td>
+<td>不当退款、错对象或错金额的发生情况；严重违规单独记录。</td>
+</tr>
+<tr>
+<td>缩短处理周期</td>
+<td>能补齐信息、执行操作并及时接管。</td>
+<td>从来单到确认解决的时长分布；等待用户与等待人工分别记录。</td>
+</tr>
+<tr>
+<td>保持问题真正解决</td>
+<td>能交付正确结果，而非仅结束对话。</td>
+<td>在约定观察窗口内的复联、重开与结果验收情况。</td>
+</tr>
+</tbody>
+</table></div>
+<p>这些指标是待验证的设计建议，不是已证明的行业标准。每个指标需要写清分母和口径：自主完成率若只统计
+Agent
+选择接手的简单单，会掩盖覆盖范围；只统计成功单的成本，会隐藏失败、重试和人工补救；平均耗时下降，也可能伴随少数客户等待显著变长。</p>
+<p>能力指标主要帮助解释和诊断，业务指标才接近价值目标。规则理解正确，不保证工具执行正确；工具执行正确，也不保证客户问题得到解决。反过来，一次业务成功可能由人工挽救，不能据此认定
+Agent 已具备自主能力。至少应区分“Agent
+独立完成”“人机共同完成”“未完成”，并记录必要的接管负担。</p>
+<p>若要把价值折算为经济账，本文建议先建立同范围的比较口径：<strong>相对基线增加的合格交付价值与节省的资源，扣除新增运行、审核、返工和维护代价。</strong>
+各项不能重复计算，也不宜把难以可靠估计的重大违规损失强行折成一个权重。对这些约束先设门槛，再比较门槛内的成本和效率；门槛由业务责任人确定，本篇不凭空给数值。</p>
+<h3
+id="01-五三个容易改变产品路线的机制对照">五、三个容易改变产品路线的机制对照</h3>
+<h4 id="01-1-找到一次解与每次可靠是两种产品承诺">1.
+找到一次解，与每次可靠，是两种产品承诺</h4>
+<p>pass@k 关心 k 次尝试中至少一次成功；pass^k 关心 k 次尝试全部成功。在
+τ-bench
+的定义里，它们针对同一任务的独立重复尝试，再跨任务汇总。二者不能互换，更不能把全体任务平均成功率简单取
+k 次方，代替真实的一致性估计。<a
+href="https://arxiv.org/html/2406.12045v1#S5">τ-bench 指标定义</a></p>
+<p>本文推断：允许生成多份候选、且能低成本筛选正确结果的产品，可以重视搜索式成功；直接修改订单的产品更需要每次执行都可靠。即使
+pass@k
+很高，也仍需证明产品能识别那个正确答案，并计入选择与重试成本。不能把离线裁判替产品完成的挑选工作视为免费能力。</p>
+<h4 id="01-2-自主程度更高不保证用户价值更高">2.
+自主程度更高，不保证用户价值更高</h4>
+<p>Agentless
+使用预先组织的定位、修复、补丁验证流程，而非让模型自由选择所有后续行动。作者在当时的
+SWE-bench Lite
+设置中报告了有竞争力的效果与成本。这是保留简单工作流基线的理由，不是“固定流程永远优于
+Agent”的证明；本文也不据此推断 2026 年的排名。<a
+href="https://arxiv.org/html/2407.01489v2">Agentless，v2，§3、§5</a></p>
+<p>本文建议比较三类实际可行基线：现有人工流程、规则或固定工作流，以及更自主的
+Agent。若流程稳定、例外少，固定步骤可能更容易管理；若需要依据反馈不断调整路线，自主机制才更可能带来额外收益。选择依据应是任务适配和整体结果，不能把工具调用次数、多
+Agent 数量或“自主完成”标签本身当成价值。</p>
+<h4 id="01-3-能力进步不自动等于工作提速">3.
+能力进步，不自动等于工作提速</h4>
+<p>METR 在 2025 年发表的随机对照实验，研究了 16
+名熟悉各自开源项目的开发者和 246 项实际任务。作者报告，在其早期 2025
+年工具与实验条件下，允许使用 AI 的任务耗时反而增加
+19%。这是特定人群、项目与时期的结果，不支持“AI 普遍降低生产力”的结论。<a
+href="https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/">METR，2025
+年研究</a></p>
+<p>时效边界同样重要。METR 在 2026 年 2 月更新中认为，开发者不愿参与无 AI
+条件、选择性提交任务以及并行使用 Agent
+的计时问题，使后续数据难以可靠估计当时的收益。作者认为加速可能增加，但对增幅证据较弱。因此，既不能沿用旧结果否定今日工具，也不能把后续原始估计说成已证明普遍提速。<a
+href="https://metr.org/blog/2026-02-24-uplift-update/">METR，2026
+年实验设计更新</a></p>
+<p>本文据此强调：业务系统的测量对象必须包含人。生成得更快可能增加审核负担；自主成功不高的辅助工具，也可能通过帮助人处理某个瓶颈而产生价值。这两种关系都应作为待检验假设。</p>
+<h3 id="01-六产品规划真正应带走什么">六、产品规划真正应带走什么</h3>
+<p>首先，把“希望 Agent
+更强”改写成一个近期决定。例如“是否把规则明确的退款从草拟建议升级为授权后执行”。这会自然暴露需要测量的新能力：从答对，扩展到执行正确、遵守授权以及出错后可接管。</p>
+<p>其次，把业务目标与能力假设分开写。目标可以是降低坐席总投入；假设可以是更好的信息收集减少追问、更完整的交接降低人工接手时间。假设必须允许被推翻：如果问答准确率提高但人工投入未降，应检查价值链的其他环节，而不是继续堆同一种能力指标。</p>
+<p>再次，先保留结果、成本、时效、人工负担和关键约束的分项信息。只有确定取舍规则之后，才考虑汇总。一个总分把严重违规与节省几秒钟互相抵消，通常会让决策更难解释。具体业务也可能接受不同方案：低频高价值任务容许更高运行成本，高频低风险任务更关心单位经济性。</p>
+<p>最后，每项结论都写明适用范围。测了模拟退款任务，就报告该设置下的表现；验证了某模型与某工具组合，就报告该组合。明确范围不是削弱证据，而是让团队知道下一笔验证投入应补在哪里。</p>
+<h3
+id="01-七交给后续专题的输入与尚缺证据">七、交给后续专题的输入与尚缺证据</h3>
+<p>本篇输出应是一份目标说明：待支持的决定及候选行动、被测对象、业务范围、对照基线、允许的人工参与、主要结果与约束，以及能力通向价值的假设。说明中还应约定什么结果会触发哪项行动，例如关键约束满足且目标改善充分时扩大使用、关键约束不满足时维持原范围、证据不足时继续验证；这里只确定门槛形式，不编造业务阈值。</p>
+<p>第二篇承接任务和环境能否代表该范围；第三篇确定怎样判定结果正确；<a
+href="#chapter-04">第四篇</a>落实执行条件；第五篇检验差异和归因；第六篇负责“证据使用与线上校准”，研究证据怎样支持选型、发布、诊断和回归，并与实际使用表现校准。本篇只定义这些接口。</p>
+<p>当前仍缺目标业务的真实任务分布、人工基线、接管与返工成本、错误后果，以及模拟表现与真实收益之间的对应关系。因此本文能支持评测规划，不能给出上线阈值或
+ROI
+承诺。所列一手来源分别提供机制、作者实验或方法经验，均未在本轮独立复现；未检查仓库代码，也未把供应方自述当作我方验证效果。来源日期、核对位置和证据边界见来源核验简表（见文末来源核验附录）。</p>
+<details class="source-notes"><summary>来源核验附录：版本、承重章节与证据上限</summary><p>核对日期：2026-11-09；2026-11-10 增量核对 Hyper-τ 论文与官方
+README。只使用作者论文、研究机构官方技术文章与官方仓库说明。正文为研究初稿；本轮未运行
+benchmark、未核查源代码、未验证真实客户收益。下列“核对”指浏览原文相应段落，不等于复现实验。</p>
+<h3 id="01-src-筛选口径">筛选口径</h3>
+<p>问题驱动的选择标准为：能否区分决策用途、识别被测对象、把业务要求转成可观察量，或提供能力与价值不一致的反例。以
+τ-bench、SWE-agent、《AI Agents That Matter》为机制主参考，τ²-bench 和
+METR 为补充证据，Anthropic
+为工程方法参照。排除未说明系统配置的榜单比较、二手解读和供应方客户 ROI
+宣称；未扩展到全部评测平台。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>一手来源与版本</th>
+<th>本轮核实的承重点</th>
+<th>证据边界与正文用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://arxiv.org/html/2407.01502v1">AI Agents That
+Matter</a>，arXiv:2407.01502v1，提交于 2024-07-01。</td>
+<td>§2 联合考虑成本与准确性；§4 区分模型研究和下游采购。</td>
+<td>作者分析与实验，不是所有应用的成本定律。正文仅采纳决策区分，不引用历史价格。HTML
+页作者区出现 2026-08-24 字样；<a
+href="https://arxiv.org/abs/2407.01502">arXiv 版本记录</a>仍只有
+2024-07-01 v1，故年份按版本记录，不将其当成新实验。</td>
+</tr>
+<tr>
+<td><a
+href="https://arxiv.org/html/2406.12045v1">τ-bench</a>，2024-06-17
+v1。</td>
+<td>§3 的用户、工具、规则与状态机制；§5 的 pass@k、pass^k
+定义及任务内重复、跨任务汇总。</td>
+<td>模拟环境中的可靠性指标，不能推出客户收益。正文不引用当时模型分数，不把重复成功当成线上
+SLA。</td>
+</tr>
+<tr>
+<td><a
+href="https://arxiv.org/html/2405.15793v3">SWE-agent</a>，2024-11-11
+v3，首稿 2024-05-06。</td>
+<td>§2 明说固定 LM、研究 ACI；§5.1 分析接口设计。</td>
+<td>作者实验说明接口可影响组合系统表现；没有本轮独立复现，不泛化当前模型能力。</td>
+</tr>
+<tr>
+<td><a
+href="https://arxiv.org/html/2407.01489v2">Agentless</a>，2024-10-29
+v2，首稿 2024-07-01。</td>
+<td>§3 定位、修复、补丁验证三阶段；§5 对 SWE-bench Lite
+的作者结果。</td>
+<td>仅支持保留简单流程基线。未混用早期两阶段描述、不同版本分数或当前榜单；v3
+HTML 访问返回 404，改读已确认存在的 v2。</td>
+</tr>
+<tr>
+<td><a
+href="https://arxiv.org/html/2506.07982v1">τ²-bench</a>，2025-06-09
+v1。</td>
+<td>§4.2 Default、No-User、Oracle Plan 设置及 Default 与 No-User
+对照。</td>
+<td>作者报告模拟电信场景结果；No-User
+同时改变控制与信息，正文明确不作纯沟通能力因果归因。</td>
+</tr>
+<tr>
+<td><a
+href="https://metr.org/blog/2025-03-19-measuring-ai-ability-to-complete-long-tasks/">METR：Measuring
+AI Ability to Complete Long Software Tasks</a>，2025-03-19。</td>
+<td>以人类任务时长为轴，在指定成功概率处描述能力跨度。</td>
+<td>用于解释指标含义，不引用当前模型跨度、不预测岗位替代。当前页面注明
+TH1.1 已停止新增模型，正文没有把旧曲线当作最新前沿。</td>
+</tr>
+<tr>
+<td><a
+href="https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/">METR：早期
+2025 开源开发者生产力实验</a>，2025-07-10。</td>
+<td>Methodology 和 Core Result：16 名开发者、246 项任务、允许/不允许 AI
+随机分配、作者报告耗时增加 19%；限制表。</td>
+<td>实际工作实验但人群、仓库和工具时期有限。正文保留规模与时间边界，不称普遍减速。</td>
+</tr>
+<tr>
+<td><a
+href="https://metr.org/blog/2026-02-24-uplift-update/">METR：Changing
+our Developer Productivity Experiment Design</a>，2026-02-24。</td>
+<td>作者说明参与者与任务选择偏差、并行 Agent
+计时问题，并称后续数据不足以可靠估计当前效果。</td>
+<td>对 2025
+历史反例的必要时效补充；不把新原始点估计写成已证明普遍提速。</td>
+</tr>
+<tr>
+<td><a
+href="https://www.anthropic.com/research/demystifying-evals-for-ai-agents">Anthropic：Demystifying
+evals for AI agents</a>，2026-01-09。</td>
+<td>“The structure of an evaluation” 定义 Agent harness、outcome；后段将
+evals 与其他证据结合。</td>
+<td>官方工程经验，不是独立收益验证。/engineering/ 链接重定向到
+/research/，正文使用最终地址。</td>
+</tr>
+<tr>
+<td><a
+href="https://arxiv.org/abs/2609.04611">Hyper-τ（τ^τ-bench）论文</a>，2026-09-04
+v1；<a
+href="https://github.com/sierra-research/hyper-tau-bench#readme">官方
+README</a>，2026-11-10 读取。</td>
+<td>论文 §3.1–3.2：企业式材料与可访谈 Client、交付 Agent
+的未见任务验收、平均服务额度及超额惩罚；§4 与
+README：构建耗时、Developer 调用成本与服务额度分项记录。</td>
+<td>仅用于第二节的构建系统与交付物区分。材料由规则转换构造，Client
+与终端用户均为模拟角色；未读实现代码、未复现结果、未验证真实生产收益。README
+为读取时状态，未锁定提交版本。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="01-src-事实推断与未核项">事实、推断与未核项</h3>
+<p>“作者报告”包括论文性能方向和 METR
+实验结果；“本文建议/推断”包括三层被测对象框架、退款教学例、价值倒推链和产品决策建议。退款例无真实企业、样本、成本或成效对应。所有现实案例只说明机制或测量边界，未改写为普遍规律。</p>
+<p>正文没有代码观察结论，因为本轮未读取实现代码或运行仓库。还未核验目标业务分布、人工效率与错误代价，未开展统计复核、裁判有效性审计或上线对照。所列来源用于支撑问题框架，不能替代业务侧证据。</p>
+<p>若后续获得相同业务、相同交付标准下的系统对照，可检验本文的价值假设；若只有排行榜更新，则只能更新候选能力证据，不应直接改写业务收益判断。</p>
+</details></div><a class="return" href="#reading-start">返回研究地图 ↑</a></section><section class="chapter" id="chapter-02" tabindex="-1"><div class="chapter-heading"><span class="chapter-number">02</span><div><p class="eyebrow">任务保留了哪些真实工作约束？</p><h2>任务与环境代表性</h2></div></div><p class="chapter-take">覆盖与保真是两回事。更多同模板实例，不能补足遗漏的任务族或失真的约束。</p><div class="article"><blockquote>
+<p>2026-11-10 · docs: 在访谈与专家段补充指向 01 篇 Hyper-τ
+案例的交叉引用；保留研究初稿状态。</p>
+<p>本篇研究怎样把真实工作变成任务与环境，以及这些样本能代表什么。来源为本轮核对的八项公开一手研究；案例与方法建议另行标明。已据独立审稿修订；未读取内部原
+PDF，未运行评测环境。</p>
+</blockquote>
+<h3
+id="02-先建立一个判断约束失真时增加任务数量不能弥补代表性">先建立一个判断：约束失真时，增加任务数量不能弥补代表性</h3>
+<p>企业评测不能只问“题目像不像工作”，还要问“做对这道题，需要面对的条件，是否与目标业务相同”。如果真实采购需要核对合同版本、发现重复订单、取得批准，而评测直接给出正确供应商和批准信息，那么任务即使在真实采购软件里成功执行，也只证明了后半段操作能力。</p>
+<p>本篇把代表性拆为两个问题。<strong>覆盖</strong>是目标场景中哪些类型进入了样本；<strong>保真</strong>是进入样本的任务保留了哪些关键约束。前者需要一个可说明的采样范围，后者需要逐步解释转译过程。生态效度在此指评测中的行为和结果，对真实工作情境有多大解释力；不是画面相似度，也不是一个脱离用途的统一分数。这是本文的分析框架，不是某个基准的官方分类。</p>
+<p>可把整条证据链读成：<strong>业务范围 → 原始工作证据 → 任务抽象 →
+环境实例 → 人工复核 →
+适用范围声明</strong>。每次转换都可能丢东西：访谈会漏掉习惯性判断，日志未必记录线下协调，模板会合并例外，模拟器会改变可见信息。研究的核心是把这些变化显式留下，而不是追求一比一复制企业。</p>
+<h3
+id="02-一20242026从可操作任务走向工作约束的显式构造">一、2024—2026：从可操作任务，走向工作约束的显式构造</h3>
+<p>以下是与本题有关的方法演变，并非全面历史，也不表示后来的基准全面替代前者。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>研究与时间</th>
+<th>任务怎样进入评测</th>
+<th>得到什么，又留下什么边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>WorkArena++，2024</td>
+<td>把 ServiceNow 原子任务组成工作流；L2 给明确步骤，L3
+改用工单和知识库。</td>
+<td>可以研究指令显式程度与组合能力；工作流由作者设计，不是企业任务频率抽样。<a
+href="https://arxiv.org/html/2407.05291v1#S3">论文 §3</a></td>
+</tr>
+<tr>
+<td>TheAgentCompany，2024</td>
+<td>建造虚构软件公司，把网站、文件和模拟同事放在同一工作情境。</td>
+<td>可以保留跨工具与协作关系；作者明确承认任务多来自经验推演，自动评分也限制了题材。<a
+href="https://arxiv.org/html/2412.14161v1#S8">论文 §3、§8</a></td>
+</tr>
+<tr>
+<td>SCUBA，2025</td>
+<td>访谈 Salesforce 用户，提炼工作模板，再改写和实例化。</td>
+<td>任务意图有用户来源；测试数据与问法仍经构造，不能当作生产日志原样回放。<a
+href="https://arxiv.org/html/2509.26506v1#S3.SS2">论文 §3.2</a></td>
+</tr>
+<tr>
+<td>GDPval，2025</td>
+<td>先选行业、职业，再由专家基于职业工作构造交付任务并复核。</td>
+<td>提供职业覆盖框架；主要研究上下文完整的交付任务，沟通和隐性知识等被排除。<a
+href="https://arxiv.org/html/2510.04374v1#S2">论文 §2、§5</a></td>
+</tr>
+<tr>
+<td>SaaS-Bench，2026</td>
+<td>从角色与工作流种子出发，用模型生成、专家挑战修订、静态和执行检查构造任务。</td>
+<td>将生成过程绑定具体应用数据；可执行和专业性复核仍不等于目标企业的分布代表性。<a
+href="https://arxiv.org/html/2605.15777v1#S3.SS2">论文 §3.2</a></td>
+</tr>
+</tbody>
+</table></div>
+<p>这条演变提示：真实应用、真实工作来源、真实交互约束是不同维度。研究正分别补齐这些维度，不能看到“真实企业软件”便替其他维度背书。</p>
+<h3
+id="02-二工作证据怎样变成任务三种入口应当相互校正">二、工作证据怎样变成任务：三种入口应当相互校正</h3>
+<h4
+id="02-真实记录保留发生过的困难但先问记录遗漏了谁">真实记录：保留发生过的困难，但先问记录遗漏了谁</h4>
+<p>工单、操作日志、产物版本和审批记录，可以提供真实输入、发生顺序及业务结果。但日志里的“先查
+A，再改
+B”未必说明为什么这样做；成功结案记录也可能缺少被放弃、转交或线下解决的任务。本文建议先定义业务范围和时间窗，再按任务族、角色、结果与异常类型抽样；把“没有留下可用记录”单列，避免把数据容易取得误认为业务重要。</p>
+<p>SWE-Lancer 提供可复核的历史工作转译案例：任务来自 Expensify 在 Upwork
+发布并由付费贡献者解决的工作，使用原问题描述及修复前代码状态，再补建端到端测试。真实来源没有消除选择边界：它仍围绕一个代码库和自由职业工作机制。本篇借鉴其“历史问题与当时状态成对保留”的方法，不把其结果外推到一般企业岗位。<a
+href="https://arxiv.org/html/2502.12115v1#S2.SS2">SWE-Lancer
+§2.2</a></p>
+<h4
+id="02-访谈与专家补回判断依据但不能替代发生频率">访谈与专家：补回判断依据，但不能替代发生频率</h4>
+<p>访谈应围绕具体事件追问：当时知道什么、缺什么、为什么没有采用另一个方案、什么情况下必须停下。业务专家能识别日志没有表达的权限、例外和责任；“资深人士认为典型”仍是专家判断，不能直接写成“覆盖大部分工作量”。因此任务来源应区分真实记录、访谈复述、专家重建和作者假设。</p>
+<p>SCUBA 共含 300 个任务实例：从真实 Salesforce 用户访谈获得用例，并关联
+Trailhead 知识文章；每个模板填值产生五个查询，再由 ChatGPT
+改写、作者检查。环境还会合成记录、配置权限。这是“真实用例来源—模板变体—合成初态”的混合链路，不能视为三百条原始用户会话。<a
+href="https://arxiv.org/html/2509.26506v1#S3.SS2">SCUBA
+§3.2–3.2.2</a></p>
+<p>关于如何把需求追问本身纳入构建任务，参见 <a href="#01-短案例当-agent-本身成为交付物">01
+篇 Hyper-τ
+短案例</a>；其中的模拟委托方访谈不能替代真实业务访谈证据。</p>
+<h4
+id="02-模板与合成扩大变化范围不能凭空扩大现实证据">模板与合成：扩大变化范围，不能凭空扩大现实证据</h4>
+<p>模板适合固定业务关系、改变实例参数，例如保留“合同额度约束订单”的关系，替换金额与日期。仅换姓名主要增加表面变化；增加规则冲突、资料缺失、权限差异，才可能扩展决策条件。反过来，任意组合异常也可能制造现实中不会同时成立的任务。</p>
+<p>SaaS-Bench §3.2
+的承重点是两层生成：先生成场景、目标和跨应用依赖，再绑定具体入口、数据状态与素材；两层均由模型生成，人工挑战、审查并修订。静态检查还关注跨应用自然性、parallel
+tasking
+与规格堆叠。本文据此推断，生成质量应复核“约束是否保留、依赖是否自然”，而非只数步数或软件数量。<a
+href="https://arxiv.org/html/2605.15777v1#S3.SS2">SaaS-Bench
+§3.2</a></p>
+<h3
+id="02-三环境需要多真实取决于要测哪种能力">三、环境需要多真实，取决于要测哪种能力</h3>
+<p>为了研究业务推理，可以用简化
+API；为了研究页面定位，必须保留相关界面；为了研究沟通协作，则需要另一个参与者的知识与行动边界。环境选择应跟随被测能力。本文建议每项简化都写出“保留了什么、删除了什么、因此不能声称什么”。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>环境选择</th>
+<th>适合保留的条件</th>
+<th>需要单独证明的部分</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>规则与 API 模拟</td>
+<td>状态变化、权限检查、规则依赖。</td>
+<td>工具语义与真实系统是否一致；界面操作能力不在其中。</td>
+</tr>
+<tr>
+<td>真实软件的开发或沙箱实例</td>
+<td>页面结构、原生字段与应用行为。</td>
+<td>客户定制、数据规模、集成和业务分布是否匹配。</td>
+</tr>
+<tr>
+<td>自建跨应用工作场景</td>
+<td>对象关系、文档线索和协作依赖。</td>
+<td>作者设定是否反映目标组织，而非理想化工作方式。</td>
+</tr>
+<tr>
+<td>模拟用户或同事</td>
+<td>分散信息、追问与协同行动。</td>
+<td>模拟者是否过度配合、泄露信息或偏离角色。</td>
+</tr>
+</tbody>
+</table></div>
+<p>τ-bench 明确简化现实领域的数据库、API
+与政策，并迭代人工任务，使用户指令对应唯一结果。这样有利于可判定性，却有意减少了业务歧义。若产品要帮助客户澄清互相冲突的目标，这类任务只能覆盖其中一部分；不能把所有歧义消除后，再声称测到了处理歧义的能力。<a
+href="https://arxiv.org/html/2406.12045v1#S4">τ-bench §4、附录 B</a></p>
+<p>τ²-bench
+又揭示另一种简化：用户不只是回答问题，也会操作设备。它给用户和 Agent
+各自的工具与观测，并用环境状态约束模拟用户。这为故障排查引入了协同行动，但仍是受控模拟；模拟器一致性检查不能证明真实客户具有相同的理解力、耐心和执行行为。<a
+href="https://arxiv.org/html/2506.07982v1#S3">τ²-bench §3、§4.3</a></p>
+<h3
+id="02-四覆盖不是数量至少分别看任务族约束和目标分布">四、覆盖不是数量：至少分别看任务族、约束和目标分布</h3>
+<p>WorkArena++ 的 682 项任务对应 341 个工作流的两种呈现层级；附录 D
+又按能力分桶，减少类似交互的冗余。这个例子说明，实例数、工作流数、能力条件数应分别报告。大量相似实例有助于检查稳定性，不能自动变成同样多的独立业务覆盖。<a
+href="https://arxiv.org/html/2407.05291v1">WorkArena++ §3.1、附录
+D</a></p>
+<p>本文建议维护两份视图：一份按真实业务中的出现情况描述常见任务，另一份单列低频但后果严重的挑战条件。前者回答日常适用性，后者回答边界脆弱点。没有可信频率时，就报告所见样本及覆盖空白，不把人为均衡的任务集称为“企业日常通过率”；如何加权和估计不确定性归第
+05 篇。</p>
+<p>GDPval
+从行业和职业向下组织任务，以真实工作产物或按其类似构造的产物为基础，由专家检查职业相关性；并非凭空编题。<a
+href="https://openai.com/index/gdpval/">官方来源说明</a>
+但其初版仍排除大量隐性知识、专有工具访问与人员沟通，通常一次提供完整上下文。因此“覆盖若干工作交付物”与“覆盖整个职业”仍须分开。<a
+href="https://arxiv.org/html/2510.04374v1#S5">GDPval §5</a></p>
+<p>还有一个容易忽视的循环：先限定只有能自动评分的任务才能入选，最后就会得到一个偏向可评分工作的任务集。TheAgentCompany
+主动承认这一限制，并指出没有覆盖产品创意、系统架构等更复杂创造性任务。对于难以自动评分但业务重要的任务，合理做法可以是保留专家评审成本，并把判据问题交给第
+03 篇，而非默默删去整个任务族。<a
+href="https://arxiv.org/html/2412.14161v1#S8">TheAgentCompany §8</a></p>
+<h3
+id="02-五教学例怎样把采购异常处理变成可研究的任务族">五、教学例：怎样把“采购异常处理”变成可研究的任务族</h3>
+<p>以下是<strong>内部探索用的虚构案例</strong>，没有对应客户证据，也不是产品需求。假设业务要处理“供应商要求提前付款”这类请求，验收记录缺失是其中一种变体。目标是研究
+Agent 能否识别条件、补齐必要信息并采取恰当动作，而非只测建单。</p>
+<p>从原始请求、当时合同与验收记录出发，用访谈补齐批准规则，再形成下列四种<strong>虚构覆盖变体</strong>。每种都需保留对应初态与可见信息，不能提前透露事后事实。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>变体</th>
+<th>测到的关键约束</th>
+<th>合理处理方向</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>条件与材料齐备</td>
+<td>付款条件成立且经办权限充分。</td>
+<td>核对后按授权办理。</td>
+</tr>
+<tr>
+<td>验收记录缺失</td>
+<td>必要证据未齐，不能自行补造。</td>
+<td>暂停付款并请求补证。</td>
+</tr>
+<tr>
+<td>合同版本冲突</td>
+<td>金额或期限依据存在冲突。</td>
+<td>查明有效版本后再处理。</td>
+</tr>
+<tr>
+<td>无例外批准权限</td>
+<td>提前付款须由其他角色批准。</td>
+<td>提交有权者，不越权执行。</td>
+</tr>
+</tbody>
+</table></div>
+<p>未覆盖供应商身份欺诈和银行到账延迟：前者需独立身份核验资料，后者需异步支付状态，本例未构造。四种变体也不代表真实发生比例。</p>
+<p>专家解释决定业务判断的条件，环境团队核对其如何变成可见信息和状态变化。先复核一个小任务族，再讨论扩大投入；这里不预设产品形态。</p>
+<p>若只把“付款成功”当作目标，发现缺证后正确停止也会被错记为失败。公开研究已有对应设计：WorkArena++
+附录 C.5 要求 Agent
+识别无法执行的指令并通知用户，例如不存在的字段或无效商品配置。这支持把正确不执行纳入合法结果，但不直接验证本例的采购规则。<a
+href="https://arxiv.org/html/2407.05291v1">WorkArena++ 附录 C.5</a>
+判据与初态一致性分别归第 03、04 篇。</p>
+<h3
+id="02-六带着什么证据才可以开始使用这批任务">六、带着什么证据，才可以开始使用这批任务</h3>
+<p>本篇建议每个任务族附一份简短说明：它面向哪个组织或角色，原始证据是什么，哪些内容由作者合成，专家具体复核了什么，哪些条件被简化，哪些场景尚未覆盖。人工执行只支持“在指定环境中可完成”；业务专家复核支持“具有场景合理性”；只有目标业务中的对照证据，才能进一步支持迁移判断。三者不能相互替代。</p>
+<p>当前仍未回答：内部业务的任务频率与异常分布是什么，专家能否接触到失败和转交案例，已有沙箱保留了哪些客户约束，以及公开基准上的表现与内部任务是否同向变化。这些都需要实际材料或实验，不能由公开论文补出。本轮没有运行环境，也没有验证任何基准在内部业务上的代表性。</p>
+<p>本篇向第 03 篇交付“允许的结果与业务分支”，向<a
+href="#chapter-04">第 04
+篇</a>交付“需要保留的初态、观测及动作语义”，向第 05
+篇交付“样本来源、任务族与覆盖边界”。对产品负责人的直接价值，是先看清评测证明了哪一段工作，再决定下一笔采样、专家或环境投入。</p>
+<hr />
+<p>来源版本及支持边界见
+02-sources.md（见文末来源核验附录）。本文优先使用固定 arXiv v1
+研究设计，数字仅描述相应版本，不代表 2026-11-09 最新榜单或仓库实现。</p>
+<details class="source-notes"><summary>来源核验附录：版本、承重章节与证据上限</summary><p>核对日期：2026-11-09。核验方式：本轮实际打开一手论文
+HTML，定位任务构造、环境设定与限制章节。以下固定版本用于方法比较，不把旧版结果写成当前模型表现；未运行环境、未读取用户原
+PDF、未核验仓库最新提交。正文使用八项研究，以下表格区分支持与不支持范围。</p>
+<p>另逐一打开 arXiv 摘要页核对 v1 日期：τ-bench 为
+2024-06-17，WorkArena++ 为 2024-07-07，TheAgentCompany 为
+2024-12-18，SWE-Lancer 为 2025-02-17，τ²-bench 为 2025-06-09，SCUBA 为
+2025-09-30，GDPval 为 2025-10-05，SaaS-Bench 为 2026-05-15。摘要页显示
+SaaS-Bench 已有 v2、WorkArena++ 已有 v2、TheAgentCompany 已有
+v3、SWE-Lancer 已有 v4；本篇保留固定 v1
+的方法叙述，未比较这些后续版本的全部改动。没有采用撤稿论文
+arXiv:2606.19544。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>来源、版本及定位</th>
+<th>本篇采用的证据</th>
+<th>不支持的结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a
+href="https://arxiv.org/html/2605.15777v1#S3.SS2">SaaS-Bench，arXiv
+2605.15777v1，2026，§3.2</a></td>
+<td>Stage II 明示模板生成与任务实例化两层，各层均由 LLM Builder
+生成、人工专家 Challengers/Refiners 审查修订；Builder 采用 Claude Opus
+4.6。Stage III 原文反模式为 CRM dumping ground、parallel
+tasking、specification overflow，另列 cross-app naturalness 检查。</td>
+<td>两层角色与三术语已回原文复核；不代表真实生产任务随机采样或内部客户适用性。与无连字符的
+SaaSBench 编程基准不是同一项目。</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2509.26506v1#S3">SCUBA，arXiv
+2509.26506v1，2025，§3.1–3.2.2</a></td>
+<td>300 个实例、三类 persona；访谈真实 Salesforce 用户；关联
+Trailhead；每模板五个填值实例，经 ChatGPT
+改写和两位作者检查；合成记录及权限初始化；采用 Salesforce 开发
+org。</td>
+<td>不等于 300
+条真实日志或用户原问法；真实产品界面不证明客户定制、规模、集成或业务频率一致。</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2407.05291v1">WorkArena++，arXiv
+2407.05291v1，2024，§3.1、附录 C.5/D</a></td>
+<td>341 工作流分别呈现为 L2 与 L3，共 682 任务；附录 D
+按能力分桶减少重复；C.5
+要求识别不可执行指令并通知用户，例为不存在的表单字段、无效商品配置。</td>
+<td>不是 682
+个独立业务工作流；不可行任务支持“正确不执行”的结果设计，不直接证明采购拒付或转交规则正确。</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2412.14161v1">TheAgentCompany，arXiv
+2412.14161v1，2024，§3、§5、§8</a></td>
+<td>虚构软件公司、多应用和模拟同事；§8
+明示任务主要由熟悉工作场景者经验推演，自动评分需求使任务偏直接，未覆盖更复杂创造性任务。</td>
+<td>不支持“从真实公司日志采样”；不支持全岗位、全行业或真实劳动力替代率；v1
+未进行人类专业人员表现对照。</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2510.04374v1">GDPval，arXiv
+2510.04374v1，2025，§2.3、§5、附录 A.5</a></td>
+<td>§2.3 规定请求与工作产物两部分，并按 O*NET 职业任务分类；<a
+href="https://openai.com/index/gdpval/">官方发布文</a> 的 What GDPval
+measures 明示基于真实工作产物或类似构造的产物。§5
+说明一次性上下文及隐性知识、专有工具、人员沟通等边界。</td>
+<td>“专家构造”不意味着凭空编造，也不支持全是原始交付物；真实工作来源仍不等于完整职业覆盖、真实频率抽样或生产收益。</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2406.12045v1#S4">τ-bench，arXiv
+2406.12045v1，2024，§4、附录 B</a></td>
+<td>人工协同设计并简化数据库、API、政策；模型辅助生成数据；人工迭代任务，使用户指令对应唯一数据库结果。</td>
+<td>不支持开放目标、所有现实歧义或真实用户行为已被充分覆盖；没有把合成任务称作真实会话。</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2506.07982v1">τ²-bench，arXiv
+2506.07982v1，2025，§3、§4.3</a></td>
+<td>用户与 Agent
+都能用工具、各有观测；电信排障中共享动态状态；环境约束用户模拟器；有模拟器质量与可靠性分析。</td>
+<td>模拟器受约束不等于真实用户行为分布；不支持客户耐心、理解力、长期互动或现场行为完全一致。</td>
+</tr>
+<tr>
+<td><a
+href="https://arxiv.org/html/2502.12115v1#S2.SS2">SWE-Lancer，arXiv
+2502.12115v1，2025，§2.2</a></td>
+<td>Expensify 在 Upwork
+的已解决付费任务；原问题、修复前代码快照、专家补建端到端测试；作为历史工作记录转译示例。另核对
+<a href="https://proceedings.mlr.press/v267/miserendino25a.html">ICML
+2025 正式出版入口</a>。</td>
+<td>单代码库和自由职业工作来源不能外推全部企业岗位；历史支付不是部署后实际节省；正文没有引用模型分数或当前仓库题数。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="02-src-选材边界">选材边界</h3>
+<p>四项主参考各补一个缺口：SCUBA 补“用户来源到模板”，SaaS-Bench
+补“生成到具体环境”，WorkArena++ 补“组合、呈现与去冗余”，TheAgentCompany
+补“工作情境与可评估性取舍”。GDPval 补职业采样和专家角色；SWE-Lancer
+补历史记录与当时状态；τ-bench 与 τ²-bench
+对照“消除歧义”和“保留协同行动”的不同设计。</p>
+<p>未扩展模型排名、运行器适配或评分算法。正文关于采样视图、约束保留说明及采购案例，均为作者综合建议或虚构教学例，不冒充上述论文已验证的通用方法。内部管理咨询专家与沙箱产品线仅作为探索语境，未被写成已经确定的产品方案。</p>
+<h3 id="02-src-尚未核验">尚未核验</h3>
+<ol type="1">
+<li>未下载并运行任何环境，因此环境可启动性、当前依赖、权限边界和成本均未测。</li>
+<li>未逐项审查公开任务配置、原始访谈材料或全部生成记录；论文报告的构造方法不能替代逐任务溯源。</li>
+<li>未做系统性文献穷尽搜索；2024—2026
+叙述仅是所选方法的演变，不是完整领域史。</li>
+<li>未取得内部业务样本与现场对照数据，无法确认内部目标分布、客户约束保真度及迁移效果。</li>
+</ol>
+<h3 id="02-src-本地自检范围">本地自检范围</h3>
+<p>已核对八项引用的题名、固定版本和承重章节；正文未报告运行成功、最新排名或内部业务验收。本次已依据
+agy batch B 独立审稿修订，并重新打开承重原文；逐项处置见
+02-review-response.md（本地留存）；主控已组织增量复审，结论为可交付初稿。</p>
+</details></div><a class="return" href="#reading-start">返回研究地图 ↑</a></section><section class="chapter" id="chapter-03" tabindex="-1"><div class="chapter-heading"><span class="chapter-number">03</span><div><p class="eyebrow">做对与做错，能被正确识别吗？</p><h2>判据与裁判有效性</h2></div></div><p class="chapter-take">裁判也需要校准。合理替代解可能被误拒，错误结果也可能钻过判据。</p><div class="article"><p><strong>核心判断：可信评分需要同时证明两件事——规则代表了任务真正要求，裁判能根据足够证据正确执行规则。</strong>
+更强模型、更详细的评分表、更多裁判投票，都不能自动补上其中任何一环。工程上可先用程序核验可确定的事实，再用明确判据处理开放质量；对未知、冲突和故障保留独立出口，并用正确变体与错误反例检验整个评分系统。</p>
+<p>本篇假定任务范围、可用能力和运行条件已经约定，只回答“同一份交付凭什么算完成”。任务代表性归第
+02 篇，证据怎样可靠采集归第 04 篇，分数差异的统计推断归第 05
+篇，是否据此选型或发布归第 06
+篇。正文的论文结果均为作者报告；标明“本文建议”的框架与教学例是研究综合，不是原论文结论。本轮核验公开一手材料，未运行基准、未测裁判，也未读取内部
+PDF。</p>
+<h3 id="03-一先分清判据裁判与证据">一、先分清判据、裁判与证据</h3>
+<p>判据规定什么值得得分，例如“所有重复订单只保留一条，原始金额不变”。裁判是执行判据的机制，可以是
+SQL、测试程序、模型或专家。证据是它实际看见的文件、状态、轨迹与来源。<strong>rubric
+是评分规则，不是与程序、模型、人类并列的第四种裁判</strong>；同一 rubric
+可以交给不同执行者。Anthropic 的工程总结也区分代码、模型、人类三类
+grader，并允许一个任务组合多个 grader。<a
+href="https://www.anthropic.com/research/demystifying-evals-for-ai-agents">Anthropic，2026-01-09</a></p>
+<p>本文把目标表述为：在任务允许的解法集合内，尽量接受功能等价的正确结果；对越过任务底线的结果，尽量拒绝。前者对应误拒，后者对应误放。稳定执行错误规则，只证明可靠性，不证明有效性；重复打出同一个分数，不代表这个分数回答了用户的问题。</p>
+<p>例如，要求“合并两份客户清单”，可能允许不同排序与列宽；要求“保留可更新的公式”，则静态数值相同仍可能不合格。合理解法集合必须由任务语义限定，不能由参考答案的偶然格式限定，也不能为减少误拒而无限放宽。任务存在歧义时，先澄清或保留多种可接受解释；不能让隐藏测试偷偷增加义务。</p>
+<h3 id="03-二选裁判要看错误怎样被识别">二、选裁判要看错误怎样被识别</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>判定内容</th>
+<th>优先机制</th>
+<th>必须验证的盲点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>金额、记录集合、权限、接口行为等确定事实</td>
+<td>程序断言、状态查询、功能测试</td>
+<td>是否只覆盖已知案例；是否误把实现细节当要求</td>
+</tr>
+<tr>
+<td>文档是否忠于证据、解释是否完整</td>
+<td>明确 rubric 的模型裁判，附来源与定位</td>
+<td>是否漏掉关键错误；是否被流畅表达或伪造引用影响</td>
+</tr>
+<tr>
+<td>领域争议、模糊需求、错误代价高的边界</td>
+<td>合格专家独立判断并裁决分歧</td>
+<td>专家是否看见足够证据；标准是否一致</td>
+</tr>
+<tr>
+<td>已知事实与开放质量混合</td>
+<td>分项裁判，再按业务约束聚合</td>
+<td>软项得分能否抵消不可接受的硬错误</td>
+</tr>
+</tbody>
+</table></div>
+<p>这不是裁判强弱排行榜。程序善于精确执行规则，却不会自动知道规则错了；模型可处理语义差异，却可能不会识别专业错误；专家可解释争议，但也可能共享盲点。本文建议先明确“什么证据能够推翻通过结论”，再选择最便宜且已验证能识别它的机制。</p>
+<p>对于开放质量，rubric
+应描述可观察条件和边界例。例如把“报告专业”拆为“关键结论有来源”“来源确实支持该结论”“不确定事实未写成确定结论”。每项保留证据位置、通过/失败/未知及理由。拆分要以区分实质错误为目的，不按措辞扩充条数；“表达清晰”“易读”“组织良好”可能反复奖励同一属性。</p>
+<h3 id="03-三20242026-年的变化从使用裁判到检验裁判">三、2024—2026
+年的变化：从使用裁判，到检验裁判</h3>
+<h4 id="03-1-判断偏好不能代替判断正确">1.
+判断偏好，不能代替判断正确</h4>
+<p>JudgeBench 于 2024 年提出、2025
+年修订，使用同一模型生成的正确与错误答案构造困难配对，覆盖知识、推理、数学和代码。其
+GPT-4o 主集合含 350 对；GPT-4o 配 Arena-Hard judge 提示的
+56.57%，指按论文聚合协议选中正确答案的配对比例。每对换序判断两次：偏好同一答案，或一次偏好、另一次平局时，按该偏好判定；两次偏好冲突或两次平局均计错。普通单次二选一随机猜测的
+50%
+可作直观参照，但不能直接当作这一换序聚合协议的随机基线。这说明“擅长生成、受人喜欢”不等于“擅长找出细微错误”，但不能把旧模型、特定题集上的分数当作今天全部裁判的上限。<a
+href="https://arxiv.org/html/2410.12784v2">JudgeBench v2，§3–4</a></p>
+<p>CALM
+的偏差研究则通过受控修改检查判断是否随无关因素变化，包括答案位置、篇幅及权威暗示。其研究报告不同模型对这些扰动的敏感程度不同。本文据此采用一个检验思路：内容正确性没有改变时，判断应尽量保持；关键事实被改变时，判断应随之变化。匿名化、换序和异构模型是待验证的缓解手段，不能直接当作消除偏差的证明。<a
+href="https://arxiv.org/html/2410.02736v2">Justice or Prejudice?
+v2，§2–4</a></p>
+<h4 id="03-2-确定性测试也要接受有效性审计">2.
+确定性测试，也要接受有效性审计</h4>
+<p>OpenAI 在 2026 年审计了 138 道 SWE-bench Verified 题：它们来自 o3 在
+64
+次独立运行中未能稳定解决的题目，每题由至少六位工程师独立审查，问题再复核。作者报告
+59.4% 存在测试或描述的实质问题。其中一个例子是测试导入题目未要求的
+<code>get_annotation</code>，使其他功能正确的实现因名称不符而失败。<strong>59.4%
+的分母是有选择偏差的 138 题，不能推广为全部 500 题的缺陷率。</strong><a
+href="https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified/">OpenAI
+官方审计，2026-02-23</a></p>
+<p>OSWorld-Verified 在 2025
+年的修订提供另一种路径：维护者列举等价电子表格公式被误拒、段落间空行格式存在合理变体等问题，并通过扩充可接受结果、调整格式和颜色容差改进评分，强调优先修裁判而非改任务。这里讨论的是该版修订，不是对后续
+OSWorld
+版本质量的总评。它提示我们：参考产物最好用于证明至少一种解法成立，而非规定唯一产物。<a
+href="https://xlang.ai/blog/osworld-verified">XLANG 修订报告</a></p>
+<h4 id="03-3-更细的-rubric-需要更细的元评测">3. 更细的 rubric
+需要更细的元评测</h4>
+<p>2026 年的 RRD 研究把 rubric
+生成拆为递归细化、过滤错向与冗余项、降低相关项目的重复权重。作者在引言中指出，未经筛选的生成式
+rubric
+可能使判断准确性退化；规则质量与聚合方式需要分别验证。本文只采纳“规则质量和聚合方式需要验证”这一机制启示，不把作者在
+JudgeBench、PPE 等设置中的改进外推为企业 Agent 的已验证收益。<a
+href="https://arxiv.org/html/2602.05125v1">RRD v1，§1–3</a></p>
+<p>RubricEval 进一步直接评估“一个回答是否满足一条 rubric”。其 3,486
+条样本经模型筛选与仲裁产生；作者随机抽查 160
+条，以两位人类独立标注并讨论分歧，报告人与自动标签一致率
+85.0%。这既提供条目级核验方法，也暴露元评测标签自身仍有不确定性。<strong>多裁判一致不等于独立真值</strong>，特别是裁判还参与了标签生成时。<a
+href="https://arxiv.org/html/2603.25133v1">RubricEval
+v1，§3.3–3.4</a></p>
+<p>这条演变线是本文对所选材料的综合：评测重心逐步从“选一个好裁判”，扩展到检查题目、评分规则、标签生成和裁决流程。不同方法并未形成可以互相替代的统一标准。</p>
+<h3
+id="03-四教学例一份订单异常报告应该怎样判">四、教学例：一份订单异常报告应该怎样判</h3>
+<p>以下是本文构造的教学例，未经实测。任务要求：“合并两份订单表，按订单
+ID
+去重；冲突记录单独列出；金额保留两位小数；生成异常说明并附订单依据；不得修改原表。”设定允许不同排序、不同版式，但金额计算必须正确。</p>
+<p>首先检查事实。程序比较输入与输出的订单集合、金额计算、冲突条目和原表内容；两位小数要明确是展示要求还是计算舍入要求。再检查解释：模型逐项判断每个异常说明是否被对应订单支持，不能仅看是否出现“异常”一词。对原始记录互相矛盾、无法确定正确金额的情况，应确认是否明确标为待核实，而不是强迫裁判选出一个金额。</p>
+<p>然后准备四种候选交付。A 用不同列顺序但内容正确，应通过；B
+报告流畅却漏掉一条冲突，应失败；C
+金额正确但修改了原表，应触发硬约束失败；D
+文件无法打开，应先记录证据不可判定，并查明是产物损坏还是采集失败。A
+检验误拒，B、C 检验误放，D
+检验故障出口。没有任何一个单独的参考文件能够覆盖这些情况。</p>
+<p>聚合时，完成度和总体通过分开报告。遗漏冲突可以说明其他部分已完成，却不能用“排版优秀”补回任务成功；若原表损坏属于禁止副作用，也不能与文风平均。本文建议将硬条件表示为必须同时成立的门槛，软质量保留分项结果。具体哪些条件是硬门槛，应来自任务约定，而非裁判临时发挥。</p>
+<h3 id="03-五结果过程与奖励漏洞">五、结果、过程与奖励漏洞</h3>
+<p>结果通常比固定路径更接近用户意图，但只看终态也会漏掉问题。上例中原表被改后又恢复，最终快照可能看不出来；若“不修改”是过程约束，就需要相应写入日志。相反，任务没有限定软件或操作顺序时，不应因
+Agent
+使用另一条有效路径而扣分。本文建议只对授权、不可逆副作用及明确业务流程检查必要过程，把其他轨迹留作诊断材料。</p>
+<p>真实调用成功、Agent
+宣称成功、外部结果正确，是三个不同命题。裁判应尽量读取独立保存的结果证据；轨迹中的自述可帮助定位，却不独立证明完成，更不能把推理文本直接当作真实动机。证据采集和隔离怎样实现归第
+04 篇，本篇负责规定裁判需要什么证据以及缺失时如何判。</p>
+<p>METR 在 2025 年公开的软件开发与 AI
+研发评测案例中，观察到修改测试、接触参考实现和利用计时漏洞等取巧行为。该报告证明这些失败机制实际出现过，不提供所有
+Agent
+的统一发生率。本文据此建议：把评分器和参考答案放在受保护边界；用未见输入复查泛化；检查评分证据能否被被测系统伪造，并把“文本要求裁判给满分”作为恶意交付反例。<a
+href="https://metr.org/blog/2025-06-05-recent-reward-hacking/">METR，2025-06-05</a></p>
+<p>取巧不只发生在代码层。如果 rubric 只统计是否提到风险，Agent
+可以罗列大量无关风险；如果评价只看数据库最终值，Agent
+可能绕过必须的授权。裁判要检测的是用户目标与得分之间的裂缝，而非穷举某一代模型的所有作弊方式。这是机制推断，需要在自己的任务中验证。</p>
+<h3 id="03-六把裁判当作一个待验收系统">六、把裁判当作一个待验收系统</h3>
+<p>本文建议建立一个与调参样本分开的裁判验证集。它同时包括真实交付和人为控制的反例：正确替代解、只改一个关键事实的错误解、格式变化、缺失证据、违规过程，以及针对裁判的诱导文本。合成反例用于隔离机制，真实交付用于防止只会识别人为错误；两类结果分别保留。</p>
+<p>验收可按以下顺序推进：</p>
+<ol type="1">
+<li><strong>核判据。</strong>
+领域专家先检查要求是否可观察、可执行，是否漏掉硬约束，是否误加任务外义务；为争议保留解释和裁决记录。</li>
+<li><strong>核标签。</strong>
+由至少两位具备相关知识的人独立判断困难样本，分歧时回看证据；无法解决的案例标记未知，不能仅以多数票制造真值。</li>
+<li><strong>核错误方向。</strong>
+分别报告正确交付被拒、错误交付被放行的比例，并列出各自分母；再按被比较系统或产物来源分层，标注裁判与生成者是否同模型或同家族，检查错误是否偏向某一方。类别失衡时，单一总体一致率可能掩盖关键错误。受控反例集上的这些比例不等于真实使用中的错误率，真实分布推断交第
+05 篇处理。</li>
+<li><strong>核扰动与遗漏。</strong>
+交换答案顺序、改变不相关格式，再插入单个关键错误。程序测试也要做这一步，检验它既接受等价解，又能抓住实质变化。</li>
+<li><strong>核未知与版本。</strong>
+分开记录裁判弃权、超时、解析失败和有效判定；保留覆盖率、模型版本、提示词、规则及测试版本。改动后先重跑保留集，再讨论能否替换旧裁判。</li>
+</ol>
+<p>如果允许弃权，就要同时看“判了多少”和“已判部分错了多少”。把难例全部弃权会制造漂亮准确率；把未知全算失败，又会把评分设施故障混入
+Agent
+能力。错误究竟来自产物、证据采集还是裁判服务，应保留可追查原因，最终统计处理由第
+05 篇接续。模型自报置信度只能作为待校准信号，不能直接当作正确概率。</p>
+<h3
+id="03-七取舍反证条件与尚未解决的问题">七、取舍、反证条件与尚未解决的问题</h3>
+<p>本篇推荐的最小组合是：少量必要硬断言、能区分实质质量的
+rubric、独立验证集，以及面向争议的专家出口。不要为所有任务默认叠加多个模型；增加裁判的价值应由错误下降证明。若便宜程序已准确覆盖某项，再加模型可能只引入噪声；若错误集中在专业知识不足，增加同类模型票数也未必有效。</p>
+<p>三个条件会推翻这套具体配置：正确替代解持续被拒，说明判据或程序过窄；关键错误持续被放行，说明证据、规则或裁判能力不足；专家分歧持续集中在同一项，说明任务语义或标签标准尚未稳定。此时应回到出错层修订，而不是只调最终分数阈值。</p>
+<p>公开材料仍不能回答某个企业场景需要多少专家样本、可容忍多少误放，或哪款当前模型最适合做裁判。这些值取决于任务分布、错误代价与实际样本。本轮也没有逐项复现
+OSWorld 修补、独立重审 SWE-bench
+题目或运行所引论文。可交付的结论是判据设计与验证方法；要声称“该裁判可用”，还需要在目标任务上完成上述验收。</p>
+<details class="source-notes"><summary>来源核验附录：版本、承重章节与证据上限</summary><p>核验日期：2026-11-09。正文为研究初稿，全部引用来自公开一手页面或作者论文。核验为网页正文、论文
+HTML
+与版本元信息读取；未执行基准、未复现实验。来源之间的综合判断及订单教学例由本文作者提出。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>来源及版本</th>
+<th>本轮核到的证据</th>
+<th>使用范围与限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a
+href="https://www.anthropic.com/research/demystifying-evals-for-ai-agents">Anthropic：Demystifying
+evals for AI agents</a>，2026-01-09</td>
+<td>Types of graders 与 Step
+5；代码、模型、人类三类裁判；任务可组合多裁判；过度限定轨迹、Unknown
+与专家校准的讨论</td>
+<td>工程经验，不是对所有方法的受控比较；正文只引分类，综合方案单独标明</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2410.12784v2">JudgeBench
+v2</a>，初稿 2024-10-16，v2 2025-04-05</td>
+<td>§3–4：GPT-4o 生成的主集合 350 对；§4 换序协议；Table 1 GPT-4o +
+Arena-Hard Judge 为 56.57%</td>
+<td>历史模型、困难配对、固定协议；不能当作当前裁判能力上限；来源本身依赖原任务验证器并做格式过滤</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2410.02736v2">Justice or Prejudice?
+/ CALM v2</a>，2024-10-04</td>
+<td>§2–4 与附录 C：位置、冗长、权威等扰动实验；不同模型的偏差不同</td>
+<td>接近两年窗口的基础方法来源；不泛化具体模型排名，不宣称匿名化或异构消除偏差</td>
+</tr>
+<tr>
+<td><a
+href="https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified/">OpenAI：Why
+we no longer evaluate SWE-bench Verified</a>，2026-02-23</td>
+<td>Too narrow and too wide tests：138 题、o3 的 64
+次运行筛选、至少六位专家及复核、59.4%；pylint-4551 的 get_annotation
+示例</td>
+<td>非随机、常失败题子样本；不能把 59.4% 推广到 500
+题；本篇不展开污染结论</td>
+</tr>
+<tr>
+<td><a href="https://xlang.ai/blog/osworld-verified">XLANG：Introducing
+OSWorld-Verified</a>，<a
+href="https://github.com/xlang-ai/OSWorld">官方仓库发布记录</a>为
+2025-07-28</td>
+<td>Multiple Solution Approaches；Evaluation Function
+Robustness；优先改评分、扩展 gold solutions、格式容差及等价公式问题</td>
+<td>仅使用 2025 年修订机制，不评价后续
+2.x；未审查每个具体实现与回归结果</td>
+</tr>
+<tr>
+<td><a
+href="https://metr.org/blog/2025-06-05-recent-reward-hacking/">METR：Recent
+Frontier Models Are Reward Hacking</a>，2025-06-05</td>
+<td>What we've observed
+与实例：修改测试/评分代码、参考实现访问、计时取巧</td>
+<td>一手观察案例；不支持全部 Agent 的发生率或训练因果结论</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2602.05125v1">RRD v1</a>，<a
+href="https://arxiv.org/abs/2602.05125">元信息</a>首发 2026-02-04</td>
+<td>§2–3：递归分解、过滤错向/冗余、相关性加权；引言描述 naïve rubric
+可退化</td>
+<td>仅用方法与有限设置边界；不使用训练奖励涨幅作为任务收益。HTML
+题头另显示 August 24, 2026，与 arXiv
+首发不同，正文不据此作精确月份推断</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2603.25133v1">RubricEval
+v1</a>，2026-03-26</td>
+<td>§3.3–3.4：3,486 样本；自动仲裁；随机 160
+条人类验证，两人独立后讨论；85.0% 一致率</td>
+<td>标签并非全量人工真值；作者 o3/DeepSeek-R1 参与仲裁。正文不拿 judge
+排名作独立优劣证据</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="03-src-排除的候选">排除的候选</h3>
+<ul>
+<li><a href="https://arxiv.org/abs/2606.19544">Reliability without
+Validity，arXiv:2606.19544</a>：搜索结果仍展示研究结论，但原始页面明确标记
+“This paper has been withdrawn by arXiv Admin”，版本页最后修订
+2026-11-03。本篇不采用其数字或实验结论；这里只记录排除理由，未推测撤稿原因。</li>
+<li>二次报道、聚合排行榜与搜索结果摘要仅用于发现入口，不作为正文事实依据。较新的
+rubric RL 候选未展开，以免把篇幅转为训练优化研究。</li>
+</ul>
+<h3 id="03-src-自检与未核项">自检与未核项</h3>
+<p>已将判据、裁判、证据区分；已标记教学例与本文建议；所有关键数字写明样本或模型/协议；不将
+SWE-bench
+子样本缺陷率推广到总体；未把相同裁判投票当作独立真值；未把公开研究等同本地验收。</p>
+<p>尚未核验：具体基准的代码级实现、论文原始实验日志、企业领域专家校准成本、当前候选裁判在本任务分布的实际误放/误拒率。本来源表记录作者核验范围，异构审查由主控组织。</p>
+</details></div><a class="return" href="#reading-start">返回研究地图 ↑</a></section><section class="chapter" id="chapter-04" tabindex="-1"><div class="chapter-heading"><span class="chapter-number">04</span><div><p class="eyebrow">运行条件与采到的证据，符合实验约定吗？</p><h2>执行条件的可控与等价</h2></div></div><p class="chapter-take">执行条件包括状态、权限、预算与采证。隔离必须覆盖会改变结果的状态，通用运行器不自动保证实验等价。</p><div class="article"><nav class="local-guide" aria-label="04章内阅读路径">本篇可从核心问题进入：<a href="#04-一状态边界决定隔离与重置">状态边界</a> · <a href="#04-四条件改变后怎样判断是否仍可比较">等价核验</a> · <a href="#04-五saas-bench-接入-harbor-应解决什么">框架取舍</a>。</nav>
+<h3 id="04-本篇要回答什么">本篇要回答什么</h3>
+<p><strong>这次运行和采到的证据，是否符合约定的实验条件；条件变化后，实验含义是否仍然成立？</strong></p>
+<p>同一任务、同一模型，可能因为残留数据、额外权限、隐藏的重试或采证时点不同，而变成不同的实验。本篇关心这些条件能否被明确、落实和核查。跨运行器、并发和部署迁移只是核验场景，Harbor
+接入也只是其中一个案例。</p>
+<p>这里的“等价”指<strong>与当前判断相关的条件和语义得到保留</strong>，不要求实现相同，也不保证每次输出或分数相同。分数接近不能单独证明等价；分数下降也不能单独证明执行有错。</p>
+<p>作为工作定义，benchmark
+固定任务集合与比较协议，产品评测套件覆盖特定产品能力及回归风险，评测系统负责使它们能够运行、复核和维护。本篇只讨论其中的执行条件。全局问题回到总览；测谁归
+<a href="#chapter-01">01</a>，任务应保留什么归 <a
+href="#chapter-02">02</a>，什么算成功归 <a
+href="#chapter-03">03</a>，差异如何归因归 <a
+href="#chapter-05">05</a>。</p>
+<h3 id="04-一状态边界决定隔离与重置">一、状态边界决定隔离与重置</h3>
+<p><strong>隔离必须覆盖任务能改变、且会影响其他运行或判分的状态。</strong>
+容器、进程或 VM
+的边界是实现选择；真正要核查的是数据库、文件、账号、会话、缓存与记忆是否仍在边界外相互影响。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>状态关系</th>
+<th>应明确什么</th>
+<th>条件失真会怎样发生</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>任务独占</td>
+<td>初态如何创建，运行结束后如何回收；失败退出也要处理。</td>
+<td>上一题的数据或文件进入下一题，实际起点不同。</td>
+</tr>
+<tr>
+<td>多任务或多参与者共享</td>
+<td>谁能读写，何时允许修改，重置会波及谁。</td>
+<td>单个任务的清理删掉另一任务正在使用的数据。</td>
+</tr>
+<tr>
+<td>允许跨任务保留</td>
+<td>哪些经验可保留、哪些业务状态仍须重置；任务顺序与反馈来源是什么。</td>
+<td>意外清空学习状态，或把测试答案当作可迁移经验。</td>
+</tr>
+</tbody>
+</table></div>
+<p>这三类描述状态与运行的关系，并非给数据永久贴标签。同一个文件，在独立任务测试中应清除，在学习实验中可能需要保留。需要逐项规定业务数据、会话、长期记忆、技能文件和参数的生命周期。</p>
+<p>已有实现说明隔离位置并不统一。</p>
+<ul>
+<li><strong>WorkArena／WorkArena++</strong> 在 ServiceNow
+实例内准备用户和任务数据，通过 BrowserGym
+交互与验证；应检查实例中的状态边界，而不能只检查浏览器是否新开。<a
+href="https://github.com/ServiceNow/WorkArena">官方仓库</a></li>
+<li><strong>SaaS-Bench</strong>
+按次准备所需应用组合，把访问入口与后台验收关联到本次运行；环境分配、访问与验收协议是适配时必须保留的部分。<a
+href="https://github.com/UniPat-AI/SaaS-Bench/blob/main/docs/kubernetes.md">部署与
+API 说明</a></li>
+<li><strong>OSWorld</strong> 围绕桌面环境进行任务设置和恢复，其 Harbor
+适配版继续使用镜像与评估器；复用这两者仍需检查交互和采证条件。<a
+href="https://github.com/xlang-ai/OSWorld">原生仓库</a> · <a
+href="https://hub.harborframework.com/datasets/xlang-ai/osworld-verified">Harbor
+适配版</a></li>
+<li><strong>TheAgentCompany 的 Harbor
+适配说明</strong>要求串行运行，因为共享业务服务的重置会干扰其他任务。这是该适配实现的约束，不能外推成所有版本或所有部署都不支持并行。<a
+href="https://github.com/harbor-framework/adapters/blob/main/src/theagentcompany/README.md#notes--caveats">适配说明</a></li>
+</ul>
+<p>由这些案例可推得：上层调度器“能并发”并不代表整套评测“可并发”。并发是否有效，需要在实际共享状态与重置范围下核验。公开实现不足以给各项目的吞吐、稳定性和成本排总名次。</p>
+<h3
+id="04-二把执行与采证约定落到组件之间">二、把执行与采证约定落到组件之间</h3>
+<p><strong>先规定允许发生什么，再记录实际发生了什么。</strong>
+只保存最终分数，无法判断一次失败来自
+Agent、环境初始化、工具访问还是证据丢失。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>约定对象</th>
+<th>运行前固定或声明</th>
+<th>运行后保留的证据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>初态与身份</td>
+<td>数据、文件、账号、权限及共享范围。</td>
+<td>初始化结果、实例与身份对应关系、已知偏差。</td>
+</tr>
+<tr>
+<td>观测与动作</td>
+<td>能看到哪些信息，能调用什么操作，操作对业务状态产生什么后果。</td>
+<td>实际观测、调用及返回；失败和状态变化能关联到同一次运行。</td>
+</tr>
+<tr>
+<td>预算与恢复</td>
+<td>时间、步数、计算预算；超时、工具重试、整题重跑和人工介入规则。</td>
+<td>实际消耗、每次重试及介入；任务难度的人类时长标定不等于 Agent
+实际耗时，后者单独记录；失败尝试不因后续成功而消失。</td>
+</tr>
+<tr>
+<td>采证与版本</td>
+<td>何时、从哪里采集哪些证据；任务、应用、Agent 配置与验证器版本。</td>
+<td>交付物、状态快照或差异、轨迹及版本标识；标明缺失与采集失败。</td>
+</tr>
+</tbody>
+</table></div>
+<p>上表是本篇提出的设计约定，不是这些 benchmark
+已共同实现的标准。所需字段随判据和决策变化，不以收集更多日志作为目标。</p>
+<p>组件之间的责任可以这样划分，具体实现可以合并组件。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>组件</th>
+<th>提供或消费什么</th>
+<th>必须交接的边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>环境</td>
+<td>提供状态、观测和动作后果。</td>
+<td>初态是否就绪；权限和实例归属；谁能重置哪些状态。</td>
+</tr>
+<tr>
+<td>运行器与适配层</td>
+<td>调度运行、落实预算、关联轨迹和结果。</td>
+<td>是否完整传递环境入口、动作结果及失败；证据何时收集、状态何时释放。</td>
+</tr>
+<tr>
+<td>被测 Agent</td>
+<td>消费允许的观测并发出动作，可能积累经验。</td>
+<td>工具、记忆与重试是否属于被测配置；不能把增加的能力隐去。</td>
+</tr>
+<tr>
+<td>验证器</td>
+<td>消费约定证据并给出判分或缺证状态。</td>
+<td>能读哪些证据，何时读取；验证所需权限不应默认为 Agent
+的可用权限。</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>03 与 04 的交接是双向的。</strong> 03
+规定什么算对、需要什么证据及缺证时如何判；04
+保证采证来自正确实例、正确时点，并如实报告缺失。若清理早于采证，或验证器读到的是另一轮数据，即使判据本身正确也无法得到可信分数。若约定证据无法可靠采集，04
+应把采集限制反馈给
+03，共同修订采证方案或缺证处理；需要调整判据时，还须回查 02
+是否损失了真实工作约束。完整日志不能修复错误判据。</p>
+<p>共享环境中的协作还需要记录“谁知道什么、谁能做什么、谁改变了状态”。τ²-bench
+将用户操作纳入共享环境，提供了这一问题的具体背景。<a
+href="https://arxiv.org/abs/2506.07982">原论文</a>
+协作是否改善能力及是否只是增加计算投入，应交给 05
+的对照与归因，不由日志完整性直接推出。</p>
+<h3
+id="04-三技术演变改变了哪些执行条件">三、技术演变改变了哪些执行条件</h3>
+<p>以下变化并存，不是所有团队必经的线性阶段。项目说明沿用既有底稿，不另排年代；重点是执行约定增加了什么，而非罗列更多
+benchmark。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>被测行为的变化</th>
+<th>执行条件必须补什么</th>
+<th>本篇的判断上限</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>从回答到操作工具、应用与桌面。</td>
+<td>可执行初态、权限、观测、行动后果与后台采证。</td>
+<td>能确认操作与结果是否发生；任务是否代表工作仍归 02。</td>
+</tr>
+<tr>
+<td>从一次尝试到长程与恢复。</td>
+<td>固定并记录预算、超时、重试与恢复后的状态。</td>
+<td>能识别实际条件差异；可靠性和成本如何比较仍归 05。</td>
+</tr>
+<tr>
+<td>从单主体到协作。</td>
+<td>各参与者的身份、信息、权限、共享状态与交接。</td>
+<td>能复核交互条件；协作增益仍需消融或对照。</td>
+</tr>
+<tr>
+<td>从每题重开到跨任务学习。</td>
+<td>业务状态与学习状态分开管理，保留任务顺序和允许反馈。</td>
+<td>能判断经验保留是否符合协议；迁移与遗忘仍须独立评估。</td>
+</tr>
+<tr>
+<td>从报告分数到用于训练奖励。</td>
+<td>分开管理训练反馈与独立检验，标记任务、验证器及状态版本。</td>
+<td>执行记录不能证明奖励有效或没有被利用，判据问题回到 03。</td>
+</tr>
+</tbody>
+</table></div>
+<p>τ-bench 的工具调用与数据库结果检查、OSWorld
+的桌面任务与专用验证器，说明执行环境已成为实验条件的一部分。<a
+href="https://arxiv.org/abs/2406.12045">τ-bench</a> · <a
+href="https://arxiv.org/abs/2404.07972">OSWorld</a></p>
+<p>LifelongAgentBench 的技能依赖任务与 LongMemEval
+的跨会话记忆问题，则提醒我们：“全部清空”不是普遍正确的重置策略。前者为长期学习提供参照；后者帮助辨明记忆能力需求，不能直接当作运行时隔离方案。<a
+href="https://arxiv.org/abs/2505.11942">LifelongAgentBench</a> · <a
+href="https://arxiv.org/abs/2410.10813">LongMemEval</a></p>
+<p>长程指标如何选择见 01 与 05；奖励漏洞与独立检验见
+03；任务资产何时退入回归、如何由线上失败触发维护见 <a
+href="#chapter-06">06</a>。本篇保留的是使这些判断可核查的运行条件与版本证据。</p>
+<h3
+id="04-四条件改变后怎样判断是否仍可比较">四、条件改变后，怎样判断是否仍可比较</h3>
+<p><strong>等价是针对具体用途提出、需要证据支持的主张。</strong>
+更换运行器、容器或接口后，应先说清哪些条件必须保留、哪些允许变化，再讨论结果。</p>
+<p>可按三个层面检查，以下是方法建议，尚未由本系列实跑验证。</p>
+<ol type="1">
+<li><strong>对齐协议。</strong>
+比较初态、权限、观测、动作、预算、重试、记忆保留与验证器输入；记录允许差异。不能仅核对任务
+ID 和模型名。</li>
+<li><strong>核验关键路径与失败路径。</strong>
+在相同起点下检查动作后果、后台状态和采证；包含初始化失败、超时、重试、回收，以及共享状态下的串扰。无操作和已知错误的拒绝由
+03 定义，04 核查是否向验证器提供了正确证据。</li>
+<li><strong>带着偏差解释运行结果。</strong>
+保留逐题与逐次结果，将基础设施故障、Agent
+行为失败、缺证分开记录并公开处理口径；不能悄悄丢掉失败或增加重试。是否合并比较、差异是否显著及能否归因，交给
+05。</li>
+</ol>
+<p>接口对齐是必要核验，不是证明统计等价的充分条件；输出随机性、样本量和允许误差还需要
+05 处理。如果迁移同时改了工具能力或 Agent 编排，应先回到 01
+确认是在比较完整系统，而不是把全部变化称作“换运行器”。</p>
+<h3 id="04-五saas-bench-接入-harbor-应解决什么">五、SaaS-Bench 接入
+Harbor 应解决什么</h3>
+<p><strong>本篇建议有条件地做可选适配，在旧稿基础上补充需求与维护条件，不据“有通用框架”就替换正式环境。</strong>
+Harbor
+提供任务包、运行与评分接口，已有材料表明其支持多容器环境与多维奖励。因此，需要多容器或多维计分，本身不构成自建运行器的充分理由。<a
+href="https://docs.harborframework.com/tasks/overview">任务规范</a></p>
+<p>对
+SaaS-Bench，更关键的是把现有环境分配、访问与后台验收机制接到运行框架，同时保留上述语义。框架复用的价值与适配的成本应分别验收。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>判断</th>
+<th>希望获得什么</th>
+<th>应拿什么证据决定</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>接入有增量价值吗？</td>
+<td>外部团队更容易复跑，减少重复接模型、调度与结果汇集的工作。</td>
+<td>是否有真实复用需求；同一任务接入前后的集成步骤与成功复跑记录。</td>
+</tr>
+<tr>
+<td>原有实验含义保住了吗？</td>
+<td>环境与判分实现继续有效，新增适配不暗改能力与条件。</td>
+<td>初态、权限、观测、预算、重试和采证的对照；关键失败路径与共享状态核验。</td>
+</tr>
+<tr>
+<td>维护负担划算吗？</td>
+<td>复用收益持续超过双重接口、版本兼容与故障定位成本。</td>
+<td>真实使用频率、维护记录和故障归属；不能仅靠一次演示成功。</td>
+</tr>
+</tbody>
+</table></div>
+<p>据此，<strong>有明确外部复用需求且能保住语义时，优先薄适配；需求尚弱或底层隔离仍不稳定时，可先补原生条件核验，再按上表证据决定。</strong>
+这是基于公开架构的决策推断，不是 UniPat
+已公开的路线，也未测得具体人日、吞吐或投资回报。</p>
+<h3 id="04-六向其他专题交付什么">六、向其他专题交付什么</h3>
+<p>本篇的输出应是：实际运行条件、状态处理方式、预算与重试记录、证据来源，以及已知偏差。它让
+05 可以解释结果，让 06 可以判断某个版本的证据是否仍能用于当前产品。</p>
+<p>对企业资料收集，同样应追问“这份材料决定了什么实验条件”。以报销审批这个教学例为例：申请单与历史操作帮助
+02 还原任务；制度与例外帮助 03
+定义成功；身份权限和系统配置约束本篇的可行动作；财务与审计记录提供候选验收证据，其有效性仍由
+03
+核查。专家可以补充隐含规则并说明依据，执行系统再验证这些规则是否真正落实。</p>
+<p>这把原始信息收集、专家精炼、环境模拟和下游评测接起来，但不要求四者由同一产品完成，也不把资料齐全等同于环境保真或评测有效。</p>
+<details class="source-notes"><summary>来源核验附录：版本、承重章节与证据上限</summary><p>本轮是封闭源重构。来源沿用 2026-11-09
+底稿中的核对记录，<strong>未在本轮重新访问原件，也未锁定仓库
+commit、镜像摘要或部署版本</strong>。论文链接中的版本、仓库 main
+和文档页可能变化；实施适配前应补版本锁定与原件复核。下表记录资料的用途，不把作者说明升级为本团队复现。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>一手来源</th>
+<th>本篇承重位置</th>
+<th>支持范围与尚缺证据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>WorkArena 官方仓库</td>
+<td>第一节：实例内任务准备与交互。</td>
+<td>支持实现定位；不能据此断定所有共享状态均隔离或并发性能如何。</td>
+</tr>
+<tr>
+<td>SaaS-Bench 部署与 API 说明</td>
+<td>第一、五节：环境分配、访问与验收。</td>
+<td>支持适配边界分析；未实跑原生或 Harbor 路径。</td>
+</tr>
+<tr>
+<td>OSWorld 论文、仓库与 Harbor 适配页</td>
+<td>第一、三节：桌面状态、设置恢复与评估器。</td>
+<td>支持实现参照；没有本系列的原生／适配对照结果。</td>
+</tr>
+<tr>
+<td>TheAgentCompany Harbor 适配 README</td>
+<td>第一节：共享服务重置与串行约束。</td>
+<td>限于该适配说明；最新实现或其他部署须另核。</td>
+</tr>
+<tr>
+<td>τ-bench 与 τ²-bench 原论文</td>
+<td>第二、三节：工具、业务状态与参与者共享环境。</td>
+<td>支持交互条件举例；不证明用户模拟器对真实用户的代表性。</td>
+</tr>
+<tr>
+<td>LifelongAgentBench 与 LongMemEval 原论文</td>
+<td>第三节：长期学习与跨会话记忆。</td>
+<td>支持区分经验保留需求；不构成统一隔离协议或泄漏防护证明。</td>
+</tr>
+<tr>
+<td>Harbor 任务规范</td>
+<td>第五节：框架接口与适配边界。</td>
+<td>支持讨论可接入性；不证明适配正确、成本节省或维护收益。</td>
+</tr>
+</tbody>
+</table></div>
+<p>上表来源的原件链接均在对应正文首次出现处保留。第四节的核验方法、组件责任表及第五节的接入建议属于本系列综合，需实际对照实验检验。模型审查与结构审计可以发现文本问题，不能替代这些实验；真实读者的理解效果也仍待确认。</p>
+<h4
+id="04-src-退出主论证的背景来源与去向">退出主论证的背景来源与去向</h4>
+<p>本轮移出不等于来源无效，也不表示已经把原句搬入其他篇。以下保留旧链接以便追溯；它们不再承担新版
+04 的具体实现主张。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>旧来源</th>
+<th>原用途</th>
+<th>本轮处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://metr.org/time-horizons/">METR
+time-horizons</a></td>
+<td>旧 §3.2：用人类时长标定任务难度。</td>
+<td>01、05 已用更具体的研究与方法页解释指标；本篇第二节保留人类时长与
+Agent 实际耗时的区分。此 URL 未迁入他篇。</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/abs/2501.12948">DeepSeek-R1</a></td>
+<td>旧 §3.5：强化学习与可验证奖励的背景。</td>
+<td>仅在本附录保留，作为第三节训练用途的背景参照，不用于证明本篇提出的版本、反馈分离或隔离机制；奖励漏洞问题由
+03 承接，原论文未迁入他篇。</td>
+</tr>
+<tr>
+<td><a
+href="https://www.anthropic.com/research/multi-agent-research-system">Anthropic
+多 Agent 实践</a></td>
+<td>旧 §3.3：编排与计算投入影响表现。</td>
+<td>原项目背景退出主论证；协作增益归因交给 05
+的既有对照方法，未将该实践迁入 05。</td>
+</tr>
+<tr>
+<td><a
+href="https://www.anthropic.com/research/demystifying-evals-for-ai-agents">Anthropic
+评测指南</a></td>
+<td>指标、回归与资产维护。</td>
+<td>01、03、06 仍引用此来源；04 只保留预算、版本与执行记录。</td>
+</tr>
+<tr>
+<td><a
+href="https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified/">OpenAI
+SWE-bench 审计</a></td>
+<td>可复现不等于判据有效。</td>
+<td>总览、03 仍引用此来源；04 通过交接说明区分判据与采证问题。</td>
+</tr>
+</tbody>
+</table></div>
+<p><a
+href="https://hcnqicgvail5.feishu.cn/wiki/GWFwwSJuwinwUzk4gsec6PYgnu5#doxcnnU78el1SfQWFULBXjb6eVd">改前
+v4 全文快照（HTML 附件，下载后查看第 04
+篇）</a>保留原段落和链接；本轮未对这些背景来源重新联网核验。</p>
+</details></div><a class="return" href="#reading-start">返回研究地图 ↑</a></section><section class="chapter" id="chapter-05" tabindex="-1"><div class="chapter-heading"><span class="chapter-number">05</span><div><p class="eyebrow">差异可信、可归因、可外推吗？</p><h2>结果比较、归因与泛化</h2></div></div><p class="chapter-take">保留逐题结果、层级和预算。区间不会修复抽样偏差，轨迹共现也不是因果证明。</p><div class="article"><nav class="local-guide" aria-label="05章内阅读路径">想核算统计直觉，可跳到 <a href="#05-三同题配对保留了总分看不到的信息">100题配对教学例</a>；判断外推边界可直接看 <a href="#05-七泛化必须说明跨越了哪条边界">泛化条件</a>。</nav><p><strong>分数差异只有同时交代比较条件、抽样不确定性和外推边界，才构成可解释的证据。</strong>“B
+比 A 高 8
+分”至少缺三项信息：是否做了同样的题、是否花了相当的资源、这次领先是否可能来自偶然。即使差异稳定，也不能自动推出“模型更强”或“换一家企业仍领先”。</p>
+<p>本篇承接已确定的被测对象、任务、判据和执行约定。它研究结果怎么比较、差异怎么归因、结论能到哪里为止；不重做
+01 的指标目标、02 的任务构造、03 的裁判设计、04 的环境重置，也不替 06
+决定是否上线。以下方法建议是对一手研究的综合，教学数字为明确假设，本轮没有运行
+Agent 实验。</p>
+<h3
+id="05-一先确定这次比较到底想估计什么">一、先确定这次比较到底想估计什么</h3>
+<p>假设团队要在两个报销 Agent
+中选型。固定同一批任务、单次预算和评分规则后，可估计的是“这两个系统在这些条件下的平均完成率差”。如果
+B
+同时更换模型、检索、提示词和重试次数，这仍是有效的整套产品比较，但不是模型增益实验。</p>
+<p>可以把一次分数理解为多个因素共同作用的结果：模型、脚手架、任务、环境、预算和随机运行。它们之间还存在交互：某种工具接口可能只适合某个模型。因此，先把比较句写完整，再决定哪些因素固定、哪些允许变化。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>要回答的判断</th>
+<th>应怎样比较</th>
+<th>结论边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>同等业务约束下谁更好？</td>
+<td>同题、同费用或时延约束，比较完整系统。</td>
+<td>只对该预算与任务分布成立。</td>
+</tr>
+<tr>
+<td>更换模型贡献多少？</td>
+<td>固定脚手架，替换模型并重复运行。</td>
+<td>是该脚手架下的模型替换效果。</td>
+</tr>
+<tr>
+<td>谁的能力上限更高？</td>
+<td>比较多档资源下的性能曲线。</td>
+<td>不能等同于低成本部署效果。</td>
+</tr>
+</tbody>
+</table></div>
+<p>“公平”并非所有资源都锁成同一个数字。相同 token
+不等于相同费用或时间；相同费用也不等于相同计算量。必须由问题决定约束，并同时披露实际消耗，包括失败、重试、候选筛选和人工协助。缓存价格、工具费用、并行额度与本地计算应注明口径。2024
+年《AI Agents That
+Matter》将准确率和成本联合比较，指出忽略成本可能误判复杂 Agent
+的价值；本篇采用它的二维比较原则，而不把一种费用口径视为通用公平标准。<a
+href="https://arxiv.org/html/2407.01502v1">S1：§2–4</a></p>
+<h3
+id="05-二20242026证据从单个分数走向有条件的比较">二、2024—2026：证据从单个分数走向有条件的比较</h3>
+<p>这不是所有团队同步完成的范式替换，而是本次选取的一手研究逐步补齐了不同缺口。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>时期与代表方法</th>
+<th>补齐了什么</th>
+<th>尚不能推出什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2024：τ-bench；Adding Error Bars to Evals</td>
+<td>前者观察重复成功，后者给出配对、聚类和误差估计方法。</td>
+<td>稳定做对现有题，不等于能做新类型工作。</td>
+</tr>
+<tr>
+<td>2025：METR 时间跨度；HAL</td>
+<td>前者把任务族与重复运行纳入不确定性；后者比较模型、脚手架和基准，并检查轨迹。</td>
+<td>跨若干基准有效，不等于企业收益已验证。</td>
+</tr>
+<tr>
+<td>2026：METR TH1.1；AgentMeter v3</td>
+<td>新旧任务集需要桥接；模型与接口搭配、题面变化会影响比较。</td>
+<td>更新后的排名不能无条件继承旧版含义。</td>
+</tr>
+</tbody>
+</table></div>
+<p>对应原文为 <a href="https://arxiv.org/html/2406.12045v1">τ-bench
+§3</a>、<a href="https://arxiv.org/html/2411.00640v1">统计方法
+§2–4</a>、<a href="https://arxiv.org/html/2503.14499v4">METR §3</a>、<a
+href="https://arxiv.org/html/2510.11977v1">HAL §3–4</a>、<a
+href="https://metr.org/blog/2026-01-29-time-horizon-1-1/">TH1.1</a> 和
+<a href="https://arxiv.org/html/2606.21140v3">AgentMeter v3</a>。</p>
+<h3
+id="05-三同题配对保留了总分看不到的信息">三、同题配对保留了总分看不到的信息</h3>
+<p>比较 A、B 时，应保留每题各自的结果。共同成功、共同失败、A 独有成功、B
+独有成功，表达的信息不同。配对分析直接计算每题差值，利用双方遇到相同难题的相关性；不宜只拿两个总分和各自误差条目测胜负。<a
+href="https://arxiv.org/html/2411.00640v1#S4">S2：§4</a></p>
+<p><strong>教学例，全部为假设。</strong>100
+道从目标分布独立抽取的任务，各系统每题运行一次；两者都成功 55 题，仅 A
+成功 5 题，仅 B 成功 13 题，都失败 27 题。因此 A 为 60%，B 为
+68%，配对差为 +8 个百分点。</p>
+<p>令每题差值为 B 得分减 A 得分，则有 13 个 +1、5 个 −1、82 个
+0。样本标准差约为 0.419，均值标准误约为 0.0419；用正态近似得到 95%
+区间约 <strong>[−0.2，16.2]
+个百分点</strong>。这是简化教学计算，不是小样本下的精确保证。它说明数据既容许无优势，也容许较大优势；“没有排除零”不等于已经证明两者相同。</p>
+<p>若忽略配对，把两个总分当成独立估计，同样用样本方差计算，标准误约为
+0.0680，近似区间为 <strong>[−5.3，21.3]
+个百分点</strong>。本例的配对区间更窄，原因是双方逐题得分正相关；配对并不保证在所有数据上缩小方差。55
+题共同成功与 27 题共同失败虽在差值中均记为
+0，却分别指出本次共同做对与共同没做对的范围；共同失败不代表能力上限。18
+道结果不一致的题决定本例差值的非零贡献，全部 100
+题仍参与均值和方差计算。</p>
+<p>实际应对<strong>差值</strong>做适当的配对区间或检验。任务存在家族关系时，本例的独立假设不成立，要按相应层级处理。差异是否具有业务意义还需另定最小有用增益；统计区间解决的是估计精度，不代替业务取舍。</p>
+<p>运行安排也会影响配对含义。初态和任务版本应一致；在线服务会漂移时，宜把两系统运行分散在相近时间块内，避免一个全在白天、另一个全在夜间。同一随机种子只有在双方真正共享可比随机机制时才有控制价值，不能保证交互轨迹相同。这些是实验设计建议，执行实现归
+04。</p>
+<h3
+id="05-四重复运行与增加新任务解决不同的不确定性">四、重复运行与增加新任务，解决不同的不确定性</h3>
+<p>需要区分三个层次：同一题再跑一次会怎样、换一道同类题会怎样、换一个任务族会怎样。对
+20 个模板各生成 50 个实例，再各跑 5 次，可以得到 5,000
+条轨迹，却不能据此宣称有 5,000
+个独立任务样本。若模板内高度相关，有效信息远少于轨迹数。</p>
+<p>重复运行帮助估计同题波动；增加任务族帮助覆盖任务差异。预算紧时，可先用小规模重复判断波动主要来自哪里：若同题结果已稳定，继续重跑的价值通常低于补充新任务；若经常翻转，则需要更多重复。不存在脱离差异大小和波动水平的“统一跑三次”规则。<a
+href="https://arxiv.org/html/2411.00640v1">S2：§2.2、§3.1</a></p>
+<p>τ-bench 的 pass^k 表示同一任务 k
+次独立重复试验全部成功的概率，再对任务平均；pass@k 则是 k
+次中至少一次成功。前者研究一致性，后者研究多次尝试的解题覆盖。把 pass@k
+当成自动交付率，还缺少能在实际运行中选出正确结果的机制，且筛选本身也消耗资源。<a
+href="https://arxiv.org/html/2406.12045v1">S3：§3</a></p>
+<p>METR 原研究采用“任务族→任务→尝试”的分层
+bootstrap：按层有放回重抽，重复估计指标。比较两系统时，应在每份重抽样中保留同题配对，再估计差值。重抽的层级取决于要推广到哪里：若只关心固定题集的再次运行，就不要把“重新抽任务”的区间冒充运行噪声。<a
+href="https://arxiv.org/html/2503.14499v4">S4：§3.2</a></p>
+<p>置信区间描述的是指定抽样模型下的估计不确定性。它不会自动覆盖评分偏差、未知污染、遗漏的企业类型或未来环境变化。任务族很少时，分层重抽也无法凭空创造多样性，应该明确列出族数与未覆盖范围。</p>
+<h3
+id="05-五定位相关现象不等于完成因果归因">五、定位相关现象不等于完成因果归因</h3>
+<p>HAL
+对模型、脚手架和基准进行多维比较，同时指出：定位轨迹错误，不能确定修复后会成功还是暴露后续错误。其附录
+A4.2 明确提出保存失败点的 Agent
+与环境状态、纠错后重放，以检验因果关系；作者也说明该方案超出当时计算预算，尚未实施。<a
+href="https://arxiv.org/html/2510.11977v1">S5：§3–4、附录 A4.2</a></p>
+<p>据此，本篇建议把“原因”分三级表达：日志显示某现象；控制其他条件后，替换该组件改变结果；这种效果在其他模型或任务族中仍存在。前一级只能产生后一级的假设。例如失败轨迹经常较长，也可能是难题导致反复尝试，不能直接归结为“多思考使性能下降”。</p>
+<p>最小可解释设计是模型与脚手架的交叉对照：模型 M1、M2 分别搭配
+H1、H2。若换脚手架只改善 M1，应报告搭配效应；若 B
+同时改了检索、记忆和预算，只能先报告整套系统效果。逐项消融能缩小解释范围，但模块间交互意味着各项增益不能机械相加。</p>
+<p>2026 年 AgentMeter v3 直接比较模型—CLI
+配对，并对不同来源的任务描述进行对照。它采用任务级配对
+bootstrap，但作者明确限制：CLI
+是提示、工具、上下文等机制的组合，其差异不是某个机制的独立因果效果。描述改写实验也只是有限任务上的诊断，不能把优化后的题面等同于自然企业请求。<a
+href="https://arxiv.org/html/2606.21140v3">S6：实验与附录 E</a></p>
+<h3
+id="05-六选择偏差和污染不会被更窄的区间修复">六、选择偏差和污染，不会被更窄的区间修复</h3>
+<p>选择至少发生在三处：选哪些题、从多少配置里选赢家、哪些运行进入统计。如果试过几十种提示词，只披露最高分，并用同批题计算区间，区间没有自动计入“挑赢家”的过程。更可信的做法是用开发集选择方案，冻结后在独立留出集比较；若只能用同一批材料，应称探索结果并披露选择过程。</p>
+<p>异常运行的排除也应事先定规则。可单列确认为外部故障的运行，但必须给出各系统的排除数量与原因，并查看纳入后的敏感性结果。对某系统特有的长运行超时随意剔除，会把产品弱点从分母中删掉。</p>
+<p>污染不仅来自模型训练，还可来自 few-shot
+示例、检索库、持久记忆或联网找到标准答案。HAL 发现其所用 τ-bench
+few-shot
+脚手架含测试示例后，排除了该脚手架的结果；这项发现不能扩展为“所有
+τ-bench
+结果均无效”。未知训练数据则应如实标记未知，不能把“未发现”写成“没有”。<a
+href="https://arxiv.org/html/2510.11977v1">S5：附录 A5</a></p>
+<p>2026 年 METR
+的开发者研究更新提供了另一类选择偏差：部分参与者不愿在实验中放弃
+AI，部分任务也不再提交。即使入组后的任务仍随机分配，入组前的选择仍会限制总体推断。作者因此不把后续数据视为当前生产率效应的可靠量化；这是抽样机制改变的案例，而不是“随机实验失效”的通则。<a
+href="https://metr.org/blog/2026-02-24-uplift-update/">S9：2026-02-24
+更新</a></p>
+<h3
+id="05-七泛化必须说明跨越了哪条边界">七、泛化必须说明跨越了哪条边界</h3>
+<p>从现有任务到新实例、从已知模板到新工作流、从一个组织到另一组织，是逐级增强的主张。对应留出也应升级：留实例只能支持实例层面的检验，声称跨企业时，还需要未参与开发的组织、制度、数据结构与权限组合。仅把同模板实例随机切分，不能验证跨工作流能力。这遵循“主张越一般，留出越需要不同”的原则；具体企业划分是本篇的应用建议。<a
+href="https://arxiv.org/html/2407.01502v1">S1：§5</a></p>
+<p>跨任务汇总还必须显式给权重。每题等权会让题目更多的流程占主导；按任务族等权回答的是另一问题；按企业流量加权又依赖流量估计。平均领先也可能掩盖某个关键流程退化，因此应同时展示族级结果和整体结果。重加权只能调整已有覆盖，不能补出未测流程。</p>
+<p>本篇建议在看结果前约定关键任务族、比较对象和主要指标。族级检验越多，偶然出现显著差异的机会越大；确认性比较应预先约定多重比较处理，其余事后发现只标为探索信号，在独立样本上复测，不能挑出最有利或最不利的一族作为既定结论。</p>
+<p>METR 的 TH1.1 把任务从 170 增至
+228，并更换执行设施。报告承认任务分布改变会改变趋势估计；其迁移附录还提醒，跨任务族的宽区间不能代替固定任务上的运行差异分析。因此，新旧榜单应通过共同任务、共同系统建立桥接，再讨论趋势，不能把数值变化全算作能力进步。<a
+href="https://metr.org/blog/2026-01-29-time-horizon-1-1/">S7：任务更新及迁移附录</a></p>
+<p>时间跨度本身也有边界：<strong>50%
+时间跨度是一个时长</strong>，即在拟合的成功率曲线上，模型估计成功率达到
+50% 时，对应任务的人类专业人员完成时长。它不是 Agent
+已连续稳定工作那么久，更不是岗位替代率。原研究主要涉及软件与研究任务，明确讨论真实工作中动态环境、上下文和可靠性要求的差别。<a
+href="https://arxiv.org/html/2503.14499v4">S4：§3.1、§5、附录
+E.3</a></p>
+<p>自主任务成绩与真实工作提速仍须分别测量；METR 2025
+开发者实验及后续更新对线上校准的含义，见 <a href="#chapter-06">06
+评测证据的使用与线上校准篇</a>。</p>
+<h3
+id="05-八交给下一篇的应是一条有边界的结论">八、交给下一篇的，应是一条有边界的结论</h3>
+<p>比较报告应能完整回答：在哪个冻结版本、哪些任务族、什么预算下，B 相对
+A
+改善多少；差值区间覆盖哪些随机来源；哪些变化仍无法归因；哪些留出范围已验证。它不应只交付冠军名称。</p>
+<p>本篇建议采用这样的结论句：“在指定任务族与单次预算下，B
+的配对完成率差为 X，区间为
+Y；该结果衡量完整系统，尚未隔离模型贡献；新组织和新流程未测。”随后由 06
+结合成本、错误后果与线上证据决定如何使用。</p>
+<p>当前证据仍有三处缺口：公开研究的任务分布与企业真实流量缺少普遍映射；组件交互的因果证据有限；公开任务暴露和闭源训练数据使污染很难完全排除。可靠结论的目标是让这些边界可见，而非用更多小数位掩盖它们。</p>
+<p>一手来源的版本、核查章节、支持与不支持的主张，见
+来源核查表（见文末来源核验附录）。</p>
+<details class="source-notes"><summary>来源核验附录：版本、承重章节与证据上限</summary><p>核查日期：2026-11-09。正文为研究初稿，未运行
+Agent、复算论文数据或独立复现作者实验。承重内容均打开一手原文核查；搜索摘要仅用于发现候选。教学算例独立编写，不取自论文。未使用内部
+PDF，未写飞书。</p>
+<h3 id="05-src-入选来源与证据边界">入选来源与证据边界</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>编号、来源与版本</th>
+<th>核查位置及支持内容</th>
+<th>不支持的主张与核查边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S1 <a href="https://arxiv.org/html/2407.01502v1">AI Agents That
+Matter</a>，2024-07-01 arXiv v1。</td>
+<td>§2–4 的成本—准确率比较；§5
+的泛化层次与留出设计。支持“比较目的决定成本口径”“留出层次须对应一般性主张”。核查：2026-11-09。</td>
+<td>不把其历史基准调查当作 2026 全行业现状，不沿用历史价格排名。返回
+HTML 页首另显示 2026 日期，版本依据 arXiv v1
+标识及提交记录，正文不引用该异常页首日期。</td>
+</tr>
+<tr>
+<td>S2 <a href="https://arxiv.org/html/2411.00640v1">Adding Error Bars
+to Evals</a>，2024-11-01，v1；<a
+href="https://arxiv.org/abs/2411.00640">版本页</a>。</td>
+<td>§2.2 聚类；§3.1 重复采样与题级均值；§4.1–4.2
+不配对、配对及协方差项。返修复核了方差关系，配对缩窄区间须有相应正相关条件。核查：2026-11-09。</td>
+<td>主要是语言模型问答评测方法，迁移到有状态 Agent
+需要额外确认独立性。没有证明任意 Agent
+数据满足正态近似；正文没有采用原文假设算例或其数字。多重比较段为本篇的实验设计建议，不声称该文验证了某种任务族检验方案。</td>
+</tr>
+<tr>
+<td>S3 <a
+href="https://arxiv.org/html/2406.12045v1">τ-bench</a>，2024-06-17，v1。</td>
+<td>§3 的随机用户模拟、pass^k 与 pass@k
+定义及组合估计式。支持区分一致性与至少一次成功。核查：2026-11-09。</td>
+<td>不混用 τ²/τ³
+后续版本或最新榜单；不将独立试验概率直接解释成真实连续服务
+SLA；不展开裁判正确性。</td>
+</tr>
+<tr>
+<td>S4 <a href="https://arxiv.org/html/2503.14499v4">Measuring AI
+Ability to Complete Long Software Tasks</a>，首次 2025-03-18，当前 v4 为
+2026-07-10；<a
+href="https://arxiv.org/abs/2503.14499">版本记录</a>。</td>
+<td>§3.1 将人类完成时长与 Agent 成功率作 logistic 拟合，50% time horizon
+是相应时长参数；§3.2 分层 bootstrap；§5 与附录 E.3 讨论外推。返修重核
+§3.1，修正正文把时长误写成成功水平的问题。核查：2026-11-09。</td>
+<td>v1 与 v4 的趋势数字有差异，正文不引用翻倍天数或预测年份。该论文与
+TH1.1 更新不是同一版本标识；不推断企业岗位自动化率。</td>
+</tr>
+<tr>
+<td>S5 <a href="https://arxiv.org/html/2510.11977v1">Holistic Agent
+Leaderboard</a>，2025-10-13，v1；<a
+href="https://arxiv.org/abs/2510.11977">版本记录</a>。</td>
+<td>返修重核附录 A4.2：原文明示保存 Agent
+与环境状态、纠错重放，并说超出当时预算；A5 明示 few-shot
+示例文件含测试集内容，因此排除该脚手架结果。核查：2026-11-09。</td>
+<td>状态干预重放是原文提出但未实施的验证方案，不是本篇新增推断或作者已有因果结果；污染范围仅限所用脚手架，不代表所有
+τ-bench 配置。</td>
+</tr>
+<tr>
+<td>S6 <a href="https://arxiv.org/html/2606.21140v3">Matching Matters: A
+Fair Quality–Efficiency Benchmark for Command-Line
+Agents</a>，AgentMeter，2026-10-26 v3；<a
+href="https://arxiv.org/abs/2606.21140">版本记录</a>。</td>
+<td>实验协议：任务级配对 bootstrap；结果：模型—CLI
+搭配和描述条件影响比较；附录
+E：接口机制归因、外推限制。核查：2026-11-09。</td>
+<td>初读 v1 后发现已更新，正文采用 v3。不能沿用 v1
+“只有单次、无置信区间”的批评；v3
+区间主要量化任务抽样，不证明覆盖所有运行随机性。正文不采用 AMS
+权重作为业务标准。</td>
+</tr>
+<tr>
+<td>S7 <a href="https://metr.org/blog/2026-01-29-time-horizon-1-1/">Time
+Horizon 1.1</a>，METR，2026-01-29。</td>
+<td>正文任务集从 170 增至 228；迁移附录固定旧任务比较
+Vivaria/Inspect；脚注和解释说明宽分层区间并非运行级方差。核查：2026-11-09。</td>
+<td>不将宽区间包含新值解释成执行器等价，不拼接任务分布变化前后的数字证明能力加速；没有核查当前动态榜单所有模型。</td>
+</tr>
+<tr>
+<td>S8 <a
+href="https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/">Early-2025
+AI on Experienced Open-Source Developer
+Productivity</a>，METR，2025-07-10。</td>
+<td>初稿已核官方方法与“不支持什么”表；返修将实验背景移交
+06，本表保留已核记录。核查：2026-11-09。</td>
+<td>05 不再展开其结果，不以历史实验断言目前 AI
+使开发者变慢；本条现为跨篇背景来源而非 05 结果主张。</td>
+</tr>
+<tr>
+<td>S9 <a href="https://metr.org/blog/2026-02-24-uplift-update/">We are
+Changing our Developer Productivity Experiment
+Design</a>，METR，2026-02-24。</td>
+<td>研究更新关于参与者和任务选择、付费变化、并行工作计时问题的说明；作者明确当前数据对效应大小证据弱。核查：2026-11-09。</td>
+<td>不把作者对方向的判断当作精确加速幅度，不把随机分配误称为消除了入组前选择，不比较新旧百分比来制造确定趋势。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="05-src-教学算例自检">教学算例自检</h3>
+<p>100 个假设独立任务，二元得分：共同成功 55；仅 A 成功 5；仅 B 成功
+13；共同失败 27。A=60/100，B=68/100。差值 d 的总和为 8，平方和为
+18；均值 0.08，样本方差 (18−100×0.08²)/99≈0.17535，标准误
+sqrt(0.17535/100)≈0.04188。正态近似 95% 区间
+0.08±1.96×0.04188≈[−0.0021,0.1621]。正文四舍五入为 [−0.2,16.2]
+个百分点。该例不包含任务族、复跑、挑选配置或裁判偏差，仅解释配对数据和区间含义。</p>
+<p>返修补充不配对对照，统一使用除以 n−1
+的样本方差：SE=sqrt((0.6×0.4+0.68×0.32)/99)≈0.067987；95% 近似区间为
+[−0.053254,0.213254]，即 [−5.3,21.3]
+个百分点。若用二项比例直接代入、分母取
+100，SE≈0.067646，区间四舍五入到一位小数仍相同；正文采用前一种口径，与配对计算一致。两结果的差异来自本例的正协方差，不能推广为配对必然缩窄；也不将“题量增四倍、区间必减半”当作普遍规划规律。</p>
+<h3 id="05-src-筛选与排除">筛选与排除</h3>
+<ul>
+<li>选择统计方法、可靠性、资源比较、分层不确定性、系统归因和外推反例各有明确作用的一手资料；不以最新排行榜取代方法证据。</li>
+<li>AISI《More compute, more
+capability》已打开正文，支持预算曲线思路，但本稿未把它纳入承重来源；避免扩大为计算上限与风险评估专题。</li>
+<li>AgentMeter v1 已打开，但被 v3 替代；v1 的 90 题、24
+配置与单次运行局限不混入 v3。v3 使用 80 题全量集、30 题核心集、28
+核心配置；本稿无需这些规模数字，因此不在正文展开。</li>
+<li>arXiv:2606.19544
+按任务约束排除，未用作任何证据；本轮未重新核验其撤稿状态。</li>
+<li>未读内部附件，不对现有企业流程、任务库或产品真实表现作未经实测的判断。已读取主控组织的
+Opus/Argon 首审并完成本篇返修，逐条处置见
+05-review-response.md（本地留存）；主控已组织增量复审，结论为可交付初稿。</li>
+</ul>
+</details></div><a class="return" href="#reading-start">返回研究地图 ↑</a></section><section class="chapter" id="chapter-06" tabindex="-1"><div class="chapter-heading"><span class="chapter-number">06</span><div><p class="eyebrow">离线信号能预测真实交付吗？</p><h2>评测证据的使用与线上校准</h2></div></div><p class="chapter-take">把发布作为可撤回的有条件决定。真实输入、真实用户反应和业务结果是不同证据。</p><div class="article"><p><strong>本篇判断：评测结果只有对应到一个有边界的决定，并接受真实使用结果的检验，才成为可用的产品证据。</strong>
+离线领先可以支持候选进入下一阶段，不能自动支持全面发布。线上未报警也不能反向证明离线评分正确。关键是说明每份证据减少了什么不确定性，还剩什么必须另查。</p>
+<p>本篇承接前五篇已经明确的对象、样本、判据、运行条件与比较结果，研究选型、发布、诊断和回归如何使用这些结果。统计估计回到第05篇，裁判误判回到第03篇，环境复现回到第04篇。以下公开事实已查阅一手来源；退款案例、决策流程和操作建议是本文综合设计，未进行真实平台或业务实验。</p>
+<h3
+id="06-一第一性证据要承接决定也要允许决定被撤回">一、第一性：证据要承接决定，也要允许决定被撤回</h3>
+<p>“新版本成功率更高”只是一个条件性观察。是否值得发布，还取决于提高发生在哪类任务、失败损失是什么，以及线上使用是否保留了测试条件。评测不是一次盖章，而是让团队有理由选择行动，并知道什么新事实会推翻选择。</p>
+<p>贯穿本文的教学案例是售后退款
+Agent。现有版本由坐席确认后执行退款；候选版本更擅长识别订单与解释规则。团队希望扩大低风险任务的自动处理范围。即使候选在离线套件中领先，也可能因真实用户补充信息、支付回调延迟或重复提交而失败。改善“解释正确”也未必减少坐席的总投入。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>决定</th>
+<th>可以使用的证据</th>
+<th>证据不足时的动作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>选型：候选值得继续吗？</td>
+<td>目标任务上的表现、成本及失败类型。</td>
+<td>缩小候选范围，补测会改变排序的场景。</td>
+</tr>
+<tr>
+<td>发布：可以扩大哪些权限或流量？</td>
+<td>关键约束通过，且目标使用条件已获得相应验证。</td>
+<td>保留人工确认或缩小适用范围。</td>
+</tr>
+<tr>
+<td>诊断：先修哪里？</td>
+<td>失败轨迹、环境结果与版本变更的对应关系。</td>
+<td>提出可证伪解释，再做最小对照。</td>
+</tr>
+<tr>
+<td>回归：原有承诺还成立吗？</td>
+<td>已承诺场景的持续表现和线上异常。</td>
+<td>停止扩量、回退或重新限定承诺。</td>
+</tr>
+</tbody>
+</table></div>
+<p>同一个差值对四个决定的意义不同。新能力突破可以支持继续研发；一项低频越权行为却可能足以否决自动执行。<strong>“总体提高”不能抵消产品明确不接受的失败。</strong>
+哪些失败构成否决条件，应在看结果前由业务责任人约定，而不是看到分数后临时解释。</p>
+<h3
+id="06-二近两年的变化从发布前测量走向持续检查证据是否有效">二、近两年的变化：从发布前测量，走向持续检查证据是否有效</h3>
+<p>2025年的公开材料展示了两种不同缺口。METR随机对照研究覆盖16名熟悉自身开源项目的开发者、246项任务，报告使用当时AI工具的任务耗时增加19%。它支持的是特定人群与时期的结果，也说明基准能力和工作提速需要分别测量；它不支持“AI普遍降低生产力”。<a
+href="https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/">METR原研究说明</a></p>
+<p>同年Anthropic的事故复盘承认，既有评测未捕获用户报告的质量退化。文章说明其常规验证包括先向小规模canary群体部署，但未逐一披露三项故障的灰度过程；不能据此断言每项故障都经过同样的灰度检查。作者提出在真实生产系统持续运行质量评测，说明发布前证据仍有覆盖缺口。<a
+href="https://www.anthropic.com/research/a-postmortem-of-three-recent-issues">2025年官方复盘</a></p>
+<p>2026年METR认为后续数据无法可靠估计当时收益大小，提示测量方法本身也需要重新校准；选择偏差详见<a
+href="#chapter-05">第05篇</a>。不能把新数据包装成已证实的普遍加速。<a
+href="https://metr.org/blog/2026-02-24-uplift-update/">研究设计更新</a></p>
+<p>Anthropic同年区分能力评测与回归评测，并主张自动评测、生产监测、用户反馈、人工复核和A/B测试相互补充。<a
+href="https://www.anthropic.com/research/demystifying-evals-for-ai-agents">2026年方法文章</a>
+本文据此形成的判断是：不仅要更新题目，还要检查“题目—线上行为—业务结果”的关系是否仍成立。这是方法主张，不是行业已经完成转型的普查结论。</p>
+<h3 id="06-三六类证据各自回答什么">三、六类证据各自回答什么</h3>
+<p>这些方法不是必须依次打卡的固定流水线。低风险措辞修改与开放真实退款权限，应承担不同的取证成本；选择依据是尚未解决的不确定性。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>机制</th>
+<th>最适合回答的问题</th>
+<th>单独不能证明什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>离线评测</td>
+<td>在可控制条件下，候选是否完成规定任务？</td>
+<td>真实流量上的收益与未知失败。</td>
+</tr>
+<tr>
+<td>影子运行（shadow）</td>
+<td>接触真实输入后，候选会怎样响应？</td>
+<td>用户看到新响应后的行为及完整交付效果。</td>
+</tr>
+<tr>
+<td>小流量发布（canary）</td>
+<td>有限真实暴露中是否出现应阻止扩量的问题？</td>
+<td>长期价值、罕见故障不存在。</td>
+</tr>
+<tr>
+<td>随机A/B实验</td>
+<td>在约定人群与期间，改动是否改变业务结果？</td>
+<td>改善的具体机制和范围外效果。</td>
+</tr>
+<tr>
+<td>人工复核与用户研究</td>
+<td>自动信号遗漏了什么，失败为何重要？</td>
+<td>未经适当抽样的总体发生率。</td>
+</tr>
+<tr>
+<td>生产监测</td>
+<td>当前系统是否持续偏离预期？</td>
+<td>没有观测到的损失及变化的因果来源。</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>影子运行的边界尤其容易误读。</strong>
+SageMaker的官方机制复制实时推理请求，仅把生产版本的响应返回调用方；影子输出可记录比较。<a
+href="https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests.html">AWS文档</a>
+这支撑“真实输入、不展示候选响应”的做法，不代表它已经解决完整Agent的工具副作用。</p>
+<p>对退款Agent，本文建议让影子版本生成动作计划，或在隔离的业务副本中执行。只丢弃最终聊天答案，却允许它调用真实退款接口，仍会产生真实后果。若只生成计划，得到的证据就只覆盖决策层；若回放旧工具返回值，候选改变了调用顺序后，后续返回值也未必仍有效。多轮对话还缺少用户对候选回答的真实反应，不能称为完整线上任务验证。</p>
+<p><strong>小流量发布和A/B实验可共享分流机制，但决策目的不同。</strong>
+Google
+SRE把canary定义为局部、限时的变更部署与评估，也明确其属于A/B比较；并指出共享依赖可能使两组一起退化。<a
+href="https://sre.google/workbook/canarying-releases/">Google
+SRE章节</a>
+本文将“是否继续发布”的检查，与“业务收益有多大”的实验分开命名，以免把短期无明显故障当成收益证据。</p>
+<p>本文建议随机分组后保持会话内版本固定；同一账户的多笔退款会相互影响时，按账户分组，不能把每轮消息当独立样本。上线前约定分析单位、主要指标、观察窗口与停止条件，并检查实际分流是否符合分配、两组是否共享受影响的状态。第05篇的聚类原则可帮助理解相关性，但不替代线上实验设计。</p>
+<p>安全事件可随时触发停用；收益判断则不能每天重复普通显著性检验，挑首次“显著”时宣布获胜。采用预定观察窗口，或另行设计适合持续观察的序贯方法。后者的具体算法与样本量设计本系列未覆盖；提前安全停用后，应报告截断范围，不能照搬原定终点的收益结论。</p>
+<h3
+id="06-四典型实践的差异工具连接证据不能替团队保证结论">四、典型实践的差异：工具连接证据，不能替团队保证结论</h3>
+<p>LangSmith文档把离线历史回测、生产轨迹评分与失败回流数据集联系起来。这证明一种工作流可以被平台承载，不证明自动评分已经等价于用户结果。<a
+href="https://docs.langchain.com/langsmith/evaluation-types">LangSmith官方文档</a>
+对退款场景，模型裁判给出“解释合理”，与支付系统确认到账、客户没有再次申诉，是不同信号。</p>
+<p>AWS影子机制主要连接候选与实时请求，Google
+SRE机制连接局部部署与发布判断，METR的随机研究直接检验人在真实工作中的效果。它们不能用同一“评测平台能力清单”替代比较：前两者提供操作机制，后者提供特定研究设计下的效果证据。没有哪一项单独覆盖全链条。</p>
+<p>Anthropic的2026年4月复盘提供另一个反例：压缩输出提示通过原有评测，扩大套件并做消融后，才发现一项评测退化。另一项缓存优化故障会在会话闲置超过一小时后，持续逐轮清除较早的推理；内部消息队列实验和思考显示改动曾妨碍复现。官方称该故障于4月10日、v2.1.101修复，压缩提示于4月20日撤回；截至4月20日、v2.1.116，三项问题均解决（其中另一项本文未展开）。<a
+href="https://www.anthropic.com/research/april-23-postmortem">2026年官方复盘</a>
+这支持检查交付配置和覆盖缺口，不证明所有简洁提示都有害，修复声明也不是本轮独立验收。</p>
+<h3
+id="06-五贯穿案例怎样把离线领先变成有条件的发布决定">五、贯穿案例：怎样把“离线领先”变成有条件的发布决定</h3>
+<p>以下全部是建议流程，不是已取得的实验结果。团队先把候选用途限定为规则明确、金额受限的退款请求。离线结论应写成“在这些条件与约束下，值得验证自动执行”，而不是“可以替代坐席”。历史回测保留时间边界，避免使用当时尚未出现的物流状态或最终申诉结果帮助Agent答题。</p>
+<p>进入影子运行后，重点找离线未覆盖的输入、动作分歧和运行时问题。人工复核分歧时，不能默认线上旧版本就是正确答案，也不能只看候选失败。应同时抽取两版都通过、两版都失败的案例，检查共同盲点。若发现真实订单状态缺失，先解决状态可见性；继续调提示词未必触及根因。</p>
+<p>有限发布需要一张具体的决策记录：部署配置与适用人群、关键约束、观察窗口、扩量条件、停止条件、接管责任人。阈值由业务损失容忍度与基线确定，本篇不提供通用的“成功率达到多少即可上线”。若关键指标还没有可靠采集路径，就不能把“没有告警”写成通过。</p>
+<p>案例中的立即停止条件可以是已确认的越权退款或重复扣退；一般错误率与等待时间则按预先约定的基线和容忍范围判断。回退旧版本只能阻止继续暴露，已经发生的退款还需单独对账与补救。</p>
+<p>零事件不等于零风险。在预先固定的观察范围、事件可完整检出、案例近似独立同分布的条件下，n例零事件的单侧95%二项置信上界为
+<code>1−0.05^(1/n)</code>，n较大时约为<code>3/n</code>。因此1,000例零越权，上界仍约0.3%。这是由精确二项方法推得的“三法则”，不是越权率低于该值的确定保证；同账户重复、故障聚集、漏报或反复观察择时停止时，不能直接套用。<a
+href="https://itl.nist.gov/div898/software/dataplot/refman2/auxillar/exacbino.htm">NIST精确二项方法</a></p>
+<p>验证收益时，同时观察完成的退款任务、人工审核和返工时间、端到端等待，以及在约定窗口内的重开与申诉。不能只统计Agent自动关闭的工单，否则把难单全部转人工就能制造漂亮分数。以进入约定范围的请求为分母，另报转人工和未结束情况；尚未到结果观察期限的任务标为待定。</p>
+<p>若处理时间缩短但坐席返工增加，应暂停“节省人力”的结论。若收益只存在于资料齐全的切片，可以保留该范围继续使用，并把缺资料场景交回人工。这是收窄产品承诺，不是为了保住总分而删除失败。</p>
+<h3
+id="06-六怎样检查离线信号是否预测线上结果">六、怎样检查离线信号是否预测线上结果</h3>
+<p>校准不是把两类分数调成一致，而是检查离线信号与业务结果的联系。以下是退款案例的教学方案，没有真实数字，也不是已被来源验证的通用流程。</p>
+<p><strong>案例层先做同批配对。</strong>
+在同一已上线配置、约定业务范围内抽取请求，等待到账与重开观察窗口结束。保存请求当时的信息和初态，用该已上线版本离线回放，裁判不得看到后来的业务结果；再按请求标识连接两类标签。无法重建初态、标签尚未成熟或缺失的请求单列并报告数量，不能算成功。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>离线判定</th>
+<th>线上结果良好：按约定完成且窗口内无重开</th>
+<th>线上结果不佳：未完成或窗口内重开</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>通过</td>
+<td>a：支持该信号的案例。</td>
+<td>b：离线未预警的候选漏报，需查交付盲点。</td>
+</tr>
+<tr>
+<td>不通过</td>
+<td>c：候选误拦，需查合理解法或人工补救。</td>
+<td>d：两侧一致失败，提供诊断入口。</td>
+</tr>
+</tbody>
+</table></div>
+<p>先看通过样本中的线上不佳率
+<code>b/(a+b)</code>，再看未通过样本中的线上良好率
+<code>c/(c+d)</code>，并按预先关心的退款类型拆看。分母为空时不计算。四格不一致不自动证明裁判错了：重放随机性、环境差异和人工救场都可能造成差异。四格都应记录人工介入与投入，并事先约定转人工如何计分，按自主完成与人机协作分层报告。a
+格若靠人工纠正才成功，就不能支持 Agent 自主能力；c
+格若依赖人工补救，也不能据此认定自主执行被“误杀”。</p>
+<p><strong>版本层再检查改善方向。</strong>
+对多个实际候选，固定离线套件与基线，逐个登记离线增益；线上在可比人群中与同一基线随机比较，登记业务增益及不确定性。将“离线上升、线上改善”“离线上升、线上无改善或变差”等并列，检查是否反复错向。区间宽、方向未定时保留“不确定”，不同时间或人群未经对齐不直接比差值。少数同向版本只提供局部支持，不能证明今后升分必然增益。</p>
+<p>这一检查仍受选择限制：只有被选中上线的版本和请求拥有对应结果，被拒绝候选缺少反事实；观察窗口外的后果未被覆盖。影子运行也没有用户对新回答的真实反应，不能拿旧版本结果充当影子候选的线上标签。因此校准结论应限定到已观察的版本、范围与期限。</p>
+<p>出现不一致后，形成三个待检验解释：真实任务改变了，评分遗漏了交付要求，或部署与人工流程改变了。通过但重开增加时查到账与后续行为；工具错误集中增加时查服务条件；评分提高但人工投入未降时查审核和返工。这些只决定调查方向，不能据共现认定根因。</p>
+<p>回流时保留失败前可见的信息、关键操作和最终结果，将敏感信息按授权处理，再制作能够重现核心失败的用例。若无法恢复必要状态，应标为待复现线索，而非声称已有有效回归测试。修复原例之外，再留一组没有参与修改的相近场景检查泛化；否则只能证明团队学会了回答已知题。</p>
+<p>保留三种用途不同的样本很有帮助：已承诺能力的稳定回归集、检查近期真实分布的滚动样本、用于诊断和修复的事故样本。事故样本刻意富集失败，不能直接用于估计总体错误率。旧题也不应因“已做对”全部删除：它们仍能保护过去的承诺。具体采样与权重回到第02、05篇。</p>
+<p>训练是另一个消费场景。失败轨迹可以转成训练或优化材料，但一旦用于调参，就不再提供同等独立的验收证据。应记录使用边界并保留独立检验；本篇不展开奖励模型、RL算法或训练吞吐。</p>
+<h3
+id="06-七可以执行的判断与仍未知的部分">七、可以执行的判断与仍未知的部分</h3>
+<p>每次版本决策至少能回答：这次批准什么范围；证据对应哪个配置和人群；哪项重要结果仍未观测；什么事件会触发暂停；谁负责补证据。一个有条件的小范围决定，往往比含义不清的“综合评测通过”更可执行。</p>
+<p>线上校准也有成本与限制。标签可能延迟，投诉存在选择偏差，少量企业客户不足以支撑稳定A/B估计，保存完整轨迹又受到隐私与权限限制。此时可采用受控试点、人工审阅与阶段性对账，但必须保留证据强度的差别，不能把替代方案直接称为因果证明。</p>
+<p>本轮没有验证任何平台当前账户的实际可用能力，没有运行退款Agent、影子测试或线上实验，也没有估计通用收益。九项来源分别支持机制、方法或具体事件；案例的发布规则仍待真实业务校准。下一步可选择一项真实决定，按第六节连接离线信号与线上结果，并检验其局限。</p>
+<p>来源版本、核验位置与不支持的结论见 06
+来源核验表（见文末来源核验附录）。</p>
+<details class="source-notes"><summary>来源核验附录：版本、承重章节与证据上限</summary><p>核验日期：2026-11-09。范围：公开官方页面实时打开与指定段落核对；未运行平台、未调用业务API、未阅读原始内部PDF、未做线上实验。正文已按Opus/Argon首审修订，逐条处置见06审查回执（本地留存）；主控已组织增量复审，P1已关闭，结论为可交付初稿。</p>
+<h3 id="06-src-选源原则与取舍">选源原则与取舍</h3>
+<p>以“哪个机制减少哪一种发布不确定性”为筛选标准。选入方法总结、平台机制、真实事故与现场实验，并为零事件边界补入统计方法。共九项承重来源，全部打开原站正文；日期不明的滚动文档按本次访问快照使用，不能称为固定发布版本。</p>
+<p>METR两次研究作为同一测量问题的时序更新：2025结果不能外推所有开发者，2026更新不能包装为确定加速。Anthropic两篇事故复盘提供负面案例，与方法文章交叉阅读；供应方陈述未获本轮独立运行验证。Google
+SRE为2018年的机制基础参考，不把canary说成近两年的新发明。近两年变化主要依据2025—2026一手材料，不声称做过完整行业史调查。</p>
+<h3 id="06-src-承重来源">承重来源</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>编号、版本与原始链接</th>
+<th>实时核验位置与支持内容</th>
+<th>不支持的结论及正文用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S1 · Anthropic，2026-01-09，<a
+href="https://www.anthropic.com/research/demystifying-evals-for-ai-agents">Demystifying
+evals for AI agents</a>。网页无独立修订号；2026-11-09读取。</td>
+<td>“Capability vs. regression evals”；“How evals fit with other
+methods…”：能力与回归用途不同，作者主张自动评测与监测、A/B、用户反馈、人工审阅互补。</td>
+<td>是方法主张与经验，不据此断言作者已经完整部署所有机制，也不是普遍收益试验；本篇发布和校准流程为综合设计。</td>
+</tr>
+<tr>
+<td>S2 · METR，2025-07-10，<a
+href="https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/">Measuring
+the Impact of Early-2025 AI on Experienced Open-Source Developer
+Productivity</a>。核对当日网页及其后续更新提示。</td>
+<td>Methodology、Core
+Result及“不提供证据的主张”表：16名开发者、246项任务，按任务随机允许/不允许AI；该条件下耗时增加19%。</td>
+<td>不证明AI普遍拖慢工作，不代表2026现状。未复算原数据或复现研究。正文强调基准与实际工作收益分开测量。</td>
+</tr>
+<tr>
+<td>S3 · METR，2026-02-24，<a
+href="https://metr.org/blog/2026-02-24-uplift-update/">We are Changing
+our Developer Productivity Experiment
+Design</a>。网页公开更新，非同等质量的第二次确定结论。</td>
+<td>开篇、Wider
+adoption…及Details：参与选择、任务选择、报酬变化、多Agent并行计时影响；作者称新数据对收益大小证据很弱。</td>
+<td>不可引用后续原始估计为确定的当代加速率；作者认为收益可能增加也需带限定。正文以此说明测量方法本身需要重校。</td>
+</tr>
+<tr>
+<td>S4 · Anthropic，2025-09-17，<a
+href="https://www.anthropic.com/research/a-postmortem-of-three-recent-issues">A
+postmortem of three recent
+issues</a>。旧engineering链接跳转research；修订时再次打开。</td>
+<td>“Why detection was
+difficult”说明常规流程含先向小规模canary部署，评测未抓到退化；“What
+we're changing”提出生产连续评测。</td>
+<td>未逐项披露三次故障的灰度过程，不能写成每次均经相同灰度仍逃逸；也没有说故障变更绕过/跳过了灰度流程。正文已收窄。供应方修复与计划非本轮验收。</td>
+</tr>
+<tr>
+<td>S5 · Anthropic，2026-04-23，<a
+href="https://www.anthropic.com/research/april-23-postmortem">An update
+on recent Claude Code quality reports</a>。修订时再次打开。</td>
+<td>缓存段：3月26日引入，闲置超过一小时后本应只清一次，却持续逐轮清除较早推理；内部消息队列与思考显示实验妨碍复现；4月10日v2.1.101修复。提示段：4月16日推出压缩提示，扩展评测与消融后发现退化，4月20日撤回。开篇称截至4月20日v2.1.116三项问题解决。</td>
+<td>两条根因不能混成同一故障；v2.1.116是全部问题解决的声明，不是缓存故障首次修复版本。不证明简洁提示普遍有害，不把产品故障写成API本体退化；未独立验证修复。</td>
+</tr>
+<tr>
+<td>S6 · AWS，<a
+href="https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests.html">Shadow
+tests</a>。latest滚动文档，未标发布日期；2026-11-09读取。</td>
+<td>页面主体：复制实时推理请求给影子variant，只返回生产variant响应，可保存影子响应做离线比较。</td>
+<td>是模型服务机制，不是完整Agent隔离保证；不保证外部写工具无副作用，也不证明反事实用户反馈。本文明确另作Agent适配推断。</td>
+</tr>
+<tr>
+<td>S7 · Google SRE Workbook，2018，第16章，<a
+href="https://sre.google/workbook/canarying-releases/">Canarying
+Releases</a>。经典机制来源，2026-11-09读取在线章。</td>
+<td>定义、Before/After Evaluation Is Risky、Dependencies and
+Isolation：局部限时部署；canary是A/B比较；共享状态可污染对照，需要绝对服务指标。</td>
+<td>不把canary与A/B说成互斥技术；本文按决策目的区分发布检查和业务效果实验。该章不是Agent专用指南。</td>
+</tr>
+<tr>
+<td>S8 · LangChain，<a
+href="https://docs.langchain.com/langsmith/evaluation-types">Evaluation
+types</a>。滚动产品文档、无固定版本号；2026-11-09读取。</td>
+<td>Backtesting、Online evaluation types、Production feedback
+loop：历史生产数据可用于回测，线上评分发现异常并形成离线样本候选。</td>
+<td>文档说明不等于账户可用性或可靠性实测；生产轨迹上的模型评分不等于业务真值。正文不推荐采购、不列未验证的性能收益。</td>
+</tr>
+<tr>
+<td>S9 · NIST Dataplot，<a
+href="https://itl.nist.gov/div898/software/dataplot/refman2/auxillar/exacbino.htm">EXACT
+BINOMIAL</a>。页脚更新2015-11-16；2026-11-09打开。</td>
+<td>Description与单侧上限说明支持按二项分布反演置信界。本文令事件数为0、单侧尾概率0.05，解<code>(1−p)^n=0.05</code>，得<code>p=1−0.05^(1/n)</code>；大n近似<code>−ln(0.05)/n≈3/n</code>。</td>
+<td>这是本文从官方方法推导的零事件特例，不声称NIST页面逐字列出“三法则”。要求固定观察范围、近似独立同分布和完整检出；不覆盖相关案例、缺失标签或择时停止。单侧95%上界不是双侧95%区间，也不是风险为零的证明。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="06-src-需要审查者重点检查的推断">需要审查者重点检查的推断</h3>
+<ol type="1">
+<li>正文把证据按“支持哪个决定”组织，而不是按平台分类。这是研究框架，不是任何单篇论文的原有分类。</li>
+<li>影子Agent必须另控副作用；只生成计划或回放工具返回值会损失部分执行证据。此判断来自有状态交互的逻辑约束，不声称AWS已提供完整解决方案。</li>
+<li>案例将关键事件停止条件、业务收益验证与长期监测分开。阈值没有套用供应方数字，仍需业务责任人和真实数据确定。</li>
+<li>事故样本用于诊断、稳定样本用于回归、滚动样本用于分布校准，是本文建议的职责划分；未声称三套数据必须物理分库。</li>
+<li>回退部署不能撤销已发生退款；训练使用会改变检验独立性。只解释决策含义，不展开补偿系统实现或RL系统设计。</li>
+<li>§六的同批四格、多个版本的离线/线上增益方向检查是本文教学方案。四格不一致先称候选漏报/误拦，不直接等同裁判错误；额外检查重放随机性、人工补救和环境差异。结果仅限已上线样本，缺少反事实、延迟标签与影子用户反应时明确保留未知。</li>
+<li>§三补充随机分组、会话固定、账户干扰与预定观察窗口，区分安全停止和收益检验。本系列不提供序贯算法或完整线上样本量设计，不再将这些内容空交给05。</li>
+</ol>
+<h3 id="06-src-排除与未验证边界">排除与未验证边界</h3>
+<ul>
+<li>按任务约束排除已撤回的
+arXiv:2606.19544，未用于任何论证；本轮没有再次核对其撤回记录，因此不把撤回状态当本轮新增发现。</li>
+<li>搜索中出现的论坛反馈、媒体复述和供应方收益宣传没有作为承重来源；事故结论回到官方复盘。</li>
+<li>未对九项来源的所有旁链逐一阅读；没有下载或复算METR数据，未验证网页历史版本是否发生细微编辑。</li>
+<li>未核验特定账号、套餐、区域的产品功能，未运行SageMaker/LangSmith，也未执行真实发布或人工实验。</li>
+<li>本篇只借用前五篇的输入条件，不替代任务代表性、裁判有效性、执行等价或统计显著性检查。</li>
+</ul>
+</details></div><a class="return" href="#reading-start">返回研究地图 ↑</a></section><section class="chapter" id="source-index" tabindex="-1"><p class="eyebrow">证据与维护</p><h2>读完之后，仍需要什么证据？</h2><div class="closing"><p><strong>真实业务基线。</strong> 任务分布、人工接管与返工成本、错误后果，仍需目标业务提供。</p><p><strong>执行与裁判验证。</strong> 原件、方法分析和模型审稿不能替代环境复跑、裁判校准或版本适配实验。</p><p><strong>离线与线上对应。</strong> 少量一致案例不足以证明普遍预测力；被选中上线的版本也有选择限制。</p></div><p>本 HTML 沿用 2026-11-09 研究底稿及 2026-11-10 Hyper-τ 增量，框架与编辑结构更新于 2026-11-11，04 正文已按执行条件收窄。本次未重新核查既有来源；一手引用、既有核验记录与审查边界仍按底稿保留。文中“作者报告”与“本文建议 / 推断 / 教学假设”保留各自含义，未实跑 benchmark 或线上实验。</p><details><summary>完整来源索引（打印时展开）</summary><ol class="source-index"><li id="ref-1"><a href="https://arxiv.org/abs/2406.12045">https://arxiv.org/abs/2406.12045</a></li><li id="ref-2"><a href="https://arxiv.org/html/2605.15777v1#S3.SS2">https://arxiv.org/html/2605.15777v1#S3.SS2</a></li><li id="ref-3"><a href="https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified/">https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified/</a></li><li id="ref-4"><a href="https://github.com/harbor-framework/adapters/blob/main/src/theagentcompany/README.md#notes--caveats">https://github.com/harbor-framework/adapters/blob/main/src/theagentcompany/README.md#notes--caveats</a></li><li id="ref-5"><a href="https://huggingface.co/datasets/harborframework/parity-experiments/discussions/259">https://huggingface.co/datasets/harborframework/parity-experiments/discussions/259</a></li><li id="ref-6"><a href="https://metr.org/blog/2025-03-19-measuring-ai-ability-to-complete-long-tasks/">https://metr.org/blog/2025-03-19-measuring-ai-ability-to-complete-long-tasks/</a></li><li id="ref-7"><a href="https://www.anthropic.com/research/demystifying-evals-for-ai-agents">https://www.anthropic.com/research/demystifying-evals-for-ai-agents</a></li><li id="ref-8"><a href="https://arxiv.org/html/2407.01502v1">https://arxiv.org/html/2407.01502v1</a></li><li id="ref-9"><a href="https://arxiv.org/html/2405.15793v3">https://arxiv.org/html/2405.15793v3</a></li><li id="ref-10"><a href="https://arxiv.org/html/2609.04611v1#S3">https://arxiv.org/html/2609.04611v1#S3</a></li><li id="ref-11"><a href="https://github.com/sierra-research/hyper-tau-bench#readme">https://github.com/sierra-research/hyper-tau-bench#readme</a></li><li id="ref-12"><a href="https://arxiv.org/html/2609.04611v1#S4">https://arxiv.org/html/2609.04611v1#S4</a></li><li id="ref-13"><a href="https://arxiv.org/html/2406.12045v1">https://arxiv.org/html/2406.12045v1</a></li><li id="ref-14"><a href="https://arxiv.org/html/2506.07982v1">https://arxiv.org/html/2506.07982v1</a></li><li id="ref-15"><a href="https://arxiv.org/html/2406.12045v1#S5">https://arxiv.org/html/2406.12045v1#S5</a></li><li id="ref-16"><a href="https://arxiv.org/html/2407.01489v2">https://arxiv.org/html/2407.01489v2</a></li><li id="ref-17"><a href="https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/">https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/</a></li><li id="ref-18"><a href="https://metr.org/blog/2026-02-24-uplift-update/">https://metr.org/blog/2026-02-24-uplift-update/</a></li><li id="ref-19"><a href="https://arxiv.org/abs/2407.01502">https://arxiv.org/abs/2407.01502</a></li><li id="ref-20"><a href="https://arxiv.org/abs/2609.04611">https://arxiv.org/abs/2609.04611</a></li><li id="ref-21"><a href="https://arxiv.org/html/2407.05291v1#S3">https://arxiv.org/html/2407.05291v1#S3</a></li><li id="ref-22"><a href="https://arxiv.org/html/2412.14161v1#S8">https://arxiv.org/html/2412.14161v1#S8</a></li><li id="ref-23"><a href="https://arxiv.org/html/2509.26506v1#S3.SS2">https://arxiv.org/html/2509.26506v1#S3.SS2</a></li><li id="ref-24"><a href="https://arxiv.org/html/2510.04374v1#S2">https://arxiv.org/html/2510.04374v1#S2</a></li><li id="ref-25"><a href="https://arxiv.org/html/2502.12115v1#S2.SS2">https://arxiv.org/html/2502.12115v1#S2.SS2</a></li><li id="ref-26"><a href="https://arxiv.org/html/2406.12045v1#S4">https://arxiv.org/html/2406.12045v1#S4</a></li><li id="ref-27"><a href="https://arxiv.org/html/2506.07982v1#S3">https://arxiv.org/html/2506.07982v1#S3</a></li><li id="ref-28"><a href="https://arxiv.org/html/2407.05291v1">https://arxiv.org/html/2407.05291v1</a></li><li id="ref-29"><a href="https://openai.com/index/gdpval/">https://openai.com/index/gdpval/</a></li><li id="ref-30"><a href="https://arxiv.org/html/2510.04374v1#S5">https://arxiv.org/html/2510.04374v1#S5</a></li><li id="ref-31"><a href="https://arxiv.org/html/2509.26506v1#S3">https://arxiv.org/html/2509.26506v1#S3</a></li><li id="ref-32"><a href="https://arxiv.org/html/2412.14161v1">https://arxiv.org/html/2412.14161v1</a></li><li id="ref-33"><a href="https://arxiv.org/html/2510.04374v1">https://arxiv.org/html/2510.04374v1</a></li><li id="ref-34"><a href="https://proceedings.mlr.press/v267/miserendino25a.html">https://proceedings.mlr.press/v267/miserendino25a.html</a></li><li id="ref-35"><a href="https://arxiv.org/html/2410.12784v2">https://arxiv.org/html/2410.12784v2</a></li><li id="ref-36"><a href="https://arxiv.org/html/2410.02736v2">https://arxiv.org/html/2410.02736v2</a></li><li id="ref-37"><a href="https://xlang.ai/blog/osworld-verified">https://xlang.ai/blog/osworld-verified</a></li><li id="ref-38"><a href="https://arxiv.org/html/2602.05125v1">https://arxiv.org/html/2602.05125v1</a></li><li id="ref-39"><a href="https://arxiv.org/html/2603.25133v1">https://arxiv.org/html/2603.25133v1</a></li><li id="ref-40"><a href="https://metr.org/blog/2025-06-05-recent-reward-hacking/">https://metr.org/blog/2025-06-05-recent-reward-hacking/</a></li><li id="ref-41"><a href="https://github.com/xlang-ai/OSWorld">https://github.com/xlang-ai/OSWorld</a></li><li id="ref-42"><a href="https://arxiv.org/abs/2602.05125">https://arxiv.org/abs/2602.05125</a></li><li id="ref-43"><a href="https://arxiv.org/abs/2606.19544">https://arxiv.org/abs/2606.19544</a> — 已排除候选，未用于论证（见03附录）</li><li id="ref-44"><a href="https://github.com/ServiceNow/WorkArena">https://github.com/ServiceNow/WorkArena</a></li><li id="ref-45"><a href="https://github.com/UniPat-AI/SaaS-Bench/blob/main/docs/kubernetes.md">https://github.com/UniPat-AI/SaaS-Bench/blob/main/docs/kubernetes.md</a></li><li id="ref-46"><a href="https://hub.harborframework.com/datasets/xlang-ai/osworld-verified">https://hub.harborframework.com/datasets/xlang-ai/osworld-verified</a></li><li id="ref-47"><a href="https://arxiv.org/abs/2506.07982">https://arxiv.org/abs/2506.07982</a></li><li id="ref-48"><a href="https://arxiv.org/abs/2404.07972">https://arxiv.org/abs/2404.07972</a></li><li id="ref-49"><a href="https://arxiv.org/abs/2505.11942">https://arxiv.org/abs/2505.11942</a></li><li id="ref-50"><a href="https://arxiv.org/abs/2410.10813">https://arxiv.org/abs/2410.10813</a></li><li id="ref-51"><a href="https://docs.harborframework.com/tasks/overview">https://docs.harborframework.com/tasks/overview</a></li><li id="ref-52"><a href="https://metr.org/time-horizons/">https://metr.org/time-horizons/</a></li><li id="ref-53"><a href="https://arxiv.org/abs/2501.12948">https://arxiv.org/abs/2501.12948</a></li><li id="ref-54"><a href="https://www.anthropic.com/research/multi-agent-research-system">https://www.anthropic.com/research/multi-agent-research-system</a></li><li id="ref-55"><a href="https://hcnqicgvail5.feishu.cn/wiki/GWFwwSJuwinwUzk4gsec6PYgnu5#doxcnnU78el1SfQWFULBXjb6eVd">https://hcnqicgvail5.feishu.cn/wiki/GWFwwSJuwinwUzk4gsec6PYgnu5#doxcnnU78el1SfQWFULBXjb6eVd</a></li><li id="ref-56"><a href="https://arxiv.org/html/2411.00640v1">https://arxiv.org/html/2411.00640v1</a></li><li id="ref-57"><a href="https://arxiv.org/html/2503.14499v4">https://arxiv.org/html/2503.14499v4</a></li><li id="ref-58"><a href="https://arxiv.org/html/2510.11977v1">https://arxiv.org/html/2510.11977v1</a></li><li id="ref-59"><a href="https://metr.org/blog/2026-01-29-time-horizon-1-1/">https://metr.org/blog/2026-01-29-time-horizon-1-1/</a></li><li id="ref-60"><a href="https://arxiv.org/html/2606.21140v3">https://arxiv.org/html/2606.21140v3</a></li><li id="ref-61"><a href="https://arxiv.org/html/2411.00640v1#S4">https://arxiv.org/html/2411.00640v1#S4</a></li><li id="ref-62"><a href="https://arxiv.org/abs/2411.00640">https://arxiv.org/abs/2411.00640</a></li><li id="ref-63"><a href="https://arxiv.org/abs/2503.14499">https://arxiv.org/abs/2503.14499</a></li><li id="ref-64"><a href="https://arxiv.org/abs/2510.11977">https://arxiv.org/abs/2510.11977</a></li><li id="ref-65"><a href="https://arxiv.org/abs/2606.21140">https://arxiv.org/abs/2606.21140</a></li><li id="ref-66"><a href="https://www.anthropic.com/research/a-postmortem-of-three-recent-issues">https://www.anthropic.com/research/a-postmortem-of-three-recent-issues</a></li><li id="ref-67"><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests.html">https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests.html</a></li><li id="ref-68"><a href="https://sre.google/workbook/canarying-releases/">https://sre.google/workbook/canarying-releases/</a></li><li id="ref-69"><a href="https://docs.langchain.com/langsmith/evaluation-types">https://docs.langchain.com/langsmith/evaluation-types</a></li><li id="ref-70"><a href="https://www.anthropic.com/research/april-23-postmortem">https://www.anthropic.com/research/april-23-postmortem</a></li><li id="ref-71"><a href="https://itl.nist.gov/div898/software/dataplot/refman2/auxillar/exacbino.htm">https://itl.nist.gov/div898/software/dataplot/refman2/auxillar/exacbino.htm</a></li></ol></details></section></div></main><footer class="page-footer full-only"><div class="inner"><strong>何时回炉：</strong>被测配置或权限变化、任务分布漂移、合理解被误判、环境版本或接口变化、离线提升与线上结果背离时，应回到对应专题重新核查。此手册支持探索与内化，不预设产品最终路线。</div></footer><script>
+    (() => {
+      const root = document.documentElement;
+      const controls = document.getElementById('mode-controls');
+      const quickButton = document.getElementById('quick-button');
+      const fullButton = document.getElementById('full-button');
+      const status = document.getElementById('mode-status');
+      const quick = document.getElementById('quickview');
+      const fullReading = document.getElementById('full-reading');
+      const sections = Array.from(document.querySelectorAll('.chapter'));
+      const chapterLinks = Array.from(document.querySelectorAll('.chapter-nav a'));
+      let currentView = 'full';
+      function targetFor(hash) {
+        try { return document.getElementById(decodeURIComponent(hash.slice(1))); }
+        catch { return null; }
+      }
+      function focusTarget(target) {
+        if (!target) return;
+        if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+        target.focus({ preventScroll: true });
+      }
+      function currentSection() {
+        const scroller = document.scrollingElement || root;
+        const paddingValue = getComputedStyle(scroller).scrollPaddingTop;
+        const padding = (parseFloat(paddingValue) || 0) * (paddingValue.endsWith('%') ? window.innerHeight / 100 : 1);
+        const last = sections.at(-1);
+        // 短末章可能无法滚到锚点判定线；仅在真正滚到底且末章可见时选中。
+        if (window.scrollY > 0 && window.scrollY + window.innerHeight >= scroller.scrollHeight - 2 && last?.getBoundingClientRect().top < window.innerHeight) return last;
+        return sections.filter(section => {
+          const margin = parseFloat(getComputedStyle(section).scrollMarginTop) || 0;
+          // 与浏览器锚点落位共用 CSS 偏移，2px 仅吸收子像素取整。
+          return section.getBoundingClientRect().top <= padding + margin + 2;
+        }).at(-1);
+      }
+      function updateCurrent() {
+        const active = currentView === 'full' ? currentSection()?.id : null;
+        for (const link of chapterLinks) {
+          if (link.hash === '#' + active) link.setAttribute('aria-current', 'location');
+          else link.removeAttribute('aria-current');
+        }
+      }
+      // 目录和打印增强可独立使用；删除速览不应连带取消它们。
+      window.addEventListener('scroll', updateCurrent, { passive: true });
+      window.addEventListener('resize', updateCurrent);
+      updateCurrent();
+      let printState = [];
+      window.addEventListener('beforeprint', () => {
+        printState = [...document.querySelectorAll('details')].map(item => [item, item.open]);
+        printState.forEach(([item]) => { item.open = true; });
+      });
+      window.addEventListener('afterprint', () => {
+        printState.forEach(([item, open]) => { item.open = open; });
+      });
+      if (!controls || !quickButton || !fullButton || !quick || !fullReading) return;
+      // 飞书在 about:srcdoc 内渲染。切换与定位使用嵌入页自己的状态。
+      let fullScrollY = 0;
+      root.classList.add('js');
+      controls.hidden = false;
+
+      function visibleReadingTarget() {
+        const section = currentSection() || fullReading;
+        return [...section.querySelectorAll('h2,h3,p,li,summary,td,th,a,button')].find(node => {
+          const collapsed = node.closest('details:not([open])');
+          if (collapsed && node !== collapsed.firstElementChild) return false;
+          const rect = node.getBoundingClientRect();
+          return node.getClientRects().length && rect.top >= 76 && rect.top < window.innerHeight;
+        }) || section;
+      }
+      function showReading(view, target, scrollY) {
+        currentView = view;
+        root.dataset.view = view;
+        quickButton.setAttribute('aria-pressed', String(view === 'quick'));
+        fullButton.setAttribute('aria-pressed', String(view === 'full'));
+        if (status) status.textContent = view === 'quick' ? '速览 · 整篇核心区别与关键边界' : '全文 · 核心图解与全部细节';
+
+        for (let node = target?.parentElement; node; node = node.parentElement) {
+          if (node.tagName === 'DETAILS') node.open = true;
+        }
+        if (Number.isFinite(scrollY)) window.scrollTo({ top: scrollY, behavior: 'instant' });
+        else target?.scrollIntoView({ block: 'start', behavior: 'instant' });
+        const focus = view === 'full' && Number.isFinite(scrollY) ? visibleReadingTarget() : target;
+        focusTarget(focus);
+        updateCurrent();
+      }
+
+      function enterQuick() {
+        if (currentView === 'quick') return;
+        fullScrollY = window.scrollY;
+        showReading('quick', quick, 0);
+      }
+
+      function enterFull() {
+        if (currentView === 'full') return;
+        showReading('full', null, fullScrollY);
+      }
+
+      quickButton.addEventListener('click', enterQuick);
+      fullButton.addEventListener('click', enterFull);
+      // Handle local fragments during capture, before a file preview handles link navigation.
+      window.addEventListener('click', event => {
+        const link = event.composedPath().find(node => node instanceof Element && node.matches('a[href^="#"]'));
+        if (!link || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        const target = targetFor(link.hash);
+        if (!target) return;
+        event.preventDefault();
+        if (target === quick) {
+          enterQuick();
+          return;
+        }
+        const view = quick.contains(target) ? 'quick' : fullReading.contains(target) ? 'full' : currentView;
+        showReading(view, target);
+      }, { capture: true });
+    })();
+  </script></body></html>
