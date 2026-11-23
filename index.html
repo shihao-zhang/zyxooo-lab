@@ -96,15 +96,25 @@
       <section id="learning" aria-labelledby="learning-title">
         <h2 class="section-title" id="learning-title">Learn</h2>
         <article class="entry">
-          <h3>learn-SDE <span class="byline">· AI 产品经理的软件工程实践课</span></h3>
-          <p>从一张客服工单出发，写出可验证的需求，再与 coding agent 协作交付一次软件改动。</p>
-          <p class="meta">两课实操 · 十章软件工程基础 · 四个专题</p>
-          <div class="links"><a href="https://github.com/shihao-zhang/learn-SDE" target="_blank" rel="noopener noreferrer">开始学习 <span class="arrow" aria-hidden="true">↗</span></a></div>
-        </article>
-        <article class="entry">
           <h3>Agent 评测研究 <span class="byline">· 1＋6 阅读手册</span></h3>
           <p>从第一性原理拆解 Agent 评测体系：先问「结果会改变哪个决定」，再倒推该测哪些任务、怎样判分、什么证据才够。</p>
           <div class="links"><a href="agent-evaluation.html" target="_blank" rel="noopener">阅读手册 <span class="arrow" aria-hidden="true">↗</span></a></div>
+        </article>
+        <article class="entry project">
+          <div class="project-copy">
+            <h3>learn-SDE <span class="byline">· AI 产品经理的软件工程实践课</span></h3>
+            <p>用正反例写清需求，与 coding agent 审计划、改软件，用运行证据验收。从员工工作台起步，进阶到数字员工任务验证台，选修挑战是 benchmark 自动化生产平台。</p>
+            <p class="meta">基础：软件工程 · 主课：六阶段交付方法 · 实操：工单台两课 · 专题：按需查阅</p>
+            <div class="links">
+              <a href="https://github.com/shihao-zhang/learn-SDE" target="_blank" rel="noopener noreferrer">开始学习 <span class="arrow" aria-hidden="true">↗</span></a>
+              <a href="assets/learn-sde-course-map.svg" target="_blank" rel="noopener">课程架构 <span class="arrow" aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+          <figure>
+            <a class="diagram-link" href="assets/learn-sde-course-map.svg" target="_blank" rel="noopener" aria-label="查看 learn-SDE 课程架构原图（新窗口）">
+              <img src="assets/learn-sde-course-map.svg" width="1200" height="730" alt="六阶段主课与三个实践项目：工作台已开放，验证台为后续结项，评测包生产平台为待定挑战。">
+            </a>
+          </figure>
         </article>
         <article class="entry">
           <h3>Agent Harness</h3>
@@ -132,6 +142,21 @@
       </section>
       <section class="practice" id="practice" aria-labelledby="practice-title">
         <h2 class="section-title" id="practice-title">Build</h2>
+        <article class="project">
+          <div class="project-copy">
+            <h3>AutoEvoloop <span class="byline">· Meta Harness</span></h3>
+            <p>评测驱动的 Agent Harness 自进化框架。内环用评测结果改进 Harness；外环把多轮实验中学到的方法用于改进框架本身。</p>
+            <div class="links">
+              <a href="https://github.com/yoolee-agent-evoloop/auto-evoloop-registry" target="_blank" rel="noopener noreferrer">查看项目 <span class="arrow" aria-hidden="true">↗</span></a>
+              <a href="assets/auto-evoloop-architecture.svg" target="_blank" rel="noopener">项目架构 <span class="arrow" aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+          <figure>
+            <a class="diagram-link" href="assets/auto-evoloop-architecture.svg" target="_blank" rel="noopener" title="查看项目架构原图" aria-label="查看 AutoEvoloop 项目架构原图（新窗口）">
+              <img src="assets/auto-evoloop-architecture.svg" width="1200" height="628" alt="AutoEvoloop 双环：内环用评测和评审更新 Harness 基线；外环从多轮实验中提炼元经验，改进实验方法，再用后续实验验证。">
+            </a>
+          </figure>
+        </article>
         <article class="project">
           <div class="project-copy">
             <h3>AI-native PM <span class="byline">· Plugin</span></h3>
@@ -163,21 +188,6 @@
               <img src="assets/hire-screening-kit-architecture.svg" width="1200" height="972" alt="hire-screening-kit 原始架构图：规则粗排、模型精读、人工复核、面试反馈与规则回归。">
             </a>
             <p class="sr-only" id="hire-diagram-description">投递从飞书招聘进入私有工作区，先经规则粗排，再经模型精读。筛选结果经人工确认后同步到飞书多维表格，由招聘团队复核和跟进。人工评估与面试结果用于回归核对；规则调整先模拟，再由人确认。</p>
-          </figure>
-        </article>
-        <article class="project">
-          <div class="project-copy">
-            <h3>AutoEvoloop <span class="byline">· Meta Harness</span></h3>
-            <p>评测驱动的 Agent Harness 自进化框架。内环用评测结果改进 Harness；外环把多轮实验中学到的方法用于改进框架本身。</p>
-            <div class="links">
-              <a href="https://github.com/yoolee-agent-evoloop/auto-evoloop-registry" target="_blank" rel="noopener noreferrer">查看项目 <span class="arrow" aria-hidden="true">↗</span></a>
-              <a href="assets/auto-evoloop-architecture.svg" target="_blank" rel="noopener">项目架构 <span class="arrow" aria-hidden="true">↗</span></a>
-            </div>
-          </div>
-          <figure>
-            <a class="diagram-link" href="assets/auto-evoloop-architecture.svg" target="_blank" rel="noopener" title="查看项目架构原图" aria-label="查看 AutoEvoloop 项目架构原图（新窗口）">
-              <img src="assets/auto-evoloop-architecture.svg" width="1200" height="628" alt="AutoEvoloop 双环：内环用评测和评审更新 Harness 基线；外环从多轮实验中提炼元经验，改进实验方法，再用后续实验验证。">
-            </a>
           </figure>
         </article>
       </section>

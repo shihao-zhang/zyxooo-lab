@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="730" viewBox="0 0 1200 730" role="img" aria-labelledby="map-title map-desc">
+<title id="map-title">learn-SDE：AI 产品经理的软件工程实践课</title>
+<desc id="map-desc">基础与专题支持六阶段主课。员工工作台对应前两阶段的已开放实操；数字员工任务验证台对应后四阶段的结项路线；评测包生产平台是待定选修。</desc>
+<style>
+text {font-family:"PingFang SC","Microsoft YaHei",sans-serif;fill:#263f36}
+.brand {font:700 44px Georgia,serif}.lead {font-size:23px}.label {font-size:19px;font-weight:600;fill:#496456}.name {font-size:24px;font-weight:700}.detail {font-size:17px;fill:#455d50}
+</style>
+<rect width="1200" height="730" fill="#f8f7f3"/>
+<text class="brand" x="52" y="70">learn-SDE</text>
+<text class="lead" x="52" y="112">PM 定义什么算做对，和 coding agent 审改动，再凭运行证据决定是否交付。</text>
+<path d="M52 140H1148" stroke="#c8d5cc"/>
+<text class="label" x="52" y="185">主课 · 六个阶段</text>
+<g transform="translate(52 212)">
+<rect width="176" height="120" rx="6" fill="#edf1eb" stroke="#c8d5cc"/>
+<text class="label" x="12" y="27">01</text><text class="name" x="12" y="66">规格定义</text><text class="detail" x="12" y="98">用正反例写验收条件</text>
+</g>
+<g transform="translate(236 212)">
+<rect width="176" height="120" rx="6" fill="#edf1eb" stroke="#c8d5cc"/>
+<text class="label" x="12" y="27">02</text><text class="name" x="12" y="66">协作开发</text><text class="detail" x="12" y="98">审计划，再看改动</text>
+</g>
+<g transform="translate(420 212)">
+<rect width="176" height="120" rx="6" fill="#eef0f4" stroke="#cbd2dd"/>
+<text class="label" x="12" y="27">03</text><text class="name" x="12" y="66">独立验证</text><text class="detail" x="12" y="98">复现并核对运行证据</text>
+</g>
+<g transform="translate(604 212)">
+<rect width="176" height="120" rx="6" fill="#eef0f4" stroke="#cbd2dd"/>
+<text class="label" x="12" y="27">04</text><text class="name" x="12" y="66">故障修复</text><text class="detail" x="12" y="98">定位原因，验证修复</text>
+</g>
+<g transform="translate(788 212)">
+<rect width="176" height="120" rx="6" fill="#eef0f4" stroke="#cbd2dd"/>
+<text class="label" x="12" y="27">05</text><text class="name" x="12" y="66">受控接入</text><text class="detail" x="12" y="98">限制业务 Agent 权限</text>
+</g>
+<g transform="translate(972 212)">
+<rect width="176" height="120" rx="6" fill="#eef0f4" stroke="#cbd2dd"/>
+<text class="label" x="12" y="27">06</text><text class="name" x="12" y="66">回归交接</text><text class="detail" x="12" y="98">复跑用例，交接版本</text>
+</g>
+<path d="M52 343v8h360v-8 M420 343v8h728v-8" stroke="#85998c" fill="none"/>
+<text class="detail" x="52" y="382">01–02 · 在已有软件上交付改动</text>
+<text class="detail" x="420" y="382">03–06 · 从一次验收到可复用的验证流程</text>
+<text class="label" x="52" y="438">实践 · 三个项目</text>
+<g transform="translate(52 462)"><rect width="356" height="131" rx="6" fill="#edf1eb" stroke="#c8d0c8"/><text class="label" x="16" y="30">已开放 · 阶段 01–02</text><text class="name" x="16" y="73">员工工作台</text><text class="detail" x="16" y="108">从客服工单到可验收的软件改动。</text></g>
+<g transform="translate(422 462)"><rect width="356" height="131" rx="6" fill="#eef0f4" stroke="#c8d0c8"/><text class="label" x="16" y="30">结项路线 · 阶段 03–06</text><text class="name" x="16" y="73">数字员工任务验证台</text><text class="detail" x="16" y="108">复用工作台，独立验证任务表现。</text></g>
+<g transform="translate(792 462)"><rect width="356" height="131" rx="6" fill="#f3eee3" stroke="#c8d0c8"/><text class="label" x="16" y="30">选修挑战 · 待定</text><text class="name" x="16" y="73">benchmark 自动化生产平台</text><text class="detail" x="16" y="108">从业务场景定义生成对应评测包。</text></g>
+<path d="M52 632H1148" stroke="#c8d5cc"/>
+<text class="label" x="52" y="676">按需查阅</text><text class="detail" x="176" y="676">基础：软件工程十章</text><text class="detail" x="460" y="676">专题：企业商业与合规、系统与数据、网络与操作系统、推理服务</text>
+</svg>
