@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+<title id="title">Agent 评测研究：六个判断怎样支撑一个决定</title>
+<desc id="desc">先确定评测要改变什么决定。任务与环境、判据与裁判、执行条件共同支撑结果比较；目标也约束行动阈值。上线后用真实结果校准，必要时重查目标与证据条件。</desc>
+<rect width="1200" height="680" fill="#f8f7f3"/>
+<g fill="#263f36" font-family="Georgia, 'Microsoft YaHei', serif" font-size="44" font-weight="700">
+  <text x="52" y="70">Agent 评测研究</text>
+</g>
+<text x="52" y="112" fill="#263f36" font-family="system-ui, sans-serif" font-size="23">从一个决定倒推：哪些证据值得信，哪些结论还不能下？</text>
+<path d="M52 140H1148" stroke="#c8d5cc"/>
+<g transform="translate(52 152) scale(1.096)">
+<defs>
+<marker id="quick-evidence-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+<path d="M0,0 L8,4 L0,8" fill="none" stroke="#47736b"/>
+</marker>
+<marker id="quick-goal-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+<path d="M0,0 L8,4 L0,8" fill="none" stroke="#846b42"/>
+</marker>
+<marker id="quick-feedback-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+<path d="M0,0 L8,4 L0,8" fill="none" stroke="#6b7184"/>
+</marker>
+</defs>
+<rect x="80" y="10" width="840" height="210" rx="5" fill="none" stroke="#c7cdbf" stroke-width="1.5"/>
+<g fill="none" stroke="#846b42" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#quick-goal-arrow)">
+<path d="M500 94 V112 H220 V135"/>
+<path d="M500 94 V135"/>
+<path d="M500 112 H780 V135"/>
+<path d="M240 67 H45 V385 H240"/>
+</g>
+<g fill="none" stroke="#47736b" stroke-width="2">
+<path d="M220 200 V235 H780 V200"/>
+<path d="M500 200 V260" marker-end="url(#quick-evidence-arrow)"/>
+<path d="M500 320 V355" marker-end="url(#quick-evidence-arrow)"/>
+</g>
+<path d="M760 385 H960 V110 H920" fill="none" stroke="#6b7184" stroke-width="2" stroke-dasharray="2 5" marker-end="url(#quick-feedback-arrow)"/>
+<g fill="#edf2ee" stroke="#bacbc3">
+<rect x="240" y="40" width="520" height="54" rx="4"/>
+<rect x="95" y="135" width="250" height="65" rx="4"/>
+<rect x="375" y="135" width="250" height="65" rx="4"/>
+<rect x="655" y="135" width="250" height="65" rx="4"/>
+<rect x="240" y="260" width="520" height="60" rx="4"/>
+<rect x="240" y="355" width="520" height="60" rx="4"/>
+</g>
+<g fill="#233e38" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18">
+<text x="500" y="74">01 目标与被测对象：证据要改变什么行动</text>
+<text x="220" y="162">02 任务与环境代表性</text>
+<text x="220" y="185" font-size="15">覆盖≠保真；数量≠代表性</text>
+<text x="500" y="162">03 判据与裁判有效性</text>
+<text x="500" y="185" font-size="15">合理解能通过，实质错误能拒绝</text>
+<text x="780" y="162">04 执行条件的可控与等价</text>
+<text x="780" y="185" font-size="15">隔离须覆盖状态，适配须验语义</text>
+<text x="500" y="286">05 比较、归因与泛化</text>
+<text x="500" y="309" font-size="15">同题配对；区间不能修复抽样偏差</text>
+<text x="500" y="382">06 证据使用与线上校准</text>
+<text x="500" y="405" font-size="15">支持有条件的决定，并核对真实交付</text>
+<text x="95" y="32" text-anchor="start" font-size="14">可重查的目标与证据条件</text>
+<text transform="translate(25 255) rotate(-90)" font-size="15" fill="#846b42">01 → 06：目标与行动阈值</text>
+<text transform="translate(985 258) rotate(-90)" font-size="15" fill="#6b7184">06 反馈：可重查 01 / 02 / 03 / 04</text>
+</g>
+<g fill="none" stroke-width="2">
+<path d="M90 450 H130" stroke="#47736b"/>
+<path d="M365 450 H405" stroke="#846b42" stroke-dasharray="7 5"/>
+<path d="M670 450 H710" stroke="#6b7184" stroke-dasharray="2 5"/>
+</g>
+<g fill="#59645e" font-family="system-ui,sans-serif" font-size="15">
+<text x="140" y="455">共同支撑与结果使用</text>
+<text x="415" y="455">目标约束（含 01 → 06）</text>
+<text x="720" y="455">新事实反馈重查</text>
+</g>
+</g>
+</svg>
