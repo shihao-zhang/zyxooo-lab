@@ -56,6 +56,21 @@
     figure { margin: 0; width: 112px; max-width: 100%; justify-self: end; }
     .diagram-link { display: grid; justify-items: center; text-decoration: none; cursor: zoom-in; }
     .diagram-link img { display: block; width: auto; max-width: 100%; height: auto; max-height: 120px; object-fit: contain; border: 1px solid var(--rule); }
+    .viewer { padding: 0; border: 0; width: min(1440px, 92vw); height: 90vh; height: 90dvh; color: var(--text); }
+    .viewer:not([open]) { display: none; }
+    .viewer[open] { display: grid; grid-template-rows: auto minmax(0, 1fr); }
+    .viewer::backdrop { background: rgb(20 30 35 / 65%); }
+    html:has(.viewer[open]) { overflow: hidden; }
+    .viewer-bar { display: flex; align-items: center; gap: 12px; padding: 6px 12px 6px 18px; border-bottom: 1px solid var(--rule); }
+    .viewer-bar h2 { flex: 1; font-size: 16px; }
+    .viewer-bar a { white-space: nowrap; font-size: 14px; }
+    .viewer-close { border: 0; background: transparent; color: var(--heading); font: 28px/1 sans-serif; width: 44px; height: 44px; cursor: pointer; }
+    .viewer-pane { overflow: auto; overscroll-behavior: contain; }
+    .viewer-zoom { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: white; cursor: zoom-in; }
+    .viewer-zoom img { display: block; width: 100%; height: 100%; object-fit: contain; }
+    .viewer-zoom[aria-pressed="true"] { width: max(150%, var(--diagram-width)); height: auto; min-height: 100%; cursor: zoom-out; }
+    .viewer-zoom[aria-pressed="true"] img { height: auto; }
+    .viewer button:focus-visible { outline: 2px solid var(--link); outline-offset: -3px; }
     .status { margin-top: 7px; color: var(--muted); font-size: 14px; }
     footer { margin-top: 28px; padding-block: 26px 40px; border-top: 1px solid var(--rule); }
     footer h2 { font-size: 18px; margin-bottom: 12px; }
@@ -63,6 +78,7 @@
     footer p + p { margin-top: 6px; }
     footer .identity { color: var(--heading); font-size: 16px; font-weight: 600; }
     @media (max-width: 640px) {
+      .viewer { margin: 0; width: 100%; max-width: none; height: 100vh; height: 100dvh; max-height: none; }
       .page { width: calc(100% - 40px); }
       header { padding-block: 24px 20px; gap: 20px; flex-wrap: wrap; }
       .brand { font-size: 30px; }
@@ -209,5 +225,16 @@
       <p>持续学习，持续构建。分享过程中的思考与作品。</p>
     </footer>
   </div>
+  <dialog id="diagram-viewer" class="viewer" aria-labelledby="viewer-title">
+    <div class="viewer-bar">
+      <h2 id="viewer-title"></h2>
+      <a id="viewer-original" target="_blank" rel="noopener">打开原图 ↗</a>
+      <button class="viewer-close" type="button" aria-label="关闭预览" title="关闭预览" autofocus>×</button>
+    </div>
+    <div class="viewer-pane">
+      <button class="viewer-zoom" type="button" aria-label="放大架构图" aria-pressed="false"><img alt=""></button>
+    </div>
+  </dialog>
+  <script src="diagram-viewer.js"></script>
 </body>
 </html>
